@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - monitoring@localhost" uuid="bf002204-3cf2-4fbe-b148-d89d80e31c9c">
+    <database-info product="MySQL" version="5.7.21-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.40 ( Revision: 402933ef52cad9aa82624e80acbea46e3a701ce6 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+      <schema id="1" name="monitoring">
+        <visible>1</visible>
+      </schema>
+      <schema id="2" name="information_schema"/>
+      <schema id="3" name="mysql"/>
+      <schema id="4" name="performance_schema"/>
+      <schema id="5" name="spring"/>
+      <schema id="6" name="sys"/>
+      <schema id="7" name="test"/>
+      <table id="8" parent="1" name="users"/>
+      <table id="9" parent="1" name="company_dynamic"/>
+      <column id="10" parent="8" name="id_users">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="11" parent="8" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)|0</data-type>
+      </column>
+      <column id="12" parent="8" name="password">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)|0</data-type>
+      </column>
+      <column id="13" parent="8" name="role">
+        <data-type>varchar(20)|0</data-type>
+      </column>
+      <key id="14" parent="8" name="PRIMARY">
+        <columns>id_users</columns>
+        <primary>1</primary>
+      </key>
+      <column id="15" parent="9" name="id_company">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="16" parent="9" name="name">
+        <data-type>varchar(30)|0</data-type>
+      </column>
+      <column id="17" parent="9" name="tiker">
+        <data-type>varchar(30)|0</data-type>
+      </column>
+      <column id="18" parent="9" name="market_price">
+        <data-type>int(30)|0</data-type>
+      </column>
+      <column id="19" parent="9" name="p_e">
+        <data-type>double(10,2)|0</data-type>
+      </column>
+      <column id="20" parent="9" name="p_s">
+        <data-type>double(10,2)|0</data-type>
+      </column>
+      <column id="21" parent="9" name="p_bv">
+        <data-type>double(10,2)|0</data-type>
+      </column>
+      <column id="22" parent="9" name="ev_ebitda">
+        <data-type>double(10,2)|0</data-type>
+      </column>
+      <column id="23" parent="9" name="ev_s">
+        <data-type>double(10,2)|0</data-type>
+      </column>
+      <column id="24" parent="9" name="debt_ebita">
+        <data-type>double(10,2)|0</data-type>
+      </column>
+      <column id="25" parent="9" name="roe">
+        <data-type>int(30)|0</data-type>
+      </column>
+      <key id="26" parent="9" name="PRIMARY">
+        <columns>id_company</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
+  </data-source>
+</component>
