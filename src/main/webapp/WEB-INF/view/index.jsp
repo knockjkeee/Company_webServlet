@@ -1,12 +1,13 @@
+<%--@elvariable id="request" type=""--%>
+<%--<jsp:useBean id="pagecontext" scope="request" type="javax.servlet.AsyncContext"/>--%>
+<%--<%@ page isELIgnored="false"%>--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
-    <style>
-        <%@ include file="../css/style.css"%>
-    </style>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 <%
@@ -18,25 +19,59 @@
 <c:set var="userDB" value="<%= user%>"/>
 <c:set var="pwDB" value="<%= pw%>"/>
 
+<h1><c:out value="<%= pw%>"/></h1>
+
 <s:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
-url="${urlDB}" user="${userDB}" password="${pwDB}"
+                 url="${urlDB}" user="${userDB}" password="${pwDB}"
 />
 
 <s:query dataSource="${snapshot}" var="result">
-         SELECT * FROM company_dynamic;
-</s:query >
+    SELECT * FROM company_dynamic;
+</s:query>
 
 <h1>Стартанем!!!!</h1><br/>
 <h2>Все компании</h2><br/>
 
 <h2>Создание новой компании</h2><br/>
 <a href="<c:url value="/login"/>">login User</a>
+<br/>
+<br/>
+
+<button id="btn">tttt</button>
+
+<select name="selection" id="list">
+    <option>Выберите отрасль</option>
+    <option value="1">Газ</option>
+    <option value="2">Нефть</option>
+    <option value="3">Электроэнергия</option>
+</select>
+
+<div ></div>
+
+<%--<script>--%>
+<%--function check() {--%>
+<%--var x = document.getElementById("list").value;--%>
+<%--if (x == "1") {--%>
+<%--window.location.replace = ("index.jsp=" + x);--%>
+<%--document.getElementById("demo").innerHTML = "You selected: " + x;--%>
+<%--}--%>
+<%--}--%>
+<%--</script>--%>
+<%--<%--%>
+<%--String st = request.getParameter("x");--%>
+<%--if (st != null) {--%>
+<%--System.out.println("value=" + st);--%>
+<%--}--%>
+<%--%>--%>
+<%--<h1><c:out value="<%= temp%>"/></h1>--%>
+
+
 <br>
 <br>
 <header class="login">
 </header>
 
-<section class="table">
+<section id="demo">
     <table class="main__table" border="1">
         <tr>
             <th>
@@ -72,21 +107,29 @@ url="${urlDB}" user="${userDB}" password="${pwDB}"
         </tr>
         <c:forEach var="row" items="${result.rows}">
             <tr>
-                <td> <c:out value="${row.name}"/></td>
-                <td> <c:out value="${row.tiker}"/></td>
-                <td> <c:out value="${row.market_price}"/></td>
-                <td> <c:out value="${row.p_e}"/></td>
-                <td> <c:out value="${row.p_s}"/></td>
-                <td> <c:out value="${row.p_bv}"/></td>
-                <td> <c:out value="${row.ev_ebitda}"/></td>
-                <td> <c:out value="${row.ev_s}"/></td>
-                <td> <c:out value="${row.debt_ebita}"/></td>
-                <td> <c:out value="${row.roe}"/></td>
+                <td><c:out value="${row.name}"/></td>
+                <td><c:out value="${row.tiker}"/></td>
+                <td><c:out value="${row.market_price}"/></td>
+                <td><c:out value="${row.p_e}"/></td>
+                <td><c:out value="${row.p_s}"/></td>
+                <td><c:out value="${row.p_bv}"/></td>
+                <td><c:out value="${row.ev_ebitda}"/></td>
+                <td><c:out value="${row.ev_s}"/></td>
+                <td><c:out value="${row.debt_ebita}"/></td>
+                <td><c:out value="${row.roe}"/></td>
             </tr>
         </c:forEach>
         <tr>
         </tr>
     </table>
 </section>
+<script>
+    <%@include file="test1.js"%>
+</script>
+
+<style>
+    <%@ include file="../res/css/style.css"%>
+</style>
+
 </body>
 </html>

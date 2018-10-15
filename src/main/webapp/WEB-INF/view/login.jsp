@@ -10,7 +10,7 @@
 
     <%--<link href="${pageContext.request.contextPath}/WEB-INF/css/style.css" rel="stylesheet" type="text/css"/>--%>
     <style>
-        <%@ include file="../css/style.css"%>
+        <%@ include file="../res/css/style.css"%>
     </style>
 </head>
 <body>
@@ -32,8 +32,6 @@
     <div class="submit">
         <button type="submit">Войти</button>
     </div>
-
-    
 
 </form>
 </body>

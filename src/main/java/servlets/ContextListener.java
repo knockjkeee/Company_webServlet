@@ -11,6 +11,8 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+import java.io.File;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,9 +29,13 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
     private static Connection connection;
     private static Statement statement;
     private static ResultSet resultSet;
+    URL resorce;
+    File file;
 
     public void contextInitialized(ServletContextEvent sce) {
+
         ServletContext ctx = sce.getServletContext();
+
 
 //        dao = new AtomicReference<>(new UserDao());
 //        dao.get().add(new User(1, "Pavel", "1", Role.ADMIN));
@@ -59,6 +65,7 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
         }
         final ServletContext servletContext = sce.getServletContext();
         servletContext.setAttribute("dao", bd);
+
     }
 
     public void contextDestroyed(ServletContextEvent sce) {
