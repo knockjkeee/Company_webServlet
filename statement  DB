@@ -1,0 +1,66 @@
+# Company_webServlet
+
+CREATE TABLE users (
+  id_users INT AUTO_INCREMENT,
+  name     VARCHAR(20) NOT NULL,
+  password VARCHAR(20) NOT NULL,
+  role     VARCHAR(20),
+  PRIMARY KEY (id_users)
+);
+
+CREATE TABLE industry (
+id   INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(20),
+test_id int ,
+FOREIGN KEY (test_id) REFERENCES company_dynamic (id_company)
+);
+
+INSERT INTO monitoring.industry VALUES ('1', 'gaz', 1);
+INSERT Into monitoring.industry (name, test_id) VALUES ('oil', 2);
+INSERT Into monitoring.industry (name, test_id) VALUES ('electricity', 3);
+
+SELECT * FROM industry;
+
+SELECT industry.name, company_dynamic.name as 'name', company_dynamic.tiker as 'tiker'
+FROM industry INNER JOIN company_dynamic on (industry.test_id = company_dynamic.id_company) WHERE industry.name = 'gaz';
+
+
+
+SELECT company_dynamic.name as 'name', company_dynamic.tiker as 'tiker', company_dynamic.market_price as 'market_price', company_dynamic.p_e as 'p_e',
+  company_dynamic.p_s as 'p_s', company_dynamic.p_bv as 'p_bv', company_dynamic.ev_ebitda as 'ev_ebitda', company_dynamic.ev_s as 'ev_s',
+  company_dynamic.debt_ebita as 'debt_ebita', company_dynamic.roe as 'roe'
+FROM industry INNER JOIN company_dynamic on (industry.test_id = company_dynamic.id_company) WHERE industry.name = 'gaz';
+
+
+
+INSERT INTO monitoring.users VALUES ('1', 'admin', '123', 'admin');
+
+INSERT INTO monitoring.users (name, password, role) VALUES ('test', '123', 'user');
+INSERT INTO monitoring.users (name, password, role) VALUES ('test1', '123', 'user');
+
+
+CREATE TABLE IF NOT EXISTS company_dynamic (
+  id_company   INT AUTO_INCREMENT,
+  name         VARCHAR(30),
+  tiker        VARCHAR(30),
+  market_price INT(30),
+  p_e          DOUBLE(10, 2),
+  p_s          DOUBLE(10, 2),
+  p_bv         DOUBLE(10, 2),
+  ev_ebitda    DOUBLE(10, 2),
+  ev_s         DOUBLE(10, 2),
+  debt_ebita   DOUBLE(10, 2),
+  roe          INT(30),
+  PRIMARY KEY (id_company)
+);
+
+INSERT INTO monitoring.company_dynamic
+VALUES ('1', 'Газпром', 'GAZP', '3569000', '3.49', '0.49', '0.29', '5.12', '1.24', '3.64', '10');
+
+INSERT INTO monitoring.company_dynamic (name, tiker, market_price, p_e, p_s, p_bv, ev_ebitda, ev_s, debt_ebita, roe)
+VALUES
+  ('Лукойл', 'LKON', '3569000', '3.49', '0.49', '0.29', '5.12', '1.24', '3.64', '10');
+
+INSERT INTO monitoring.company_dynamic (name, tiker, market_price, p_e, p_s, p_bv, ev_ebitda, ev_s, debt_ebita, roe)
+VALUES
+  ('Роснефть', 'ROSNEFT', '3569000', '3.49', '0.49', '0.29', '5.12', '1.24', '3.64', '10');
