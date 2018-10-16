@@ -3,9 +3,9 @@
 <html>
 <head>
     <title>ADMIN</title>
-    <style>
-        <%@ include file="../css/style.css"%>
-    </style>
+    <%--<style>--%>
+        <%--<%@ include file="../css/style.css"%>--%>
+    <%--</style>--%>
 </head>
 <body>
 

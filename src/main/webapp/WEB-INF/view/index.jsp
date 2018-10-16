@@ -46,7 +46,7 @@
     <option value="3">Электроэнергия</option>
 </select>
 
-<div ></div>
+<div></div>
 
 <%--<script>--%>
 <%--function check() {--%>
@@ -71,39 +71,19 @@
 <header class="login">
 </header>
 
-<section id="demo">
-    <table class="main__table" border="1">
+<section>
+    <table id="demo" class="main__table" border="1">
         <tr>
-            <th>
-                <p>Компания</p>
-            </th>
-            <th>
-                <p>Тикер</p>
-            </th>
-            <th>
-                <p>Рыночная капитализация</p>
-            </th>
-            <th>
-                <p>P/E</p>
-            </th>
-            <th>
-                <p>P/S</p>
-            </th>
-            <th>
-                <p>P/BV</p>
-            </th>
-            <th>
-                <p>EV/EBITDA</p>
-            </th>
-            <th>
-                <p>EV/S</p>
-            </th>
-            <th>
-                <p>DEBT/EBITDA</p>
-            </th>
-            <th>
-                <p>ROE</p>
-            </th>
+            <th><p>Компания</p></th>
+            <th><p>Тикер</p></th>
+            <th><p>Рыночная капитализация</p></th>
+            <th><p>P/E</p></th>
+            <th><p>P/S</p></th>
+            <th><p>P/BV</p></th>
+            <th><p>EV/EBITDA</p></th>
+            <th><p>EV/S</p></th>
+            <th><p>DEBT/EBITDA</p></th>
+            <th><p>ROE</p></th>
         </tr>
         <c:forEach var="row" items="${result.rows}">
             <tr>

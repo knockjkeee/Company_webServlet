@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%@ include file="../css/style.css" %>--%>
+<%--<%@ include file="../res/css/style.css" %>--%>
 <html>
 <head>
     <title>Login</title>
