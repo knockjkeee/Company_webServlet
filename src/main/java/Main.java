@@ -1,6 +1,6 @@
 import dao.UserDao;
-import model.Role;
-import model.User;
+import modelUser.Role;
+import modelUser.User;
 
 import java.sql.*;
 import java.util.concurrent.atomic.AtomicReference;

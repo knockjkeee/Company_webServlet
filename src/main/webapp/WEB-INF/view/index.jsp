@@ -37,14 +37,20 @@
 <br/>
 <br/>
 
-<button id="btn">tttt</button>
 
 <select name="selection" id="list">
-    <option>Выберите отрасль</option>
-    <option value="1">Газ</option>
-    <option value="2">Нефть</option>
-    <option value="3">Электроэнергия</option>
+    <option hidden >Выберите отрасль</option>
+    <option value="gaz" id="gaz">Газ</option>
+    <option value="oil" id="oil">Нефть</option>
+    <option value="3" id="3">Электроэнергия</option>
 </select>
+<br>
+<br>
+
+<form>
+    <input type="text" required placeholder="поиск" id="search"/>
+</form>
+<button id="btn">Поиск</button>
 
 <div></div>
 
@@ -64,7 +70,6 @@
 <%--}--%>
 <%--%>--%>
 <%--<h1><c:out value="<%= temp%>"/></h1>--%>
-
 
 <br>
 <br>

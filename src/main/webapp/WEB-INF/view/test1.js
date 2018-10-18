@@ -6,19 +6,45 @@ $(document).ready(function () {
     // });
 
     $('#list').on('change', function () {
-        var t = $(this).val();
-        if (t == "1") {
-            // alert('asd');
+        var check = $(this).val();
+        if (check == "gaz") {
             $.ajax({
                 type: 'post',
-                url: 'IndustryServlet',
+                url: 'GazServlet',
+                data: {gaz: check},
                 success: function (result) {
                     $('#demo').html(result)
                 }
             });
-        } else {
+        } else if (check == "oil"){
+            $.ajax({
+                type: 'post',
+                url: 'OilServlet',
+                data: {oil: check},
+                success: function (result) {
+                    $('#demo').html(result)
+                }
+            });
+        }else {
             $('#demo').load('./gas.jsp');
         }
     });
+
+    $('#btn').on('click', function () {
+        // alert('asd');
+        var search = $('#search').val()
+        $.ajax({
+            type: 'post',
+            data: {search: search},
+            url: 'SearchServlet',
+            success: function (result) {
+                $('#demo').html(result)
+            }
+        });
+    });
+
+
+
+
 
 });

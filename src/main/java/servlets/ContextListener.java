@@ -2,8 +2,8 @@ package servlets;
 
 import dao.DBConnectionManager;
 import dao.UserDao;
-import model.Role;
-import model.User;
+import modelUser.Role;
+import modelUser.User;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
