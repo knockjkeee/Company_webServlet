@@ -39,7 +39,7 @@
 
 
 <select name="selection" id="list">
-    <option hidden >Выберите отрасль</option>
+    <option hidden>Выберите отрасль</option>
     <option value="gaz" id="gaz">Газ</option>
     <option value="oil" id="oil">Нефть</option>
     <option value="3" id="3">Электроэнергия</option>
@@ -52,30 +52,10 @@
 </form>
 <button id="btn">Поиск</button>
 
-<div></div>
-
-<%--<script>--%>
-<%--function check() {--%>
-<%--var x = document.getElementById("list").value;--%>
-<%--if (x == "1") {--%>
-<%--window.location.replace = ("index.jsp=" + x);--%>
-<%--document.getElementById("demo").innerHTML = "You selected: " + x;--%>
-<%--}--%>
-<%--}--%>
-<%--</script>--%>
-<%--<%--%>
-<%--String st = request.getParameter("x");--%>
-<%--if (st != null) {--%>
-<%--System.out.println("value=" + st);--%>
-<%--}--%>
-<%--%>--%>
-<%--<h1><c:out value="<%= temp%>"/></h1>--%>
-
 <br>
 <br>
 <header class="login">
 </header>
-
 <section>
     <table id="demo" class="main__table" border="1">
         <tr>
@@ -92,16 +72,16 @@
         </tr>
         <c:forEach var="row" items="${result.rows}">
             <tr>
-                <td><c:out value="${row.name}"/></td>
+                <td><a href="<c:url value="/company?param1=${row.name}"/>"><c:out value="${row.name}"/></a></td>
                 <td><c:out value="${row.tiker}"/></td>
-                <td><c:out value="${row.market_price}"/></td>
+                <td><c:out value="${row.market_price}"/>RUB</td>
                 <td><c:out value="${row.p_e}"/></td>
                 <td><c:out value="${row.p_s}"/></td>
                 <td><c:out value="${row.p_bv}"/></td>
                 <td><c:out value="${row.ev_ebitda}"/></td>
                 <td><c:out value="${row.ev_s}"/></td>
                 <td><c:out value="${row.debt_ebita}"/></td>
-                <td><c:out value="${row.roe}"/></td>
+                <td><c:out value="${row.roe}"/>%</td>
             </tr>
         </c:forEach>
         <tr>

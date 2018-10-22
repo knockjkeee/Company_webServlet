@@ -43,8 +43,11 @@ $(document).ready(function () {
         });
     });
 
-
-
-
+    // $('#companyName').on('click', function () {
+    //
+    //     var company = $('#companyName').val();
+    //     alert(company);
+    //
+    // });
 
 });
