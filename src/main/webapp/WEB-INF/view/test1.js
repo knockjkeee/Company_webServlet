@@ -16,17 +16,27 @@ $(document).ready(function () {
                     $('#demo').html(result)
                 }
             });
-        } else if (check == "oil"){
-            $.ajax({
+        } else if (check == "oil") {
+        $.ajax({
                 type: 'post',
                 url: 'OilServlet',
                 data: {oil: check},
                 success: function (result) {
                     $('#demo').html(result)
+
+                }
+            });
+        } else if (check == "electric") {
+            $.ajax({
+                type: 'post',
+                url: 'ElectricServlet',
+                data: {electric: check},
+                success: function (result) {
+                    $('#demo').html(result);
                 }
             });
         }else {
-            $('#demo').load('./gas.jsp');
+
         }
     });
 
@@ -43,11 +53,12 @@ $(document).ready(function () {
         });
     });
 
-    // $('#companyName').on('click', function () {
-    //
-    //     var company = $('#companyName').val();
-    //     alert(company);
-    //
-    // });
+// $('#companyName').on('click', function () {
+//
+//     var company = $('#companyName').val();
+//     alert(company);
+//
+// });
 
-});
+})
+;

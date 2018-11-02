@@ -13,15 +13,16 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@WebServlet("/GazServlet")
-public class GazServlet extends HttpServlet {
+@WebServlet("/ElectricServlet")
+public class ElectricServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ConvertFilterHtml convertHtml = new ConvertFilterHtml();
         StringBuilder sb = convertHtml.stringBuilder();
         Connection connection = (Connection) getServletContext().getAttribute("DBConnection");
 
-        String nameSearch = req.getParameter("gaz");
+        String nameSearch = req.getParameter("electric");
+
         System.out.println(nameSearch);
 
         String rSet = "SELECT company_dynamic.name as 'name', company_dynamic.tiker as 'tiker', company_dynamic.market_price as 'market_price', company_dynamic.p_e as 'p_e'," +
@@ -41,4 +42,5 @@ public class GazServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         out.write(result.toString());
     }
+
 }

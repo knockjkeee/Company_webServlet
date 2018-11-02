@@ -19,8 +19,6 @@
 <c:set var="userDB" value="<%= user%>"/>
 <c:set var="pwDB" value="<%= pw%>"/>
 
-<h1><c:out value="<%= pw%>"/></h1>
-
 <s:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
                  url="${urlDB}" user="${userDB}" password="${pwDB}"
 />
@@ -29,11 +27,8 @@
     SELECT * FROM company_dynamic;
 </s:query>
 
-<h1>Стартанем!!!!</h1><br/>
-<h2>Все компании</h2><br/>
-
-<h2>Создание новой компании</h2><br/>
-<a href="<c:url value="/login"/>">login User</a>
+<h2>Создание новой компании (Будет логотип)</h2><br/>
+<h2><a href="<c:url value="/login"/>">login User</a><h2>
 <br/>
 <br/>
 
@@ -42,7 +37,7 @@
     <option hidden>Выберите отрасль</option>
     <option value="gaz" id="gaz">Газ</option>
     <option value="oil" id="oil">Нефть</option>
-    <option value="3" id="3">Электроэнергия</option>
+    <option value="electric" id="3">Электроэнергия</option>
 </select>
 <br>
 <br>
