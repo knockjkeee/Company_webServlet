@@ -31,21 +31,10 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
         req.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
-
-
-//        req.getServletContext().getInitParameter("Url");
-//        req.getServletContext().getInitParameter("dbUser");
-//        req.getServletContext().getInitParameter("dbPassword");
-
-
     }
 }

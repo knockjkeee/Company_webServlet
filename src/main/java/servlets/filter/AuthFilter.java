@@ -2,7 +2,7 @@ package servlets.filter;
 
 
 import dao.UserDao;
-import modelUser.Role;
+import model.Role;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

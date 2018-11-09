@@ -69,7 +69,7 @@
             <tr>
                 <td><a href="<c:url value="/company?param1=${row.name}"/>"><c:out value="${row.name}"/></a></td>
                 <td><c:out value="${row.tiker}"/></td>
-                <td><c:out value="${row.market_price}"/>RUB</td>
+                <td><c:out value="${row.market_price}"/> RUB</td>
                 <td><c:out value="${row.p_e}"/></td>
                 <td><c:out value="${row.p_s}"/></td>
                 <td><c:out value="${row.p_bv}"/></td>

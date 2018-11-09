@@ -1,7 +1,8 @@
 package servlets.servlet.filterSearch;
 
 import dao.SQLStatementIndustry;
-import servlets.until.ConvertFilterHtml;
+import until.ConvertFilterHtml;
+import until.SqlString;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,10 +27,8 @@ public class SearchServlet extends HttpServlet {
 
         System.out.println(nameSearch.length());
         if (nameSearch.length() == 0) {
-            String rSet = "SELECT company_dynamic.name as 'name', company_dynamic.tiker as 'tiker', company_dynamic.market_price as 'market_price', company_dynamic.p_e as 'p_e'," +
-                    "                company_dynamic.p_s as 'p_s', company_dynamic.p_bv as 'p_bv', company_dynamic.ev_ebitda as 'ev_ebitda', company_dynamic.ev_s as 'ev_s'," +
-                    "                company_dynamic.debt_ebita as 'debt_ebita', company_dynamic.roe as 'roe'" +
-                    "                FROM company_dynamic";
+            String rSet = SqlString.getShearch();
+
             StringBuilder result = new StringBuilder();
             SQLStatementIndustry sqlStatementIndustry = SQLStatementIndustry.getInstance();
 

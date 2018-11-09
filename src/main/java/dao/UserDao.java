@@ -1,7 +1,7 @@
 package dao;
 
-import modelUser.Role;
-import modelUser.User;
+import model.Role;
+import model.User;
 
 import java.util.ArrayList;
 import java.util.List;

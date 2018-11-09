@@ -37,8 +37,6 @@ public class SQLStatementIndustry {
             int roe = resultSet.getInt(10);
 
             sb.append("<td> <a href=\"/company?param1=" + name + "\">" + name + "</a></td><br>")
-//            sb.append("<td><a href=\"/company?param1=" + name + "\"/>" + name + "</a></td><br>")
-//                    <a href="<c:url value="/company?param1="+name +"/>"><c:out value="name"/></a>
                     .append("<td>" + tiker + "</td><br>")
                     .append("<td>" + market_price + "</td><br>")
                     .append("<td>" + p_e + "</td><br>")
@@ -68,7 +66,6 @@ public class SQLStatementIndustry {
             double debt_ebita = resultSet.getDouble(10);
             int roe = resultSet.getInt(11);
 
-//            sb.append("<td>" + name + "</td><br>")
             sb.append("<td> <a href=\"/company?param1=" + name + "\">" + name + "</a></td><br>")
 
                     .append("<td>" + tiker + "</td><br>")

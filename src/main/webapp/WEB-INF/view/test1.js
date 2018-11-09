@@ -7,37 +7,47 @@ $(document).ready(function () {
 
     $('#list').on('change', function () {
         var check = $(this).val();
-        if (check == "gaz") {
-            $.ajax({
-                type: 'post',
-                url: 'GazServlet',
-                data: {gaz: check},
-                success: function (result) {
-                    $('#demo').html(result)
-                }
-            });
-        } else if (check == "oil") {
         $.ajax({
-                type: 'post',
-                url: 'OilServlet',
-                data: {oil: check},
-                success: function (result) {
-                    $('#demo').html(result)
+            type: 'post',
+            url:'OptionalServlet',
+            data: {optional:check},
+            success: function (result) {
+                $('#demo').html(result)
+            }
+        })
 
-                }
-            });
-        } else if (check == "electric") {
-            $.ajax({
-                type: 'post',
-                url: 'ElectricServlet',
-                data: {electric: check},
-                success: function (result) {
-                    $('#demo').html(result);
-                }
-            });
-        }else {
 
-        }
+        // if (check == "gaz") {
+        //     $.ajax({
+        //         type: 'post',
+        //         url: 'GazServlet',
+        //         data: {gaz: check},
+        //         success: function (result) {
+        //             $('#demo').html(result)
+        //         }
+        //     });
+        // } else if (check == "oil") {
+        // $.ajax({
+        //         type: 'post',
+        //         url: 'OilServlet',
+        //         data: {oil: check},
+        //         success: function (result) {
+        //             $('#demo').html(result)
+        //
+        //         }
+        //     });
+        // } else if (check == "electric") {
+        //     $.ajax({
+        //         type: 'post',
+        //         url: 'ElectricServlet',
+        //         data: {electric: check},
+        //         success: function (result) {
+        //             $('#demo').html(result);
+        //         }
+        //     });
+        // }else {
+        //
+        // }
     });
 
     $('#btn').on('click', function () {
@@ -55,10 +65,9 @@ $(document).ready(function () {
 
 // $('#companyName').on('click', function () {
 //
-//     var company = $('#companyName').val();
-//     alert(company);
+//     var companyInformation = $('#companyName').val();
+//     alert(companyInformation);
 //
 // });
 
-})
-;
+});

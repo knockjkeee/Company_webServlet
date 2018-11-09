@@ -36,7 +36,7 @@ public class Main {
             }
 //            Blob blob = in.ge
 //            System.out.println(image.getAbsolutePath());
-//            String query = "INSERT INTO company ('1', 'Газпром'," + image + ", )";
+//            String query = "INSERT INTO companyInformation ('1', 'Газпром'," + image + ", )";
             String query = "INSERT INTO company  (id, name, description, image) VALUES (?,?,?,?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -49,7 +49,7 @@ public class Main {
 
 //            preparedStatement.execute();
 
-//            resultSet = statement.executeQuery("INSERT INTO company VALUES ('1', 'Газпром', , )");
+//            resultSet = statement.executeQuery("INSERT INTO companyInformation VALUES ('1', 'Газпром', , )");
 //            while (resultSet.next()) {
 //                int id = resultSet.getInt(1);
 //                String name = resultSet.getString(2);
