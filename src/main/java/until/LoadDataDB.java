@@ -4,9 +4,7 @@ import model.companyInformation.DataAboutBalance;
 import model.companyInformation.FinancialData;
 import model.companyInformation.MarketData;
 
-public class LoadDataDB implements CheckDataDB {
-    public int [] years;
-
+public class LoadDataDB implements CheckDataDBble {
 
     @Override
     public DataAboutBalance getDataAboutBalance() {
@@ -22,12 +20,6 @@ public class LoadDataDB implements CheckDataDB {
     public MarketData getMarketData() {
         return new MarketData();
     }
-
-
-    public void loadDB() {
-
-    }
-
 
 
 }

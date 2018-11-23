@@ -1,12 +1,12 @@
 package servlets.servlet;
 
-import model.Company_test;
 import model.companyInformation.DataAboutBalance;
 import model.companyInformation.FinancialData;
+import model.companyInformation.LoadDatable;
 import model.companyInformation.MarketData;
-import until.CheckDataDB;
+import until.CheckDataDBble;
 import until.LoadDataDB;
-import until.SqlString;
+import until.SqlQuery;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,9 +17,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.*;
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class CompanyServlet extends HttpServlet {
+    private static final long serialVersionUID = -2322961014126559826L;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -28,82 +30,38 @@ public class CompanyServlet extends HttpServlet {
         Connection connection = (Connection) getServletContext().getAttribute("DBConnection");
         System.out.println(name);
 
-        String rSetPage = SqlString.getCompany(name);
-        String rSetDataAboutBalance = SqlString.getDataAboutBalance(name);
-        String rSetFinancialData = SqlString.getFinancialData(name);
-        String rSetMarketData = SqlString.getMarketData(name);
+        TreeMap<Integer,  LoadDatable> mapDataAboutBalance = new TreeMap<>();
+        TreeMap<Integer,  LoadDatable> mapFinancialData = new TreeMap<>();
+        TreeMap<Integer,  LoadDatable> mapMarketData = new TreeMap<>();
 
-        HashMap<String, DataAboutBalance> map = new HashMap<>();
-
-
-//        /*
-//        //TODO тестирование вывода
-//         */
-//        testViewDB(req, connection, rSetPage);
-
-        CheckDataDB checkDataDB = new LoadDataDB();
+        CheckDataDBble checkDataDB = new LoadDataDB();
         DataAboutBalance dataAboutBalance = checkDataDB.getDataAboutBalance();
         FinancialData financialData = checkDataDB.getFinancialData();
         MarketData marketData = checkDataDB.getMarketData();
 
+        SqlQuery.checkTableInDBDataAboutBalance(dataAboutBalance, connection, mapDataAboutBalance, name);
+        SqlQuery.checkTableInDBDataAboutBalance(financialData, connection, mapFinancialData, name);
 
-        dataAboutBalance.loadData(connection, rSetDataAboutBalance);
-        financialData.loadData(connection, rSetFinancialData);
-        marketData.loadData(connection, rSetMarketData);
+        //TODO test map in company.jsp
+        System.out.println(SqlQuery.checkTableInDBDataAboutBalance(dataAboutBalance, connection, mapDataAboutBalance, name));
+        System.out.println("-------------------------------------");
+        System.out.println(SqlQuery.checkTableInDBDataAboutBalance(financialData, connection, mapFinancialData, name));
+        System.out.println("-------------------------------------");
+        System.out.println(SqlQuery.checkTableInDBDataAboutBalance(marketData, connection, mapMarketData, name));
 
-        map.put("1", dataAboutBalance);
-        map.put("2", dataAboutBalance);
-        map.put("2", dataAboutBalance);
+        System.out.println(mapDataAboutBalance.size());
+        System.out.println(mapFinancialData.size());
+        System.out.println(mapMarketData.size());
 
-        req.getSession().setAttribute("map", map);
-        System.out.println(dataAboutBalance);
-        System.out.println(financialData);
-        System.out.println(marketData);
-
-        req.getSession().setAttribute("dataAboutBalance", dataAboutBalance);
-        req.getSession().setAttribute("financialData", financialData);
-        req.getSession().setAttribute("marketData",marketData);
-
-
-
-//        String rSet dataAboutBalance =
-//
-//        Statement statement = null;
-//        Company company = null;
-//        try {
-//            statement = connection.createStatement();
-//            ResultSet resultSet = statement.executeQuery()
-//
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        req.getSession().setAttribute("mapDataAboutBalance", mapDataAboutBalance);
+        req.getSession().setAttribute("mapFinancialData", mapFinancialData);
+        req.getSession().setAttribute("mapMarketData", mapMarketData);
 
 
 //        addBLOBtoDB();
-//        req.getRequestDispatcher("/WEB-INF/view/companyInformation.jsp").forward(req, resp);
         req.getRequestDispatcher("/WEB-INF/view/company.jsp").forward(req, resp);
     }
 
-    private void testViewDB(HttpServletRequest req, Connection connection, String rSet) {
-        Statement statement = null;
-        Company_test company = null;
-        try {
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(rSet);
-            while (resultSet.next()) {
-                company = new Company_test(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3),
-                        resultSet.getDouble(4), resultSet.getDouble(5), resultSet.getDouble(6), resultSet.getDouble(7),
-                        resultSet.getDouble(8), resultSet.getDouble(9), resultSet.getInt(10));
-            }
-
-            System.out.println(company);
-            req.getSession().setAttribute("company", company);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
 
     @Override
@@ -128,15 +86,14 @@ public class CompanyServlet extends HttpServlet {
             preparedStatement.setBinaryStream(3, stream);
             preparedStatement.executeUpdate();
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-
-        } catch (SQLException e) {
+        } catch (FileNotFoundException | SQLException e) {
             e.printStackTrace();
         }
 
         try {
-            stream.close();
+            if (stream != null) {
+                stream.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

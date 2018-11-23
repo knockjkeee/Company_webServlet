@@ -2,7 +2,7 @@ package servlets.servlet.filterSearch;
 
 import dao.SQLStatementIndustry;
 import until.ConvertFilterHtml;
-import until.SqlString;
+import until.SqlQuery;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +16,8 @@ import java.sql.SQLException;
 
 @WebServlet("/OptionalServlet")
 public class OptionalServlet extends HttpServlet {
+    private static final long serialVersionUID = 127572488215928155L;
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ConvertFilterHtml convertHtml = new ConvertFilterHtml();
@@ -24,8 +26,7 @@ public class OptionalServlet extends HttpServlet {
         String nameSearch = req.getParameter("optional");
         System.out.println(nameSearch);
 
-        String rSet = SqlString.getOptional(nameSearch);
-
+        String rSet = SqlQuery.getOptional(nameSearch);
 
         StringBuilder result = new StringBuilder();
         SQLStatementIndustry sqlStatementIndustry = SQLStatementIndustry.getInstance();

@@ -81,5 +81,4 @@ public class SQLStatementIndustry {
         return sb;
     }
 
-
 }

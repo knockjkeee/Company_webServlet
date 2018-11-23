@@ -8,11 +8,17 @@ public class Company {
     private DataAboutBalance dataAboutBalance;
     private FinancialData financialData;
     private MarketData marketData;
+    private String name;
 
-    public Company(DataAboutBalance dataAboutBalance, FinancialData financialData, MarketData marketData) {
+    public Company(DataAboutBalance dataAboutBalance, FinancialData financialData, MarketData marketData, String name) {
         this.dataAboutBalance = dataAboutBalance;
         this.financialData = financialData;
         this.marketData = marketData;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public DataAboutBalance getDataAboutBalance() {
@@ -26,4 +32,5 @@ public class Company {
     public MarketData getMarketData() {
         return marketData;
     }
+
 }

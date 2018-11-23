@@ -4,7 +4,7 @@ import model.companyInformation.DataAboutBalance;
 import model.companyInformation.FinancialData;
 import model.companyInformation.MarketData;
 
-public interface CheckDataDB {
+public interface CheckDataDBble {
     DataAboutBalance getDataAboutBalance();
     FinancialData getFinancialData();
     MarketData getMarketData();

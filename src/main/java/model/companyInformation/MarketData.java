@@ -1,11 +1,13 @@
 package model.companyInformation;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class MarketData {
+public class MarketData implements LoadDatable, Serializable{
+    private static final long serialVersionUID = 6646030700705212555L;
     private int numberAO;
     private int priceAO;
     private int numberAP;
@@ -45,9 +47,8 @@ public class MarketData {
     }
 
     public void loadData(Connection connection, String Rset) {
-        Connection con = connection;
         try {
-            Statement statement = con.createStatement();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(Rset);
             while (resultSet.next()) {
                 setMarketData(resultSet.getInt(1), resultSet.getInt(2), resultSet.getInt(3), resultSet.getInt(4),

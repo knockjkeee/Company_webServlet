@@ -2,7 +2,7 @@ package servlets.servlet.filterSearch;
 
 import dao.SQLStatementIndustry;
 import until.ConvertFilterHtml;
-import until.SqlString;
+import until.SqlQuery;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +16,8 @@ import java.sql.SQLException;
 
 @WebServlet("/SearchServlet")
 public class SearchServlet extends HttpServlet {
+    private static final long serialVersionUID = -2116291438053798611L;
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ConvertFilterHtml convertHtml = new ConvertFilterHtml();
@@ -27,7 +29,7 @@ public class SearchServlet extends HttpServlet {
 
         System.out.println(nameSearch.length());
         if (nameSearch.length() == 0) {
-            String rSet = SqlString.getShearch();
+            String rSet = SqlQuery.getSearch();
 
             StringBuilder result = new StringBuilder();
             SQLStatementIndustry sqlStatementIndustry = SQLStatementIndustry.getInstance();

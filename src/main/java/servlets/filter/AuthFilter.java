@@ -1,7 +1,7 @@
 package servlets.filter;
 
-
 import dao.UserDao;
+
 import model.Role;
 
 import javax.servlet.*;
@@ -24,7 +24,6 @@ public class AuthFilter implements Filter {
 
         final HttpServletRequest req = (HttpServletRequest) request;
         final HttpServletResponse res = (HttpServletResponse) response;
-
         final String login = req.getParameter("login");
         final String password = req.getParameter("password");
 
@@ -42,15 +41,11 @@ public class AuthFilter implements Filter {
 
 
         } else if (dao.get().userIsExist(login, password)) {
-
             final Role role = dao.get().getRoleByLoginPassword(login, password);
-
             req.getSession().setAttribute("password", password);
             req.getSession().setAttribute("login", login);
             req.getSession().setAttribute("role", role);
-
             moveToMenu(req, res, role);
-
         } else {
             moveToMenu(req, res, Role.UNKNOWN);
         }

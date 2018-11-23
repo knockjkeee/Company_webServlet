@@ -1,11 +1,14 @@
 package model.companyInformation;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DataAboutBalance {
+public class DataAboutBalance implements LoadDatable, Serializable{
+
+    private static final long serialVersionUID = 164476569777790030L;
     private double cash;
     private double currentAssets;
     private double nonCurrentAssets;
@@ -28,7 +31,6 @@ public class DataAboutBalance {
         this.totalLiabilities = totalLiabilities;
         this.totalCapital = totalCapital;
     }
-
 
     public double getCash() {
         return cash;
@@ -63,9 +65,8 @@ public class DataAboutBalance {
     }
 
     public void loadData(Connection connection, String Rset) {
-        Connection con = connection;
         try {
-            Statement statement = con.createStatement();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(Rset);
             while (resultSet.next()) {
                 setDataAboutBalance(resultSet.getDouble(1), resultSet.getDouble(2), resultSet.getDouble(3), resultSet.getDouble(4),

@@ -1,11 +1,13 @@
 package model.companyInformation;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class FinancialData {
+public class FinancialData implements LoadDatable, Serializable {
+    private static final long serialVersionUID = -6337919253033930510L;
     private double revenue;
     private double operatingProfit;
     private double proofitBeforTax;
@@ -58,9 +60,8 @@ public class FinancialData {
     }
 
     public void loadData(Connection connection, String Rset) {
-        Connection con = connection;
         try {
-            Statement statement = con.createStatement();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(Rset);
             while (resultSet.next()) {
                 setFinancialData(resultSet.getDouble(1), resultSet.getDouble(2), resultSet.getDouble(3), resultSet.getDouble(4),

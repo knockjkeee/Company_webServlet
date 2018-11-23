@@ -21,6 +21,8 @@ public class Main {
 
     public static void main(String[] args) throws ClassNotFoundException {
 
+
+
         try {
 
             bd = new AtomicReference<>(new UserDao());
@@ -76,7 +78,7 @@ public class Main {
 //            }
 
 
-        } catch (SQLException e) {
+        } catch (SQLException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         /*} catch (InstantiationException e) {
             e.printStackTrace();
@@ -86,10 +88,6 @@ public class Main {
 //            e.printStackTrace();
 //        } catch (IllegalAccessException e) {
 //            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
         }
 
 
