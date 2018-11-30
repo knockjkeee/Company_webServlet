@@ -5,9 +5,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.TreeMap;
 
-public class FinancialData implements LoadDatable, Serializable {
+public class FinancialData implements Data, Serializable {
     private static final long serialVersionUID = -6337919253033930510L;
+
+    private String name;
     private double revenue;
     private double operatingProfit;
     private double proofitBeforTax;
@@ -15,9 +18,20 @@ public class FinancialData implements LoadDatable, Serializable {
     private double financealIncome;
     private double financealExpenses;
     private double depreciation;
-
+    private TreeMap<String, FinancialData> mapFinance;
 
     public FinancialData() {
+    }
+
+    private void setFinancialDataForMulty(String name, double revenue, double operatingProfit, double proofitBeforTax, double clearnProfit, double financealIncome, double financealExpenses, double depreciation) {
+        this.name = name;
+        this.revenue = revenue;
+        this.operatingProfit = operatingProfit;
+        this.proofitBeforTax = proofitBeforTax;
+        this.clearnProfit = clearnProfit;
+        this.financealIncome = financealIncome;
+        this.financealExpenses = financealExpenses;
+        this.depreciation = depreciation;
     }
 
     private void setFinancialData(double revenue, double operatingProfit, double proofitBeforTax, double clearnProfit, double financealIncome, double financealExpenses, double depreciation) {
@@ -33,6 +47,10 @@ public class FinancialData implements LoadDatable, Serializable {
     public double getRevenue() {
 
         return revenue;
+    }
+
+    public TreeMap<String, FinancialData> getMapFinance() {
+        return mapFinance;
     }
 
     public double getOperatingProfit() {
@@ -66,6 +84,22 @@ public class FinancialData implements LoadDatable, Serializable {
             while (resultSet.next()) {
                 setFinancialData(resultSet.getDouble(1), resultSet.getDouble(2), resultSet.getDouble(3), resultSet.getDouble(4),
                         resultSet.getDouble(5), resultSet.getDouble(6), resultSet.getDouble(7));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadDataForMulty(Connection connection, String Rset) {
+        mapFinance = new TreeMap<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(Rset);
+            while (resultSet.next()) {
+                String name = resultSet.getString(8);
+                setFinancialDataForMulty(resultSet.getString(8),resultSet.getDouble(10), resultSet.getDouble(11), resultSet.getDouble(12), resultSet.getDouble(13),
+                        resultSet.getDouble(14), resultSet.getDouble(15), resultSet.getDouble(16) );
+                mapFinance.put(name, this);
             }
         } catch (SQLException e) {
             e.printStackTrace();

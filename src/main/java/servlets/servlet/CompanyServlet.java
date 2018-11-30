@@ -1,9 +1,6 @@
 package servlets.servlet;
 
-import model.companyInformation.DataAboutBalance;
-import model.companyInformation.FinancialData;
-import model.companyInformation.LoadDatable;
-import model.companyInformation.MarketData;
+import model.companyInformation.*;
 import until.CheckDataDBble;
 import until.LoadDataDB;
 import until.SqlQuery;
@@ -30,28 +27,35 @@ public class CompanyServlet extends HttpServlet {
         Connection connection = (Connection) getServletContext().getAttribute("DBConnection");
         System.out.println(name);
 
-        TreeMap<Integer,  LoadDatable> mapDataAboutBalance = new TreeMap<>();
-        TreeMap<Integer,  LoadDatable> mapFinancialData = new TreeMap<>();
-        TreeMap<Integer,  LoadDatable> mapMarketData = new TreeMap<>();
+        TreeMap<Integer, Data> mapDataAboutBalance = new TreeMap<>();
+        TreeMap<Integer, Data> mapFinancialData = new TreeMap<>();
+        TreeMap<Integer, Data> mapMarketData = new TreeMap<>();
+        TreeMap<Integer, Data> multy = new TreeMap<>();
 
         CheckDataDBble checkDataDB = new LoadDataDB();
         DataAboutBalance dataAboutBalance = checkDataDB.getDataAboutBalance();
         FinancialData financialData = checkDataDB.getFinancialData();
         MarketData marketData = checkDataDB.getMarketData();
 
-        SqlQuery.checkTableInDBDataAboutBalance(dataAboutBalance, connection, mapDataAboutBalance, name);
-        SqlQuery.checkTableInDBDataAboutBalance(financialData, connection, mapFinancialData, name);
+//        SqlQuery.checkTableInDBDataTableForCompany(dataAboutBalance, connection, mapDataAboutBalance, name);
+//        SqlQuery.checkTableInDBDataTableForCompany(financialData, connection, mapFinancialData, name);
 
         //TODO test map in company.jsp
-        System.out.println(SqlQuery.checkTableInDBDataAboutBalance(dataAboutBalance, connection, mapDataAboutBalance, name));
+        System.out.println(SqlQuery.checkTableInDBDataTableForCompany(dataAboutBalance, connection, mapDataAboutBalance, name));
         System.out.println("-------------------------------------");
-        System.out.println(SqlQuery.checkTableInDBDataAboutBalance(financialData, connection, mapFinancialData, name));
+        System.out.println(SqlQuery.checkTableInDBDataTableForCompany(financialData, connection, mapFinancialData, name));
         System.out.println("-------------------------------------");
-        System.out.println(SqlQuery.checkTableInDBDataAboutBalance(marketData, connection, mapMarketData, name));
+        System.out.println(SqlQuery.checkTableInDBDataTableForCompany(marketData, connection, mapMarketData, name));
+
+        System.out.println(SqlQuery.checkMathMultiplierForCompany(mapDataAboutBalance, mapFinancialData, mapMarketData, multy));
 
         System.out.println(mapDataAboutBalance.size());
         System.out.println(mapFinancialData.size());
         System.out.println(mapMarketData.size());
+        System.out.println(multy.size());
+
+
+
 
         req.getSession().setAttribute("mapDataAboutBalance", mapDataAboutBalance);
         req.getSession().setAttribute("mapFinancialData", mapFinancialData);

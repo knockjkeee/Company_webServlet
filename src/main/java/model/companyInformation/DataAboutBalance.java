@@ -5,10 +5,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.TreeMap;
 
-public class DataAboutBalance implements LoadDatable, Serializable{
+public class DataAboutBalance implements Data, Serializable{
 
     private static final long serialVersionUID = 164476569777790030L;
+
+    private String name;
     private double cash;
     private double currentAssets;
     private double nonCurrentAssets;
@@ -17,8 +20,21 @@ public class DataAboutBalance implements LoadDatable, Serializable{
     private double longTermLiabilities;
     private double totalLiabilities;
     private double totalCapital;
+    private TreeMap<String, DataAboutBalance> mapData;
 
     public DataAboutBalance() {
+    }
+
+    private void setDataAboutBalanceForMulty(String name, double cash, double currentAssets, double nonCurrentAssets, double totalAssets, double shortTermLiabilities, double longTermLiabilities, double totalLiabilities, double totalCapital) {
+        this.name = name;
+        this.cash = cash;
+        this.currentAssets = currentAssets;
+        this.nonCurrentAssets = nonCurrentAssets;
+        this.totalAssets = totalAssets;
+        this.shortTermLiabilities = shortTermLiabilities;
+        this.longTermLiabilities = longTermLiabilities;
+        this.totalLiabilities = totalLiabilities;
+        this.totalCapital = totalCapital;
     }
 
     private void setDataAboutBalance(double cash, double currentAssets, double nonCurrentAssets, double totalAssets, double shortTermLiabilities, double longTermLiabilities, double totalLiabilities, double totalCapital) {
@@ -64,6 +80,10 @@ public class DataAboutBalance implements LoadDatable, Serializable{
         return totalCapital;
     }
 
+    public TreeMap<String, DataAboutBalance> getMapData() {
+        return mapData;
+    }
+
     public void loadData(Connection connection, String Rset) {
         try {
             Statement statement = connection.createStatement();
@@ -76,6 +96,25 @@ public class DataAboutBalance implements LoadDatable, Serializable{
             e.printStackTrace();
         }
     }
+
+    public void loadDataForMulty(Connection connection, String Rset) {
+        mapData = new TreeMap<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(Rset);
+            while (resultSet.next()) {
+                String name = resultSet.getString(8);
+//                DataAboutBalance temp  = new DataAboutBalance();
+                setDataAboutBalanceForMulty(resultSet.getString(8),resultSet.getDouble(10), resultSet.getDouble(11), resultSet.getDouble(12), resultSet.getDouble(13),
+                        resultSet.getDouble(14), resultSet.getDouble(15), resultSet.getDouble(16), resultSet.getDouble(17) );
+                mapData.put(name, this);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @Override
     public String toString() {

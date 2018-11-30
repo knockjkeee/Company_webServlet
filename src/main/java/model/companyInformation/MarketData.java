@@ -5,17 +5,29 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.TreeMap;
 
-public class MarketData implements LoadDatable, Serializable{
+public class MarketData implements Data, Serializable{
     private static final long serialVersionUID = 6646030700705212555L;
+
+    private String name;
     private int numberAO;
     private int priceAO;
     private int numberAP;
     private int priceAP;
     private int capitalization;
-
+    private TreeMap<String, MarketData> mapMarket;
 
     public MarketData() {
+    }
+
+    private void setMarketDataForMulty(String name, int numberAO, int priceAO, int numberAP, int priceAP, int capitalization){
+        this.name = name;
+        this.numberAO = numberAO;
+        this.priceAO = priceAO;
+        this.numberAP = numberAP;
+        this.priceAP = priceAP;
+        this.capitalization = capitalization;
     }
 
     private void setMarketData(int numberAO, int priceAO, int numberAP, int priceAP, int capitalization) {
@@ -24,6 +36,10 @@ public class MarketData implements LoadDatable, Serializable{
         this.numberAP = numberAP;
         this.priceAP = priceAP;
         this.capitalization = capitalization;
+    }
+
+    public TreeMap<String, MarketData> getMapMarket() {
+        return mapMarket;
     }
 
     public int getNumberAO() {
@@ -58,6 +74,23 @@ public class MarketData implements LoadDatable, Serializable{
             e.printStackTrace();
         }
     }
+
+    public void loadDataForMulty(Connection connection, String Rset) {
+        mapMarket = new TreeMap<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(Rset);
+            while (resultSet.next()) {
+                String name = resultSet.getString(8);
+                setMarketDataForMulty(resultSet.getString(8), resultSet.getInt(10), resultSet.getInt(11), resultSet.getInt(12), resultSet.getInt(13),
+                        resultSet.getInt(14) );
+                mapMarket.put(name, this);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public String toString() {

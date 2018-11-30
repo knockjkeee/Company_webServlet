@@ -1,15 +1,13 @@
 package until;
 
 import model.Years;
-import model.companyInformation.DataAboutBalance;
-import model.companyInformation.FinancialData;
-import model.companyInformation.LoadDatable;
-import model.companyInformation.MarketData;
+import model.companyInformation.*;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Map;
 import java.util.TreeMap;
 
 public class SqlQuery {
@@ -47,7 +45,7 @@ public class SqlQuery {
             "  FROM company INNER JOIN marketData ON (company.id = marketData.id_main) WHERE company.name = '";
 
 
-    public static TreeMap<Integer, ? extends LoadDatable> checkTableInDBDataAboutBalance(LoadDatable data, Connection connection, TreeMap<Integer, LoadDatable> map, String name) {
+    public static TreeMap<Integer, ? extends Data> checkTableInDBDataTableForCompany(Data data, Connection connection, TreeMap<Integer, Data> map, String name) {
         Statement statement = null;
         ResultSet resultSetTable;
         ResultSet resultSetRow;
@@ -92,7 +90,64 @@ public class SqlQuery {
         return map;
     }
 
-    private static void addDataToObject(LoadDatable data, Connection connection, TreeMap<Integer, LoadDatable> map, String name, Years y, String nameTable) {
+    public static TreeMap<Integer, ? extends Data> checkMathMultiplierForCompany(TreeMap<Integer, Data> data, TreeMap<Integer, Data> finance, TreeMap<Integer, Data> market, TreeMap<Integer, Data> multiplier) {
+        for (Years years : Years.values()) {
+            for (Map.Entry<Integer, Data> entryData : data.entrySet()) {
+                if (entryData.getKey() == years.index()) {
+                    for (Map.Entry<Integer, Data> entryFinance : finance.entrySet()) {
+                        if (entryFinance.getKey() == years.index()) {
+                            for (Map.Entry<Integer, Data> entryMarket : market.entrySet()) {
+                                if (entryMarket.getKey() == years.index()) {
+                                    multiplier.put(years.index(), new MathMultiplier(entryData.getValue(), entryFinance.getValue(), entryMarket.getValue()).setMultiplier());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return multiplier;
+    }
+
+    public static TreeMap<String, ? extends Data> indexMathMultiplier(Connection connection, DataAboutBalance data, FinancialData finance, MarketData marketData, TreeMap<String, Data> multy) {
+        String nameData = data.getClass().getSimpleName().toLowerCase() + Years.Seven.index();
+        data.loadDataForMulty(connection, getDataForMathMultiplierQuery(nameData));
+        TreeMap<String, DataAboutBalance> mapData = data.getMapData();
+
+        String nameFinance = finance.getClass().getSimpleName().toLowerCase() + Years.Seven.index();
+        finance.loadDataForMulty(connection, getDataForMathMultiplierQuery(nameFinance));
+        TreeMap<String, FinancialData> mapFinance = finance.getMapFinance();
+
+        String nameMarket = marketData.getClass().getSimpleName().toLowerCase() + Years.Seven.index();
+        marketData.loadDataForMulty(connection, getDataForMathMultiplierQuery(nameMarket));
+        TreeMap<String, MarketData> mapMarket = marketData.getMapMarket();
+
+        for (Map.Entry<String, DataAboutBalance> entryD : mapData.entrySet()) {
+            String nameD = entryD.getKey();
+            for (Map.Entry<String, FinancialData> entryF : mapFinance.entrySet()) {
+                if (entryF.getKey().equals(nameD)) {
+                    for (Map.Entry<String, MarketData> entryM : mapMarket.entrySet()) {
+                        if (entryM.getKey().equals(nameD)) {
+                            multy.put(nameD, new MathMultiplier(entryD.getValue(), entryF.getValue(), entryM.getValue()).setMultiplier());
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+        return multy;
+    }
+
+
+
+
+
+    //TODO getDataForMathMultiplierQuery SQL QUERY
+
+
+    private static void addDataToObject(Data data, Connection connection, TreeMap<Integer, Data> map, String name, Years y, String nameTable) {
         if (data instanceof DataAboutBalance) {
             data.loadData(connection, getDataAboutBalanceQuery(name, nameTable));
             map.put(y.index(), data);
@@ -105,7 +160,7 @@ public class SqlQuery {
         }
     }
 
-    private static void addDataToObjectNull(LoadDatable data, TreeMap<Integer, LoadDatable> map, Years y) {
+    private static void addDataToObjectNull(Data data, TreeMap<Integer, Data> map, Years y) {
         if (data instanceof DataAboutBalance) {
             map.put(y.index(), new DataAboutBalance());
         } else if (data instanceof FinancialData) {
@@ -145,24 +200,17 @@ public class SqlQuery {
         return sb.toString();
     }
 
-    public static String getMarketData(String nameSearch) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(MARKET_DATA).append(nameSearch).append("'");
-        return sb.toString();
 
+    private static String getDataForMathMultiplierQuery(String nameTable) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT * FROM company INNER  JOIN ").append(nameTable).append(" ON (company.id = ").append(nameTable).append(".id_main)");
+        return sb.toString();
+        //SELECT * FROM marketdata2018
+        //SELECT * FROM company INNER  JOIN dataAboutBalance ON (company.id = dataAboutBalance.id_main);
     }
 
-    public static String getFinancialData(String nameSearch) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(FINANCIAL_DATA).append(nameSearch).append("'");
-        return sb.toString();
-    }
 
-    public static String getDataAboutBalance(String nameSearch) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(DATA_ABOUT_BALANCE).append(nameSearch).append("'");
-        return sb.toString();
-    }
+
 
     public static String getOptional(String nameSearch) {
         StringBuilder sb = new StringBuilder();
@@ -179,6 +227,25 @@ public class SqlQuery {
     public static String getCompany(String name) {
         StringBuilder sb = new StringBuilder();
         sb.append(COMPANY).append(name).append("'");
+        return sb.toString();
+    }
+
+    public static String getMarketData(String nameSearch) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(MARKET_DATA).append(nameSearch).append("'");
+        return sb.toString();
+
+    }
+
+    public static String getFinancialData(String nameSearch) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(FINANCIAL_DATA).append(nameSearch).append("'");
+        return sb.toString();
+    }
+
+    public static String getDataAboutBalance(String nameSearch) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(DATA_ABOUT_BALANCE).append(nameSearch).append("'");
         return sb.toString();
     }
 }
