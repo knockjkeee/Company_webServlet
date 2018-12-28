@@ -1,23 +1,28 @@
 package model.companyInformation;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 
 public class TheMultiplier implements Data, Serializable {
     private static final long serialVersionUID = 4915203885074478472L;
+    private String name;
+    private String tiker;
+    private int capitalization;
     private int P_E;
     private int ROE;
     private int EV;
     private int EBITDA;
     private double EV_EBITDA;
-    private double P_BV;
-    private double P_S;
+    private BigDecimal P_BV;
+    private BigDecimal P_S;
     private int EV_S;
     private int DEBT_EBITDA;
 
-    public TheMultiplier(DataAboutBalance dataAboutBalance, FinancialData financialData, MarketData marketData ) {
+    public TheMultiplier(DataAboutBalance dataAboutBalance, FinancialData financialData, MarketData marketData) {
         setP_E(financialData, marketData);
-        setROE(financialData, marketData);
+        setROE(financialData, dataAboutBalance);
         setEV(marketData, dataAboutBalance);
         setEBITDA(financialData);
         setEV_EBITDA();
@@ -25,9 +30,12 @@ public class TheMultiplier implements Data, Serializable {
         setP_S(marketData, financialData);
         setEV_S(financialData);
         setDEBT_EBITDA(dataAboutBalance);
+        this.tiker = marketData.getTiker();
+        this.name = marketData.getName();
+        this.capitalization = marketData.getCapitalization();
     }
 
-    private void setTheMultiplier(int p_E, int ROE, int EV, int EBITDA, double EV_EBITDA, double p_BV, double p_S, int EV_S, int DEBT_EBITDA) {
+    private void setTheMultiplier(int p_E, int ROE, int EV, int EBITDA, double EV_EBITDA, BigDecimal p_BV, BigDecimal p_S, int EV_S, int DEBT_EBITDA) {
         this.P_E = p_E;
         this.ROE = ROE;
         this.EV = EV;
@@ -49,6 +57,18 @@ public class TheMultiplier implements Data, Serializable {
 
     }
 
+    public int getCapitalization() {
+        return capitalization;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getTiker() {
+        return tiker;
+    }
+
     public int getEV() {
         return this.EV;
     }
@@ -65,11 +85,11 @@ public class TheMultiplier implements Data, Serializable {
         return EV_EBITDA;
     }
 
-    public double getP_BV() {
+    public BigDecimal getP_BV() {
         return P_BV;
     }
 
-    public double getP_S() {
+    public BigDecimal getP_S() {
         return P_S;
     }
 
@@ -94,13 +114,13 @@ public class TheMultiplier implements Data, Serializable {
         this.P_E = (int) ((double) capitalization / profit);
     }
 
-    private void setROE(FinancialData fData, MarketData marketData) {
+    private void setROE(FinancialData fData, DataAboutBalance dataB) {
         /**
          * ROE считается по формуле (Чистая прибыль/Капитал)
          */
         double profit = fData.getClearnProfit();
-        int capitalization = marketData.getCapitalization();
-        this.ROE = (int) (profit / (double) capitalization);
+        double capital = dataB.getTotalCapital();
+        this.ROE = (int) (profit / capital);
     }
 
     private void setEV(MarketData marketData, DataAboutBalance dData) {
@@ -140,7 +160,13 @@ public class TheMultiplier implements Data, Serializable {
          */
         double totalCapital = dataAboutBalance.getTotalCapital();
         int capitalization = marketData.getCapitalization();
-        this.P_BV = (double) capitalization / totalCapital;
+        if (capitalization == 0) {
+            this.P_BV = BigDecimal.valueOf(0);
+        } else {
+            BigDecimal temp = BigDecimal.valueOf(totalCapital / capitalization);
+            temp = temp.setScale(2, RoundingMode.CEILING);
+            this.P_BV = temp;
+        }
     }
 
     private void setP_S(MarketData marketData, FinancialData financialData) {
@@ -149,7 +175,13 @@ public class TheMultiplier implements Data, Serializable {
          */
         int capitalization = marketData.getCapitalization();
         double revenue = financialData.getRevenue();
-        P_S = (double) capitalization / revenue;
+        if (revenue == 0) {
+            this.P_S = BigDecimal.valueOf(0);
+        } else {
+            BigDecimal temp = BigDecimal.valueOf(capitalization / revenue);
+            temp = temp.setScale(2, RoundingMode.CEILING);
+            this.P_S = temp;
+        }
     }
 
     private void setEV_S(FinancialData financialData) {

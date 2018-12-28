@@ -90,7 +90,7 @@ public class SqlQuery {
         return map;
     }
 
-    public static TreeMap<Integer, ? extends Data> checkMathMultiplierForCompany(TreeMap<Integer, Data> data, TreeMap<Integer, Data> finance, TreeMap<Integer, Data> market, TreeMap<Integer, Data> multiplier) {
+    public static TreeMap<String, ? extends Data> checkMathMultiplierForCompany(TreeMap<Integer, Data> data, TreeMap<Integer, Data> finance, TreeMap<Integer, Data> market, TreeMap<String, TheMultiplier> multiplier) {
         for (Years years : Years.values()) {
             for (Map.Entry<Integer, Data> entryData : data.entrySet()) {
                 if (entryData.getKey() == years.index()) {
@@ -98,7 +98,7 @@ public class SqlQuery {
                         if (entryFinance.getKey() == years.index()) {
                             for (Map.Entry<Integer, Data> entryMarket : market.entrySet()) {
                                 if (entryMarket.getKey() == years.index()) {
-                                    multiplier.put(years.index(), new MathMultiplier(entryData.getValue(), entryFinance.getValue(), entryMarket.getValue()).setMultiplier());
+                                    multiplier.put(String.valueOf(years.index()), new MathMultiplier(entryData.getValue(), entryFinance.getValue(), entryMarket.getValue()).setMultiplier());
                                 }
                             }
                         }
@@ -109,9 +109,9 @@ public class SqlQuery {
         return multiplier;
     }
 
-    public static TreeMap<String, ? extends Data> indexMathMultiplier(Connection connection, DataAboutBalance data, FinancialData finance, MarketData marketData, TreeMap<String, Data> multy) {
-        String nameData = data.getClass().getSimpleName().toLowerCase() + Years.Seven.index();
-        data.loadDataForMulty(connection, getDataForMathMultiplierQuery(nameData));
+    public static TreeMap<String, ? extends Data> indexMathMultiplier(Connection connection, DataAboutBalance data, FinancialData finance, MarketData marketData, TreeMap<String, TheMultiplier> multy) {
+        String nameDataTable = data.getClass().getSimpleName().toLowerCase() + Years.Seven.index();
+        data.loadDataForMulty(connection, getDataForMathMultiplierQuery(nameDataTable));
         TreeMap<String, DataAboutBalance> mapData = data.getMapData();
 
         String nameFinance = finance.getClass().getSimpleName().toLowerCase() + Years.Seven.index();
@@ -134,18 +134,16 @@ public class SqlQuery {
                 }
             }
         }
-
-
-
         return multy;
     }
 
-
-
-
+    public static TreeMap<String, ? extends Data> indexDataMarketForMainPage(Connection connection, MarketData marketData, TreeMap<String, Data> dataTreeMap) {
+        String nameTable = marketData.getClass().getSimpleName().toLowerCase() + Years.Seven.index();
+        dataTreeMap.putAll(marketData.loadMainPageData(connection, getMarketDataQueryForMainPage(nameTable)));
+        return dataTreeMap;
+    }
 
     //TODO getDataForMathMultiplierQuery SQL QUERY
-
 
     private static void addDataToObject(Data data, Connection connection, TreeMap<Integer, Data> map, String name, Years y, String nameTable) {
         if (data instanceof DataAboutBalance) {
@@ -194,9 +192,16 @@ public class SqlQuery {
     private static String getMarketDataQuery(String nameSearch, String nameTable) {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT ").append(nameTable).append(".numberAO AS 'numberAO', ").append(nameTable).append(".priceAO AS 'priceAO', ").append(nameTable)
-                .append(".numberAP AS 'numberAP', ").append(nameTable).append(".priceAP AS 'priceAP', ").append(nameTable).append(".capitalization AS 'capitalization' FROM company INNER JOIN ")
-                .append(nameTable).append(" ON (company.id = ").append(nameTable).append(".id_main)  WHERE company.name = '")
+                .append(".numberAP AS 'numberAP', ").append(nameTable).append(".priceAP AS 'priceAP', " ).append(nameTable)
+                .append(".capitalization AS 'capitalization', ").append(nameTable).append(".name as 'name', ").append(nameTable)
+                .append(".tiker as'tiker' FROM company INNER JOIN ").append(nameTable).append(" ON (company.id = ").append(nameTable).append(".id_main)  WHERE company.name = '")
                 .append(nameSearch).append("'");
+        return sb.toString();
+    }
+
+    private static String getMarketDataQueryForMainPage(String nameTable) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT name, tiker, capitalization FROM ").append(nameTable);
         return sb.toString();
     }
 
@@ -208,6 +213,9 @@ public class SqlQuery {
         //SELECT * FROM marketdata2018
         //SELECT * FROM company INNER  JOIN dataAboutBalance ON (company.id = dataAboutBalance.id_main);
     }
+
+
+
 
 
 

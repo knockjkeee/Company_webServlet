@@ -1,4 +1,7 @@
-<%--@elvariable id="request" type=""--%>
+<%@ page import="model.companyInformation.Data" %>
+<%@ page import="model.companyInformation.TheMultiplier" %>
+<%@ page import="java.util.TreeMap" %>
+<%@ page import="model.companyInformation.MarketData" %><%--@elvariable id="request" type=""--%>
 <%--<jsp:useBean id="pagecontext" scope="request" type="javax.servlet.AsyncContext"/>--%>
 <%--<%@ page isELIgnored="false"%>--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -14,6 +17,8 @@
     String url = application.getInitParameter("dbUrl");
     String user = application.getInitParameter("dbUser");
     String pw = application.getInitParameter("dbPassword");
+    TreeMap<String, TheMultiplier> data = (TreeMap<String, TheMultiplier>) session.getAttribute("multiMap");
+
 %>
 <c:set var="urlDB" value="<%= url%>"/>
 <c:set var="userDB" value="<%= user%>"/>
@@ -28,19 +33,19 @@
 </s:query>
 
 <h2>Создание новой компании (Будет логотип)</h2><br/>
-<h2><a href="<c:url value="/login"/>">login User</a><h2>
-<br/>
-<br/>
+<h2><a href="<c:url value="/login"/>">Login</a><h2>
+<%--<br/>--%>
+<%--<br/>--%>
 
 
-<select name="selection" id="list">
-    <option hidden>Выберите отрасль</option>
-    <option value="gaz" id="gaz">Газ</option>
-    <option value="oil" id="oil">Нефть</option>
-    <option value="electric" id="3">Электроэнергия</option>
-</select>
-<br>
-<br>
+<%--&lt;%&ndash;<select name="selection" id="list">&ndash;%&gt;--%>
+    <%--&lt;%&ndash;<option hidden>Выберите отрасль</option>&ndash;%&gt;--%>
+    <%--&lt;%&ndash;<option value="gaz" id="gaz">Газ</option>&ndash;%&gt;--%>
+    <%--&lt;%&ndash;<option value="oil" id="oil">Нефть</option>&ndash;%&gt;--%>
+    <%--&lt;%&ndash;<option value="electric" id="3">Электроэнергия</option>&ndash;%&gt;--%>
+<%--&lt;%&ndash;</select>&ndash;%&gt;--%>
+<%--<br>--%>
+<%--<br>--%>
 
 <form>
     <input type="text" required placeholder="поиск" id="search"/>
@@ -65,19 +70,20 @@
             <th><p>DEBT/EBITDA</p></th>
             <th><p>ROE</p></th>
         </tr>
-        <c:forEach var="row" items="${result.rows}">
+        <c:forEach items="<%=data%>" var="map">
             <tr>
-                <td><a href="<c:url value="/company?param1=${row.name}"/>"><c:out value="${row.name}"/></a></td>
-                <td><c:out value="${row.tiker}"/></td>
-                <td><c:out value="${row.market_price}"/> RUB</td>
-                <td><c:out value="${row.p_e}"/></td>
-                <td><c:out value="${row.p_s}"/></td>
-                <td><c:out value="${row.p_bv}"/></td>
-                <td><c:out value="${row.ev_ebitda}"/></td>
-                <td><c:out value="${row.ev_s}"/></td>
-                <td><c:out value="${row.debt_ebita}"/></td>
-                <td><c:out value="${row.roe}"/>%</td>
+                <td><a href="<c:url value="/company?param1=${map.key}"/>"><c:out value="${map.key}"/></a></td>
+                <td><c:out value="${map.value.tiker}"/></td>
+                <td><c:out value="${map.value.capitalization}"/></td>
+                <td><c:out value="${map.value.p_E}"/></td>
+                <td><c:out value="${map.value.p_S}"/></td>
+                <td><c:out value="${map.value.p_BV}"/></td>
+                <td><c:out value="${map.value.EV_EBITDA}"/></td>
+                <td><c:out value="${map.value.EV_S}"/></td>
+                <td><c:out value="${map.value.DEBT_EBITDA}"/></td>
+                <td><c:out value="${map.value.ROE}"/></td>
             </tr>
+
         </c:forEach>
         <tr>
         </tr>
@@ -88,7 +94,7 @@
 </script>
 
 <style>
-    <%@ include file="../res/css/style.css"%>
+    <%@include file="../res/css/style.css"%>
 </style>
 
 </body>

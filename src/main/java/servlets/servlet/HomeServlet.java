@@ -1,10 +1,7 @@
 package servlets.servlet;
 
 import dao.DBConnectionManager;
-import model.companyInformation.Data;
-import model.companyInformation.DataAboutBalance;
-import model.companyInformation.FinancialData;
-import model.companyInformation.MarketData;
+import model.companyInformation.*;
 import until.CheckDataDBble;
 import until.LoadDataDB;
 import until.SqlQuery;
@@ -40,19 +37,17 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection connection = (Connection) getServletContext().getAttribute("DBConnection");
-
         CheckDataDBble checkDataDB = new LoadDataDB();
         DataAboutBalance dataAboutBalance = checkDataDB.getDataAboutBalance();
         FinancialData financialData = checkDataDB.getFinancialData();
         MarketData marketData = checkDataDB.getMarketData();
+        TreeMap<String, TheMultiplier> multiMap = new TreeMap<>();
 
-        TreeMap<String, Data> multyMap = new TreeMap<>();
-        SqlQuery.indexMathMultiplier(connection, dataAboutBalance, financialData, marketData, multyMap);
+        SqlQuery.indexMathMultiplier(connection, dataAboutBalance, financialData, marketData, multiMap);
 
-        System.out.println(multyMap.size());
-        System.out.println(multyMap);
-
+        req.getSession().setAttribute("multiMap", multiMap);
         req.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(req, resp);
+
 
 
     }

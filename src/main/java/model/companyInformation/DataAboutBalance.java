@@ -84,10 +84,10 @@ public class DataAboutBalance implements Data, Serializable{
         return mapData;
     }
 
-    public void loadData(Connection connection, String Rset) {
+    public void loadData(Connection connection, String rSet) {
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(Rset);
+            ResultSet resultSet = statement.executeQuery(rSet);
             while (resultSet.next()) {
                 setDataAboutBalance(resultSet.getDouble(1), resultSet.getDouble(2), resultSet.getDouble(3), resultSet.getDouble(4),
                         resultSet.getDouble(5), resultSet.getDouble(6), resultSet.getDouble(7), resultSet.getDouble(8));
@@ -97,17 +97,17 @@ public class DataAboutBalance implements Data, Serializable{
         }
     }
 
-    public void loadDataForMulty(Connection connection, String Rset) {
+    public void loadDataForMulty(Connection connection, String rSet) {
         mapData = new TreeMap<>();
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(Rset);
+            ResultSet resultSet = statement.executeQuery(rSet);
             while (resultSet.next()) {
                 String name = resultSet.getString(8);
-//                DataAboutBalance temp  = new DataAboutBalance();
-                setDataAboutBalanceForMulty(resultSet.getString(8),resultSet.getDouble(10), resultSet.getDouble(11), resultSet.getDouble(12), resultSet.getDouble(13),
+                DataAboutBalance temp  = new DataAboutBalance();
+                temp.setDataAboutBalanceForMulty(resultSet.getString(8),resultSet.getDouble(10), resultSet.getDouble(11), resultSet.getDouble(12), resultSet.getDouble(13),
                         resultSet.getDouble(14), resultSet.getDouble(15), resultSet.getDouble(16), resultSet.getDouble(17) );
-                mapData.put(name, this);
+                mapData.put(name, temp);
             }
         } catch (SQLException e) {
             e.printStackTrace();

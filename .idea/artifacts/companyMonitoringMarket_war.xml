@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="companyMonitoringMarket:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="webServletttt-1.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="companyMonitoringMarket:war exploded" />
+    </root>
+  </artifact>
+</component>

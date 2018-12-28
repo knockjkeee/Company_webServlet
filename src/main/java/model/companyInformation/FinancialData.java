@@ -77,10 +77,10 @@ public class FinancialData implements Data, Serializable {
         return depreciation;
     }
 
-    public void loadData(Connection connection, String Rset) {
+    public void loadData(Connection connection, String rSet) {
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(Rset);
+            ResultSet resultSet = statement.executeQuery(rSet);
             while (resultSet.next()) {
                 setFinancialData(resultSet.getDouble(1), resultSet.getDouble(2), resultSet.getDouble(3), resultSet.getDouble(4),
                         resultSet.getDouble(5), resultSet.getDouble(6), resultSet.getDouble(7));
@@ -90,16 +90,17 @@ public class FinancialData implements Data, Serializable {
         }
     }
 
-    public void loadDataForMulty(Connection connection, String Rset) {
+    public void loadDataForMulty(Connection connection, String rSet) {
         mapFinance = new TreeMap<>();
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(Rset);
+            ResultSet resultSet = statement.executeQuery(rSet);
             while (resultSet.next()) {
                 String name = resultSet.getString(8);
-                setFinancialDataForMulty(resultSet.getString(8),resultSet.getDouble(10), resultSet.getDouble(11), resultSet.getDouble(12), resultSet.getDouble(13),
+                FinancialData temp = new FinancialData();
+                temp.setFinancialDataForMulty(resultSet.getString(8),resultSet.getDouble(10), resultSet.getDouble(11), resultSet.getDouble(12), resultSet.getDouble(13),
                         resultSet.getDouble(14), resultSet.getDouble(15), resultSet.getDouble(16) );
-                mapFinance.put(name, this);
+                mapFinance.put(name, temp);
             }
         } catch (SQLException e) {
             e.printStackTrace();

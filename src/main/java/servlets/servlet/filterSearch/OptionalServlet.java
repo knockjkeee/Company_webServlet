@@ -36,6 +36,7 @@ public class OptionalServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+
         resp.setContentType("text/html; charset=UTF-8");
         PrintWriter out = resp.getWriter();
         out.write(result.toString());
