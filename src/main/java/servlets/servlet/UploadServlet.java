@@ -1,5 +1,10 @@
 package servlets.servlet;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -7,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/Upload")
 public class UploadServlet extends HttpServlet {
@@ -17,6 +23,39 @@ public class UploadServlet extends HttpServlet {
         String description = null;
         String selection = null;
         File image =  null;
+
+        if (ServletFileUpload.isMultipartContent(req)) {
+            try {
+                List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(req);
+                for (FileItem item : multiparts) {
+                    if (!item.isFormField()) {
+                        image = new File(item.getName());
+                    }
+                    if (item.isFormField()) {
+                        if (item.getFieldName().equals("name")) {
+                            name = item.getString();
+                        }
+                        if (item.getFieldName().equals("tiker")) {
+                            tiker =item.getString();
+                        }
+                        if (item.getFieldName().equals("description")) {
+                            description = item.getString();
+                        }
+                        if (item.getFieldName().equals("selection")) {
+                            selection =item.getString();
+                        }
+                    }
+                }
+
+
+
+            } catch (FileUploadException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+
 
 
         System.out.println(name);
