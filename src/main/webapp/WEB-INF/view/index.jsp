@@ -38,14 +38,14 @@
 <%--<br/>--%>
 
 
-<%--&lt;%&ndash;<select name="selection" id="list">&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<option hidden>Выберите отрасль</option>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<option value="gaz" id="gaz">Газ</option>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<option value="oil" id="oil">Нефть</option>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<option value="electric" id="3">Электроэнергия</option>&ndash;%&gt;--%>
-<%--&lt;%&ndash;</select>&ndash;%&gt;--%>
-<%--<br>--%>
-<%--<br>--%>
+<select name="selection" id="list">
+    <option hidden>Выберите отрасль</option>
+    <option value="gaz" id="gaz">Газ</option>
+    <option value="oil" id="oil">Нефть</option>
+    <option value="electric" id="3">Электроэнергия</option>
+</select>
+<br>
+<br>
 
 <form>
     <input type="text" required placeholder="поиск" id="search"/>

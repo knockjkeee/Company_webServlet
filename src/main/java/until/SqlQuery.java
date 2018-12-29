@@ -177,6 +177,8 @@ public class SqlQuery {
                 .append(nameTable).append(" ON (company.id = ").append(nameTable).append(".id_main)  WHERE company.name = '").append(nameSearch).append("'");
 
         return sb.toString();
+
+
     }
 
     private static String getFinancialDataQuery(String nameSearch, String nameTable) {

@@ -22,23 +22,25 @@ public class MarketData implements Data, Serializable {
     public MarketData() {
     }
 
-    private void setMarketDataForMulty(String name, String tiker, int numberAO, int priceAO, int numberAP, int priceAP, int capitalization) {
+    private void setMarketDataForMulty(String name, String tiker, int numberAO, int priceAO, int numberAP, int priceAP) {
         this.name = name;
         this.tiker = tiker;
         this.numberAO = numberAO;
         this.priceAO = priceAO;
         this.numberAP = numberAP;
         this.priceAP = priceAP;
+        setCapitalization(numberAO,priceAO, numberAP, priceAP);
         this.capitalization = capitalization;
     }
 
-    private void setMarketData(String name, String tiker, int numberAO, int priceAO, int numberAP, int priceAP, int capitalization) {
+    private void setMarketData(String name, String tiker, int numberAO, int priceAO, int numberAP, int priceAP) {
         this.name = name;
         this.tiker = tiker;
         this.numberAO = numberAO;
         this.priceAO = priceAO;
         this.numberAP = numberAP;
         this.priceAP = priceAP;
+        setCapitalization(numberAO,priceAO, numberAP, priceAP);
         this.capitalization = capitalization;
     }
 
@@ -60,6 +62,10 @@ public class MarketData implements Data, Serializable {
         return tiker;
     }
 
+    public void setCapitalization(int numberAO, int priceAO, int numberAP, int priceAP  ) {
+
+        this.capitalization = (numberAO*priceAO)+(numberAP*priceAP);
+    }
 
     public int getNumberAO() {
         return numberAO;
@@ -86,8 +92,8 @@ public class MarketData implements Data, Serializable {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(rSet);
             while (resultSet.next()) {
-                setMarketData(resultSet.getString(6),resultSet.getString(7),resultSet.getInt(1), resultSet.getInt(2), resultSet.getInt(3), resultSet.getInt(4),
-                        resultSet.getInt(5));
+                setMarketData(resultSet.getString(6),resultSet.getString(7),resultSet.getInt(1), resultSet.getInt(2),
+                        resultSet.getInt(3), resultSet.getInt(4));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -102,8 +108,8 @@ public class MarketData implements Data, Serializable {
             while (resultSet.next()) {
                 String name = resultSet.getString(8);
                 MarketData temp = new MarketData();
-                temp.setMarketDataForMulty(resultSet.getString(8), resultSet.getString(9), resultSet.getInt(10), resultSet.getInt(11), resultSet.getInt(12), resultSet.getInt(13),
-                        resultSet.getInt(14));
+                temp.setMarketDataForMulty(resultSet.getString(8), resultSet.getString(9), resultSet.getInt(10), resultSet.getInt(11),
+                        resultSet.getInt(12), resultSet.getInt(13));
                 mapMarket.put(name, temp);
             }
         } catch (SQLException e) {
