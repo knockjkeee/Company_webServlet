@@ -66,13 +66,13 @@ public class UploadServlet extends HttpServlet {
                     }
                     if (item.isFormField()) {
                         if (item.getFieldName().equals("name")) {
-                            name = item.getString();
+                            name = item.getString("UTF-8");
                         }
                         if (item.getFieldName().equals("tiker")) {
                             tiker = item.getString();
                         }
                         if (item.getFieldName().equals("description")) {
-                            description = item.getString();
+                            description = item.getString("UTF-8");
                         }
                         if (item.getFieldName().equals("selection")) {
                             selection = item.getString();
@@ -187,13 +187,12 @@ public class UploadServlet extends HttpServlet {
         System.out.println(priceAP);
 
 
-//        req.getRequestDispatcher("/WEB-INF/view/admin_menu.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/view/admin_menu.jsp").forward(req, resp);
     }
 
     private void pushMainData(Connection connection, InputStream  img, String name, String tiker, String ds) {
 
         try {
-//            FileInputStream in = new FileInputStream(img);
             String query ="INSERT  INTO  company (name, tiker, description, image) VALUES (?,?,?,?)";
             PreparedStatement st = connection.prepareStatement(query);
             st.setString(1, name);
