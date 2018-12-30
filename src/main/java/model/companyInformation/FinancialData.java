@@ -1,10 +1,7 @@
 package model.companyInformation;
 
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.TreeMap;
 
 public class FinancialData implements Data, Serializable {
@@ -43,6 +40,17 @@ public class FinancialData implements Data, Serializable {
         this.financealExpenses = financealExpenses;
         this.depreciation = depreciation;
     }
+
+    public FinancialData(String revenue, String operatingProfit, String proofitBeforTax, String clearnProfit, String financealIncome, String financealExpenses, String depreciation) {
+        this.revenue = Double.parseDouble(revenue);
+        this.operatingProfit = Double.parseDouble(operatingProfit);
+        this.proofitBeforTax = Double.parseDouble(proofitBeforTax);
+        this.clearnProfit = Double.parseDouble(clearnProfit);
+        this.financealIncome = Double.parseDouble(financealIncome);
+        this.financealExpenses = Double.parseDouble(financealExpenses);
+        this.depreciation = Double.parseDouble(depreciation);
+    }
+
 
     public double getRevenue() {
 
@@ -106,6 +114,30 @@ public class FinancialData implements Data, Serializable {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void pushData(Connection connection, int id_main, String name, String tiker) {
+        try {
+            String query = "INSERT INTO financialdata2018(id_main, name, tiker, revenue, operatingProfit, proofitBeforTax, clearnProfit, financealIncome, financealExpenses, depreciation) " +
+                    "VALUES (?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement st = connection.prepareStatement(query);
+            st.setInt(1, id_main);
+            st.setString(2, name);
+            st.setString(3, tiker);
+            st.setDouble(4, revenue);
+            st.setDouble(5, operatingProfit);
+            st.setDouble(6, proofitBeforTax);
+            st.setDouble(7, clearnProfit);
+            st.setDouble(8, financealIncome);
+            st.setDouble(9, financealExpenses);
+            st.setDouble(10, depreciation);
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public String toString() {

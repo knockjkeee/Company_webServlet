@@ -1,10 +1,7 @@
 package model.companyInformation;
 
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.TreeMap;
 
 public class MarketData implements Data, Serializable {
@@ -20,6 +17,14 @@ public class MarketData implements Data, Serializable {
     private TreeMap<String, MarketData> mapMarket;
 
     public MarketData() {
+    }
+
+    public MarketData(String numberAO,String priceAO, String numberAP, String priceAP ) {
+        this. numberAO = Integer.parseInt(numberAO);
+        this.priceAO = Integer.parseInt(priceAO);
+        this.numberAP = Integer.parseInt(numberAP);
+        this.priceAP = Integer.parseInt(priceAP);
+
     }
 
     private void setMarketDataForMulty(String name, String tiker, int numberAO, int priceAO, int numberAP, int priceAP) {
@@ -112,6 +117,26 @@ public class MarketData implements Data, Serializable {
                         resultSet.getInt(12), resultSet.getInt(13));
                 mapMarket.put(name, temp);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void pushData(Connection connection, int id_main, String name, String tiker) {
+        try {
+            String query = "INSERT INTO marketdata2018(id_main, name, tiker, numberAO, priceAO, numberAP, priceAP) " +
+                    "VALUES (?,?,?,?,?,?,?)";
+            PreparedStatement st = connection.prepareStatement(query);
+            st.setInt(1, id_main);
+            st.setString(2, name);
+            st.setString(3, tiker);
+            st.setDouble(4, numberAO);
+            st.setDouble(5, priceAO);
+            st.setDouble(6, numberAP);
+            st.setDouble(7, priceAP);
+            st.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

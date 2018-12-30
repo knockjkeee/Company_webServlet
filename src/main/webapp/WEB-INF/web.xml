@@ -30,6 +30,28 @@
         <url-pattern>/login</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>CharsetFilter</filter-name>
+        <filter-class>servlets.filter.CharsetFilter</filter-class>
+        <init-param>
+            <param-name>requestEncoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CharsetFilter</filter-name>
+        <url-pattern>/Upload</url-pattern>
+    </filter-mapping>
+
+
+    <!--<jsp-config>-->
+        <!--<jsp-property-group>-->
+            <!--<url-pattern>*.jsp</url-pattern>-->
+            <!--<page-encoding>UTF-8</page-encoding>-->
+        <!--</jsp-property-group>-->
+    <!--</jsp-config>-->
+
     <!--Logout servlet-->
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
@@ -40,7 +62,6 @@
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
-
 
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
@@ -69,5 +90,27 @@
     <servlet-name>CompanyServlet</servlet-name>
     <url-pattern>/company</url-pattern>
 </servlet-mapping>
+
+    <!--<filter>-->
+        <!--<filter-name>Character Encoding Filter</filter-name>-->
+        <!--<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>-->
+        <!--<init-param>-->
+            <!--<param-name>encoding</param-name>-->
+            <!--<param-value>UTF-8</param-value>-->
+        <!--</init-param>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>Character Encoding Filter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
+
+
 
 </web-app>

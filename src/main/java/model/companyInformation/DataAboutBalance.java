@@ -1,10 +1,7 @@
 package model.companyInformation;
 
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.TreeMap;
 
 public class DataAboutBalance implements Data, Serializable{
@@ -46,6 +43,17 @@ public class DataAboutBalance implements Data, Serializable{
         this.longTermLiabilities = longTermLiabilities;
         this.totalLiabilities = totalLiabilities;
         this.totalCapital = totalCapital;
+    }
+
+    public DataAboutBalance(String cash, String nonCurrentAssets,String currentAssets, String totalAssets, String shortTermLiabilities ,String longTermLiabilities,String totalLiabilities , String totalCapital ) {
+        this.cash = Double.parseDouble(cash);
+        this.nonCurrentAssets = Double.parseDouble(nonCurrentAssets);
+        this.currentAssets = Double.parseDouble(currentAssets);
+        this.totalAssets = Double.parseDouble(totalAssets);
+        this.shortTermLiabilities = Double.parseDouble(shortTermLiabilities);
+        this.longTermLiabilities = Double.parseDouble(longTermLiabilities);
+        this.totalLiabilities = Double.parseDouble(totalLiabilities);
+        this.totalCapital = Double.parseDouble(totalCapital);
     }
 
     public double getCash() {
@@ -113,6 +121,31 @@ public class DataAboutBalance implements Data, Serializable{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void pushData(Connection connection, int id_main, String name, String tiker) {
+        try {
+            String query = "INSERT INTO dataaboutbalance2018(id_main, name, tiker, cash, currentAssets, nonCurrentAssets, totalAssets, shortTermLiabilities, longTermLiabilities, totalLiabilities, totalCapital) " +
+                    "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement st = connection.prepareStatement(query);
+            st.setInt(1, id_main);
+            st.setString(2, name);
+            st.setString(3, tiker);
+            st.setDouble(4, cash);
+            st.setDouble(5,currentAssets);
+            st.setDouble(6, nonCurrentAssets);
+            st.setDouble(7, totalAssets);
+            st.setDouble(8, shortTermLiabilities);
+            st.setDouble(9, longTermLiabilities);
+            st.setDouble(10, totalLiabilities);
+            st.setDouble(11, totalCapital);
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 

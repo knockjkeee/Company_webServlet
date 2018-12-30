@@ -57,6 +57,11 @@ public class TheMultiplier implements Data, Serializable {
 
     }
 
+    @Override
+    public void pushData(Connection connection, int id_main, String name, String tiker) {
+
+    }
+
     public int getCapitalization() {
         return capitalization;
     }
