@@ -1,0 +1,29 @@
+.wrapper .active {
+    color: #01839a;
+    border-bottom: 1px solid #fff;
+    background: #fff;
+    
+}
+.main {
+    width: 800px;
+    margin: 20px auto;
+}
+.tabs{
+    margin-left: 1em;
+}
+.tab {
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 3px 3px 0 0;
+    padding: .5em 1em;
+    display: inline-block;
+    margin-bottom: -1px;
+    position: relative;
+    z-index: 2;
+    background: #eee;
+}
+.tab_item {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 1em;
+}

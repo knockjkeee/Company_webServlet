@@ -9,6 +9,10 @@
     <%--<style>--%>
     <%--<%@ include file="../css/style.css"%>--%>
     <%--</style>--%>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <style>
+        <%@ include file="../res/css/tabs.css"%>
+    </style>
 </head>
 <body>
 
@@ -17,13 +21,34 @@
 <a href="<c:url value="/logout"/>">Вернуться на главную страницу</a>
 <br>
 <br>
+<div class="main">
+    <div class="wrapper" >
+        <div class="tabs">
+            <span class="tab">Вкладка 1</span>
+            <span class="tab">Вкладка 2</span>
+            <span class="tab">Вкладка 3</span>
+        </div>
+        <div class="tab_content">
+            <div class="tab_item">Lorem ipsum dolor sit amet,
+                consectetur adipisicing elit. Doloremque eos ipsum maxime rem?
+                Consectetur culpa dignissimos eius illo molestiae mollitia nemo
+                odit porro quae quaerat, sed sequi, sunt voluptatibus voluptatum.
+            </div>
+            <div class="tab_item">Содержимое 2</div>
+            <div class="tab_item">Содержимое 3</div>
+        </div>
+    </div>
+</div>
+
+
+
 <form method="post" action="${pageContext.request.contextPath}/Upload" enctype="multipart/form-data">
     <div>
         <label>Главная карточка</label>
         <br>
         <input type="text" required placeholder="name" name="name" id="name"/>
         <input type="text" required placeholder="tiker" name="tiker" id="tiker"/>
-        <input type="text" required placeholder="description" name="description" id="description"/>
+        <input type="text" size="50" equired placeholder="description" name="description" id="description"/>
         <select name="selection" id="list">
             <option hidden>Выберите отрасль</option>
             <option value="gaz" id="gaz">Газ</option>
@@ -79,6 +104,16 @@
 </form>
 
 <%--https://app.moqups.com/minakov86/JuxkQNdJlc/view/page/aa9df7b72--%>
+
+
+<script>
+    $(".tab_item").not(":first").hide();
+    $(".wrapper .tab").click(function() {
+        $(".wrapper .tab").removeClass("active").eq($(this).index()).addClass("active");
+        $(".tab_item").hide().eq($(this).index()).fadeIn()
+    }).eq(0).addClass("active");
+</script>
+
 
 </body>
 </html>
