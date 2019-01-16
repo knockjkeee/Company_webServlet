@@ -22,93 +22,154 @@
 <br>
 <br>
 <div class="main">
-    <div class="wrapper" >
+    <div class="wrapper">
         <div class="tabs">
             <span class="tab">Вкладка 1</span>
             <span class="tab">Вкладка 2</span>
             <span class="tab">Вкладка 3</span>
         </div>
-        <div class="tab_content">
-            <div class="tab_item">Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. Doloremque eos ipsum maxime rem?
-                Consectetur culpa dignissimos eius illo molestiae mollitia nemo
-                odit porro quae quaerat, sed sequi, sunt voluptatibus voluptatum.
+
+
+        <form method="post" action="${pageContext.request.contextPath}/Upload" enctype="multipart/form-data">
+
+
+            <div class="tab_content">
+                <div class="tab_item">
+                    <label>Главная карточка</label>
+                    <br>
+                    <input type="text" required placeholder="name" name="name" id="name"/>
+                    <input type="text" required placeholder="tiker" name="tiker" id="tiker"/>
+                    <%--<input type="range" size="50" equired placeholder="description" name="description" id="description"/>--%>
+                    <select name="selection" id="list">
+                        <option hidden>Выберите отрасль</option>
+                        <option value="gaz" id="gaz">Газ</option>
+                        <option value="oil" id="oil">Нефть</option>
+                        <option value="electric" id="3">Электроэнергия</option>
+                    </select>
+                    <input type="file" required placeholder="image" name="image" id="image"/><br>
+                    <br>
+                    <textarea placeholder="description" name="description" rows="5" cols="30"></textarea>
+                </div>
+                <div class="tab_item">
+
+
+                    <label>Данные о балансе</label>
+                    <label>2018</label>
+                    <br>
+                    <input type="Денежные средства" required placeholder="Денежные средства" name="cash"/>
+                    <input type="Внеоборотные активы" required placeholder="Внеоборотные активы"
+                           name="nonCurrentAssets"/>
+                    <input type="Оборотные активы" required placeholder="Оборотные активы" name="currentAssets"/>
+                    <input type="Итого активы" required placeholder="Итого активы" name="totalAssets"/>
+                    <input type="Краткосрочные обязательства" required placeholder="Краткосрочные обязательства"
+                           name="shortTermLiabilities"/>
+                    <input type="Долгосрочные обязательства" required placeholder="Долгосрочные обязательства"
+                           name="longTermLiabilities"/>
+                    <input type="Итого обязательства" required placeholder="Итого обязательства"
+                           name="totalLiabilities"/>
+                    <input type="Итого капитал" required placeholder="Итого капитал" name="totalCapital"/>
+
+                    <br>
+
+                    <label>Финансовые данные</label>
+                    <label>2018</label>
+                    <br>
+                    <input type="Выручка" required placeholder="Выручка" name="revenue"/>
+                    <input type="Операционная прибыль" required placeholder="Операционная прибыль"
+                           name="operatingProfit"/>
+                    <input type="Прибыль до налогов" required placeholder="Прибыль до налогов" name="proofitBeforTax"/>
+                    <input type="Читая прибыль" required placeholder="Чистая прибыль" name="clearnProfit"/>
+                    <input type="Финансовый додход" required placeholder="Финансовый додход" name="financealIncome"/>
+                    <input type="Финансовый расход" required placeholder="Финансовый расход" name="financealExpenses"/>
+                    <input type="Амортизация" required placeholder="Амортизация" name="depreciation"/>
+
+
+                </div>
+                <div class="tab_item">
+                    <label>Рыночные данные</label>
+                    <label>2018</label>
+                    <br>
+                    <input type="Количество АО" required placeholder="Количество АО" name="numberAO"/>
+                    <input type="Цена АО" required placeholder="Цена АО" name="priceAO"/>
+                    <input type="Количество АР" required placeholder="Количество АР" name="numberAP"/>
+                    <input type="Цена АР" required placeholder="Цена АР" name="priceAP"/>
+
+                </div>
             </div>
-            <div class="tab_item">Содержимое 2</div>
-            <div class="tab_item">Содержимое 3</div>
-        </div>
+
+            <input type="submit" value="Upload">
+
+        </form>
     </div>
 </div>
 
 
+<%--<form method="post" action="${pageContext.request.contextPath}/Upload" enctype="multipart/form-data">--%>
+    <%--<div>--%>
+        <%--<label>Главная карточка</label>--%>
+        <%--<br>--%>
+        <%--<input type="text" required placeholder="name" name="name" id="name"/>--%>
+        <%--<input type="text" required placeholder="tiker" name="tiker" id="tiker"/>--%>
+        <%--&lt;%&ndash;<input type="range" size="50" equired placeholder="description" name="description" id="description"/>&ndash;%&gt;--%>
+        <%--<select name="selection" id="list">--%>
+            <%--<option hidden>Выберите отрасль</option>--%>
+            <%--<option value="gaz" id="gaz">Газ</option>--%>
+            <%--<option value="oil" id="oil">Нефть</option>--%>
+            <%--<option value="electric" id="3">Электроэнергия</option>--%>
+        <%--</select>--%>
+        <%--<input type="file" required placeholder="image" name="image" id="image"/><br>--%>
+        <%--<br>--%>
+        <%--<textarea placeholder="description" name="description" rows="5" cols="30"></textarea>--%>
 
-<form method="post" action="${pageContext.request.contextPath}/Upload" enctype="multipart/form-data">
-    <div>
-        <label>Главная карточка</label>
-        <br>
-        <input type="text" required placeholder="name" name="name" id="name"/>
-        <input type="text" required placeholder="tiker" name="tiker" id="tiker"/>
-        <input type="text" size="50" equired placeholder="description" name="description" id="description"/>
-        <select name="selection" id="list">
-            <option hidden>Выберите отрасль</option>
-            <option value="gaz" id="gaz">Газ</option>
-            <option value="oil" id="oil">Нефть</option>
-            <option value="electric" id="3">Электроэнергия</option>
-        </select>
-        <input type="file" required placeholder="image" name="image" id="image"/>
-
-    </div>
-    <br>
-    <div>
-        <label>Данные о балансе</label>
-        <label>2018</label>
-        <br>
-        <input type="Денежные средства" required placeholder="Денежные средства" name="cash"/>
-        <input type="Внеоборотные активы" required placeholder="Внеоборотные активы" name="nonCurrentAssets"/>
-        <input type="Оборотные активы" required placeholder="Оборотные активы" name="currentAssets"/>
-        <input type="Итого активы" required placeholder="Итого активы" name="totalAssets"/>
-        <input type="Краткосрочные обязательства" required placeholder="Краткосрочные обязательства"
-               name="shortTermLiabilities"/>
-        <input type="Долгосрочные обязательства" required placeholder="Долгосрочные обязательства"
-               name="longTermLiabilities"/>
-        <input type="Итого обязательства" required placeholder="Итого обязательства" name="totalLiabilities"/>
-        <input type="Итого капитал" required placeholder="Итого капитал" name="totalCapital"/>
-    </div>
-    <br>
-    <div>
-        <label>Финансовые данные</label>
-        <label>2018</label>
-        <br>
-        <input type="Выручка" required placeholder="Выручка" name="revenue"/>
-        <input type="Операционная прибыль" required placeholder="Операционная прибыль" name="operatingProfit"/>
-        <input type="Прибыль до налогов" required placeholder="Прибыль до налогов" name="proofitBeforTax"/>
-        <input type="Читая прибыль" required placeholder="Чистая прибыль" name="clearnProfit"/>
-        <input type="Финансовый додход" required placeholder="Финансовый додход" name="financealIncome"/>
-        <input type="Финансовый расход" required placeholder="Финансовый расход" name="financealExpenses"/>
-        <input type="Амортизация" required placeholder="Амортизация" name="depreciation"/>
-    </div>
-    <br>
-    <div>
-        <label>Рыночные данные</label>
-        <label>2018</label>
-        <br>
-        <input type="Количество АО" required placeholder="Количество АО" name="numberAO"/>
-        <input type="Цена АО" required placeholder="Цена АО" name="priceAO"/>
-        <input type="Количество АР" required placeholder="Количество АР" name="numberAP"/>
-        <input type="Цена АР" required placeholder="Цена АР" name="priceAP"/>
-    </div>
-    <br>
-    <div>
-        <input type="submit" value="Upload">
-    </div>
-</form>
-
-<%--https://app.moqups.com/minakov86/JuxkQNdJlc/view/page/aa9df7b72--%>
-
+    <%--</div>--%>
+    <%--<br>--%>
+    <%--<div>--%>
+        <%--<label>Данные о балансе</label>--%>
+        <%--<label>2018</label>--%>
+        <%--<br>--%>
+        <%--<input type="Денежные средства" required placeholder="Денежные средства" name="cash"/>--%>
+        <%--<input type="Внеоборотные активы" required placeholder="Внеоборотные активы" name="nonCurrentAssets"/>--%>
+        <%--<input type="Оборотные активы" required placeholder="Оборотные активы" name="currentAssets"/>--%>
+        <%--<input type="Итого активы" required placeholder="Итого активы" name="totalAssets"/>--%>
+        <%--<input type="Краткосрочные обязательства" required placeholder="Краткосрочные обязательства"--%>
+               <%--name="shortTermLiabilities"/>--%>
+        <%--<input type="Долгосрочные обязательства" required placeholder="Долгосрочные обязательства"--%>
+               <%--name="longTermLiabilities"/>--%>
+        <%--<input type="Итого обязательства" required placeholder="Итого обязательства" name="totalLiabilities"/>--%>
+        <%--<input type="Итого капитал" required placeholder="Итого капитал" name="totalCapital"/>--%>
+    <%--</div>--%>
+    <%--<br>--%>
+    <%--<div>--%>
+        <%--<label>Финансовые данные</label>--%>
+        <%--<label>2018</label>--%>
+        <%--<br>--%>
+        <%--<input type="Выручка" required placeholder="Выручка" name="revenue"/>--%>
+        <%--<input type="Операционная прибыль" required placeholder="Операционная прибыль" name="operatingProfit"/>--%>
+        <%--<input type="Прибыль до налогов" required placeholder="Прибыль до налогов" name="proofitBeforTax"/>--%>
+        <%--<input type="Читая прибыль" required placeholder="Чистая прибыль" name="clearnProfit"/>--%>
+        <%--<input type="Финансовый додход" required placeholder="Финансовый додход" name="financealIncome"/>--%>
+        <%--<input type="Финансовый расход" required placeholder="Финансовый расход" name="financealExpenses"/>--%>
+        <%--<input type="Амортизация" required placeholder="Амортизация" name="depreciation"/>--%>
+    <%--</div>--%>
+    <%--<br>--%>
+    <%--<div>--%>
+        <%--<label>Рыночные данные</label>--%>
+        <%--<label>2018</label>--%>
+        <%--<br>--%>
+        <%--<input type="Количество АО" required placeholder="Количество АО" name="numberAO"/>--%>
+        <%--<input type="Цена АО" required placeholder="Цена АО" name="priceAO"/>--%>
+        <%--<input type="Количество АР" required placeholder="Количество АР" name="numberAP"/>--%>
+        <%--<input type="Цена АР" required placeholder="Цена АР" name="priceAP"/>--%>
+    <%--</div>--%>
+    <%--<br>--%>
+    <%--<div>--%>
+        <%--<input type="submit" value="Upload">--%>
+    <%--</div>--%>
+<%--</form>--%>
 
 <script>
     $(".tab_item").not(":first").hide();
-    $(".wrapper .tab").click(function() {
+    $(".wrapper .tab").click(function () {
         $(".wrapper .tab").removeClass("active").eq($(this).index()).addClass("active");
         $(".tab_item").hide().eq($(this).index()).fadeIn()
     }).eq(0).addClass("active");

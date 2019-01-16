@@ -48,8 +48,6 @@ public class HomeServlet extends HttpServlet {
         req.getSession().setAttribute("multiMap", multiMap);
         req.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(req, resp);
 
-
-
     }
 
     @Override

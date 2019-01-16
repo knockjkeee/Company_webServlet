@@ -227,12 +227,9 @@ public class UploadServlet extends HttpServlet {
             while (rs.next()) {
                 result = rs.getInt(1);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
     }
-
-
 }

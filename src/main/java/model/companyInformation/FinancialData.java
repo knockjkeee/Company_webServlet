@@ -1,6 +1,7 @@
 package model.companyInformation;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.TreeMap;
 
@@ -8,19 +9,20 @@ public class FinancialData implements Data, Serializable {
     private static final long serialVersionUID = -6337919253033930510L;
 
     private String name;
-    private double revenue;
-    private double operatingProfit;
-    private double proofitBeforTax;
-    private double clearnProfit;
-    private double financealIncome;
-    private double financealExpenses;
-    private double depreciation;
+    private BigDecimal revenue;
+    private BigDecimal  operatingProfit;
+    private BigDecimal  proofitBeforTax;
+    private BigDecimal  clearnProfit;
+    private BigDecimal  financealIncome;
+    private BigDecimal  financealExpenses;
+    private BigDecimal  depreciation;
     private TreeMap<String, FinancialData> mapFinance;
 
     public FinancialData() {
     }
 
-    private void setFinancialDataForMulty(String name, double revenue, double operatingProfit, double proofitBeforTax, double clearnProfit, double financealIncome, double financealExpenses, double depreciation) {
+    private void setFinancialDataForMulty(String name, BigDecimal  revenue, BigDecimal  operatingProfit, BigDecimal  proofitBeforTax,
+                                          BigDecimal  clearnProfit, BigDecimal  financealIncome, BigDecimal  financealExpenses, BigDecimal  depreciation) {
         this.name = name;
         this.revenue = revenue;
         this.operatingProfit = operatingProfit;
@@ -31,7 +33,8 @@ public class FinancialData implements Data, Serializable {
         this.depreciation = depreciation;
     }
 
-    private void setFinancialData(double revenue, double operatingProfit, double proofitBeforTax, double clearnProfit, double financealIncome, double financealExpenses, double depreciation) {
+    private void setFinancialData(BigDecimal  revenue, BigDecimal  operatingProfit, BigDecimal  proofitBeforTax, BigDecimal  clearnProfit,
+                                  BigDecimal  financealIncome, BigDecimal  financealExpenses, BigDecimal  depreciation) {
         this.revenue = revenue;
         this.operatingProfit = operatingProfit;
         this.proofitBeforTax = proofitBeforTax;
@@ -41,19 +44,19 @@ public class FinancialData implements Data, Serializable {
         this.depreciation = depreciation;
     }
 
-    public FinancialData(String revenue, String operatingProfit, String proofitBeforTax, String clearnProfit, String financealIncome, String financealExpenses, String depreciation) {
-        this.revenue = Double.parseDouble(revenue);
-        this.operatingProfit = Double.parseDouble(operatingProfit);
-        this.proofitBeforTax = Double.parseDouble(proofitBeforTax);
-        this.clearnProfit = Double.parseDouble(clearnProfit);
-        this.financealIncome = Double.parseDouble(financealIncome);
-        this.financealExpenses = Double.parseDouble(financealExpenses);
-        this.depreciation = Double.parseDouble(depreciation);
+    public FinancialData(String revenue, String operatingProfit, String proofitBeforTax, String clearnProfit, String financealIncome,
+                         String financealExpenses, String depreciation) {
+        this.revenue = BigDecimal.valueOf(Double.parseDouble(revenue));
+        this.operatingProfit = BigDecimal.valueOf(Double.parseDouble(operatingProfit));
+        this.proofitBeforTax = BigDecimal.valueOf(Double.parseDouble(proofitBeforTax));
+        this.clearnProfit = BigDecimal.valueOf(Double.parseDouble(clearnProfit));
+        this.financealIncome = BigDecimal.valueOf(Double.parseDouble(financealIncome));
+        this.financealExpenses = BigDecimal.valueOf(Double.parseDouble(financealExpenses));
+        this.depreciation = BigDecimal.valueOf(Double.parseDouble(depreciation));
     }
 
 
-    public double getRevenue() {
-
+    public BigDecimal getRevenue() {
         return revenue;
     }
 
@@ -61,27 +64,27 @@ public class FinancialData implements Data, Serializable {
         return mapFinance;
     }
 
-    public double getOperatingProfit() {
+    public BigDecimal getOperatingProfit() {
         return operatingProfit;
     }
 
-    public double getProofitBeforTax() {
+    public BigDecimal getProofitBeforTax() {
         return proofitBeforTax;
     }
 
-    public double getClearnProfit() {
+    public BigDecimal getClearnProfit() {
         return clearnProfit;
     }
 
-    public double getFinancealIncome() {
+    public BigDecimal getFinancealIncome() {
         return financealIncome;
     }
 
-    public double getFinancealExpenses() {
+    public BigDecimal getFinancealExpenses() {
         return financealExpenses;
     }
 
-    public double getDepreciation() {
+    public BigDecimal getDepreciation() {
         return depreciation;
     }
 
@@ -90,8 +93,8 @@ public class FinancialData implements Data, Serializable {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(rSet);
             while (resultSet.next()) {
-                setFinancialData(resultSet.getDouble(1), resultSet.getDouble(2), resultSet.getDouble(3), resultSet.getDouble(4),
-                        resultSet.getDouble(5), resultSet.getDouble(6), resultSet.getDouble(7));
+                setFinancialData(resultSet.getBigDecimal(1), resultSet.getBigDecimal(2), resultSet.getBigDecimal(3), resultSet.getBigDecimal(4),
+                        resultSet.getBigDecimal(5), resultSet.getBigDecimal(6), resultSet.getBigDecimal(7));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,8 +109,9 @@ public class FinancialData implements Data, Serializable {
             while (resultSet.next()) {
                 String name = resultSet.getString(8);
                 FinancialData temp = new FinancialData();
-                temp.setFinancialDataForMulty(resultSet.getString(8),resultSet.getDouble(10), resultSet.getDouble(11), resultSet.getDouble(12), resultSet.getDouble(13),
-                        resultSet.getDouble(14), resultSet.getDouble(15), resultSet.getDouble(16) );
+                temp.setFinancialDataForMulty(resultSet.getString(8),resultSet.getBigDecimal(10), resultSet.getBigDecimal(11),
+                        resultSet.getBigDecimal(12), resultSet.getBigDecimal(13),
+                        resultSet.getBigDecimal(14), resultSet.getBigDecimal(15), resultSet.getBigDecimal(16) );
                 mapFinance.put(name, temp);
             }
         } catch (SQLException e) {
@@ -124,13 +128,13 @@ public class FinancialData implements Data, Serializable {
             st.setInt(1, id_main);
             st.setString(2, name);
             st.setString(3, tiker);
-            st.setDouble(4, revenue);
-            st.setDouble(5, operatingProfit);
-            st.setDouble(6, proofitBeforTax);
-            st.setDouble(7, clearnProfit);
-            st.setDouble(8, financealIncome);
-            st.setDouble(9, financealExpenses);
-            st.setDouble(10, depreciation);
+            st.setBigDecimal(4, revenue);
+            st.setBigDecimal(5, operatingProfit);
+            st.setBigDecimal(6, proofitBeforTax);
+            st.setBigDecimal(7, clearnProfit);
+            st.setBigDecimal(8, financealIncome);
+            st.setBigDecimal(9, financealExpenses);
+            st.setBigDecimal(10, depreciation);
             st.executeUpdate();
 
         } catch (SQLException e) {

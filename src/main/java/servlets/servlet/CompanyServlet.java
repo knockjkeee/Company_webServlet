@@ -61,6 +61,13 @@ public class CompanyServlet extends HttpServlet {
         req.getSession().setAttribute("mapFinancialData", mapFinancialData);
         req.getSession().setAttribute("mapMarketData", mapMarketData);
         req.getSession().setAttribute("multi", multi);
+
+//        System.out.println(mapDataAboutBalance);
+//        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+//        System.out.println(mapFinancialData);
+//        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+//        System.out.println(mapMarketData);
+
     }
 
     private void loadDataTableCompanyPage(String name, Connection connection, TreeMap<Integer, Data> mapDataAboutBalance, TreeMap<Integer, Data> mapFinancialData, TreeMap<Integer, Data> mapMarketData, TreeMap<String, TheMultiplier> multi, DataAboutBalance dataAboutBalance, FinancialData financialData, MarketData marketData) {
@@ -70,11 +77,9 @@ public class CompanyServlet extends HttpServlet {
         SqlQuery.checkMathMultiplierForCompany(mapDataAboutBalance, mapFinancialData, mapMarketData, multi);
     }
 
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     }
-
 
     private void checkBlobDB (String nameCompany,HttpServletRequest req) throws SQLException, IOException {
 //        BufferedImage image;
@@ -112,8 +117,6 @@ public class CompanyServlet extends HttpServlet {
 //        System.out.println(result.length());
     }
 
-
-
 //    public void convertImage(Blob[] blob) {
 //        BufferedImage bufferedImage = null;
 //        OutputStream outputStream = null;
@@ -146,8 +149,6 @@ public class CompanyServlet extends HttpServlet {
 //            }
 //        }
 //    }
-
-
     private void addBLOBtoDB() {
         Connection connection = (Connection) getServletContext().getAttribute("DBConnection");
 //        File file = new File(getServletContext().getRealPath("/"), "\\WEB-INF\\logo_company\\Газпром.png");

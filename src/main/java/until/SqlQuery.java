@@ -60,7 +60,8 @@ public class SqlQuery {
         for (Years y : Years.values()) {
             String nameTable = data.getClass().getSimpleName().toLowerCase() + y.index();
             String rSet = "SHOW TABLES LIKE '" + nameTable + "'";
-            String rowSetCheck = "SELECT * FROM " + nameTable + " WHERE id = 1";
+//            String rowSetCheck = "SELECT * FROM " + nameTable + " WHERE id = 1";
+            String rowSetCheck = "SELECT * FROM " + nameTable + " WHERE NAME ='" + name + "'";
 
             try {
                 resultSetRow = statement.executeQuery(rowSetCheck);
@@ -147,14 +148,21 @@ public class SqlQuery {
 
     private static void addDataToObject(Data data, Connection connection, TreeMap<Integer, Data> map, String name, Years y, String nameTable) {
         if (data instanceof DataAboutBalance) {
-            data.loadData(connection, getDataAboutBalanceQuery(name, nameTable));
-            map.put(y.index(), data);
-        } else if (data instanceof FinancialData) {
-            data.loadData(connection, getFinancialDataQuery(name, nameTable));
-            map.put(y.index(), data);
-        } else if (data instanceof MarketData) {
-            data.loadData(connection, getMarketDataQuery(name, nameTable));
-            map.put(y.index(), data);
+            DataAboutBalance temp = new DataAboutBalance();
+            temp.loadData(connection, getDataAboutBalanceQuery(name, nameTable));
+            map.put(y.index(), temp);
+        } else {
+            if (data instanceof FinancialData) {
+                FinancialData temp = new FinancialData();
+                temp.loadData(connection, getFinancialDataQuery(name, nameTable));
+                map.put(y.index(), temp);
+            } else {
+                if (data instanceof MarketData) {
+                    MarketData temp = new MarketData();
+                    temp.loadData(connection, getMarketDataQuery(name, nameTable));
+                    map.put(y.index(), temp );
+                }
+            }
         }
     }
 
@@ -207,7 +215,6 @@ public class SqlQuery {
         return sb.toString();
     }
 
-
     private static String getDataForMathMultiplierQuery(String nameTable) {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT * FROM company INNER  JOIN ").append(nameTable).append(" ON (company.id = ").append(nameTable).append(".id_main)");
@@ -215,12 +222,6 @@ public class SqlQuery {
         //SELECT * FROM marketdata2018
         //SELECT * FROM company INNER  JOIN dataAboutBalance ON (company.id = dataAboutBalance.id_main);
     }
-
-
-
-
-
-
 
     public static String getOptional(String nameSearch) {
         StringBuilder sb = new StringBuilder();

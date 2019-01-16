@@ -115,15 +115,25 @@ public class TheMultiplier implements Data, Serializable {
          * P/E cчитается по формуле (Капитализация/Чистая прибыль)
          * */
         int capitalization = marketData.getCapitalization();
-        double profit = fData.getClearnProfit();
-        this.P_E = (int) ((double) capitalization / profit);
+        if (fData.getClearnProfit() == null) {
+            this.P_E = 0;
+        } else {
+            double profit = Double.parseDouble(String.valueOf(fData.getClearnProfit()));
+            this.P_E = (int) ((double) capitalization / profit);
+        }
     }
 
     private void setROE(FinancialData fData, DataAboutBalance dataB) {
         /**
          * ROE считается по формуле (Чистая прибыль/Капитал)
          */
-        double profit = fData.getClearnProfit();
+        double profit;
+        if (fData.getClearnProfit() == null) {
+            profit = 0.0;
+
+        } else {
+            profit = Double.parseDouble(String.valueOf(fData.getClearnProfit()));
+        }
         double capital = dataB.getTotalCapital();
         this.ROE = (int) (profit / capital);
     }
@@ -142,10 +152,21 @@ public class TheMultiplier implements Data, Serializable {
         /**
          * EBITDA считается по формуле (Прибыль до налогов + финансовые расходы - финансовые доходы + Амортизация))
          */
-        double proofitBeforTax = financialData.getProofitBeforTax();
-        double financealExpenses = financialData.getFinancealExpenses();
-        double financealIncome = financialData.getFinancealIncome();
-        double depreciation = financialData.getDepreciation();
+
+//        double proofitBeforTax;
+//        double financealExpenses;
+//        double financealIncome;
+//        double depreciation;
+
+        double proofitBeforTax = financialData.getProofitBeforTax() == null ? 0.0 : Double.parseDouble(String.valueOf(financialData.getProofitBeforTax()));
+        double financealExpenses = financialData.getFinancealExpenses() == null ? 0.0 : Double.parseDouble(String.valueOf(financialData.getFinancealExpenses()));
+        double financealIncome = financialData.getFinancealIncome() == null ? 0.0 : Double.parseDouble(String.valueOf(financialData.getDepreciation()));
+        double depreciation = financialData.getDepreciation() == null ? 0.0 : Double.parseDouble(String.valueOf(financialData.getDepreciation()));
+
+//        double proofitBeforTax = Double.parseDouble(String.valueOf(financialData.getProofitBeforTax()));
+//        double financealExpenses = Double.parseDouble(String.valueOf(financialData.getFinancealExpenses()));
+//        double financealIncome = Double.parseDouble(String.valueOf(financialData.getFinancealIncome()));
+//        double depreciation = Double.parseDouble(String.valueOf(financialData.getDepreciation()));
         this.EBITDA = (int) (proofitBeforTax + financealExpenses - financealIncome + depreciation);
     }
 
@@ -179,13 +200,20 @@ public class TheMultiplier implements Data, Serializable {
          * P/S считается по формуле (Капитализация/Выручку)
          */
         int capitalization = marketData.getCapitalization();
-        double revenue = financialData.getRevenue();
-        if (revenue == 0) {
+//        double revenue = Double.parseDouble(String.valueOf(financialData.getRevenue()));
+        double revenue;
+
+        if (financialData.getRevenue() == null) {
             this.P_S = BigDecimal.valueOf(0);
         } else {
-            BigDecimal temp = BigDecimal.valueOf(capitalization / revenue);
-            temp = temp.setScale(2, RoundingMode.CEILING);
-            this.P_S = temp;
+            revenue = Double.parseDouble(String.valueOf(financialData.getRevenue()));
+            if (revenue == 0) {
+                this.P_S = BigDecimal.valueOf(0);
+            } else {
+                BigDecimal temp = BigDecimal.valueOf(capitalization / revenue);
+                temp = temp.setScale(2, RoundingMode.CEILING);
+                this.P_S = temp;
+            }
         }
     }
 
@@ -193,8 +221,15 @@ public class TheMultiplier implements Data, Serializable {
         /**
          * EV/S считается по формуле (EV/Выручку)
          */
-        double revenue = financialData.getRevenue();
-        this.EV_S = (int) (getEV() / revenue);
+        double revenue;
+
+        if (financialData.getRevenue() == null) {
+            this.EV_S = 0;
+        } else {
+            revenue = Double.parseDouble(String.valueOf(financialData.getRevenue()));
+            this.EV_S = (int) (getEV() / revenue);
+
+        }
     }
 
     private void setDEBT_EBITDA(DataAboutBalance dataAboutBalance) {
