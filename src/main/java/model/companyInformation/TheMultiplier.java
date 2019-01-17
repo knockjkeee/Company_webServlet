@@ -9,16 +9,16 @@ public class TheMultiplier implements Data, Serializable {
     private static final long serialVersionUID = 4915203885074478472L;
     private String name;
     private String tiker;
-    private int capitalization;
-    private int P_E;
-    private int ROE;
-    private int EV;
-    private int EBITDA;
-    private double EV_EBITDA;
+    private BigDecimal capitalization;
+    private BigDecimal P_E;
+    private BigDecimal ROE;
+    private BigDecimal EV;
+    private BigDecimal EBITDA;
+    private BigDecimal EV_EBITDA;
     private BigDecimal P_BV;
     private BigDecimal P_S;
-    private int EV_S;
-    private int DEBT_EBITDA;
+    private BigDecimal EV_S;
+    private BigDecimal DEBT_EBITDA;
 
     public TheMultiplier(DataAboutBalance dataAboutBalance, FinancialData financialData, MarketData marketData) {
         setP_E(financialData, marketData);
@@ -35,7 +35,7 @@ public class TheMultiplier implements Data, Serializable {
         this.capitalization = marketData.getCapitalization();
     }
 
-    private void setTheMultiplier(int p_E, int ROE, int EV, int EBITDA, double EV_EBITDA, BigDecimal p_BV, BigDecimal p_S, int EV_S, int DEBT_EBITDA) {
+    private void setTheMultiplier(BigDecimal p_E, BigDecimal ROE, BigDecimal EV, BigDecimal EBITDA, BigDecimal EV_EBITDA, BigDecimal p_BV, BigDecimal p_S, BigDecimal EV_S, BigDecimal DEBT_EBITDA) {
         this.P_E = p_E;
         this.ROE = ROE;
         this.EV = EV;
@@ -62,7 +62,7 @@ public class TheMultiplier implements Data, Serializable {
 
     }
 
-    public int getCapitalization() {
+    public BigDecimal getCapitalization() {
         return capitalization;
     }
 
@@ -74,19 +74,19 @@ public class TheMultiplier implements Data, Serializable {
         return tiker;
     }
 
-    public int getEV() {
+    public BigDecimal getEV() {
         return this.EV;
     }
 
-    public int getP_E() {
+    public BigDecimal getP_E() {
         return P_E;
     }
 
-    public int getROE() {
+    public BigDecimal getROE() {
         return ROE;
     }
 
-    public double getEV_EBITDA() {
+    public BigDecimal getEV_EBITDA() {
         return EV_EBITDA;
     }
 
@@ -98,15 +98,15 @@ public class TheMultiplier implements Data, Serializable {
         return P_S;
     }
 
-    public int getEV_S() {
+    public BigDecimal getEV_S() {
         return EV_S;
     }
 
-    public int getDEBT_EBITDA() {
+    public BigDecimal getDEBT_EBITDA() {
         return DEBT_EBITDA;
     }
 
-    public int getEBITDA() {
+    public BigDecimal getEBITDA() {
         return this.EBITDA;
     }
 
@@ -114,12 +114,13 @@ public class TheMultiplier implements Data, Serializable {
         /**
          * P/E cчитается по формуле (Капитализация/Чистая прибыль)
          * */
-        int capitalization = marketData.getCapitalization();
+        BigDecimal capitalization = marketData.getCapitalization() == null ? BigDecimal.valueOf(0.0) : marketData.getCapitalization() ;
         if (fData.getClearnProfit() == null) {
-            this.P_E = 0;
+            this.P_E = BigDecimal.valueOf(0.00);
         } else {
             double profit = Double.parseDouble(String.valueOf(fData.getClearnProfit()));
-            this.P_E = (int) ((double) capitalization / profit);
+            BigDecimal temp = capitalization.divide(BigDecimal.valueOf(profit),2, BigDecimal.ROUND_HALF_UP);
+            this.P_E = temp.setScale(2, BigDecimal.ROUND_CEILING);
         }
     }
 
@@ -127,25 +128,27 @@ public class TheMultiplier implements Data, Serializable {
         /**
          * ROE считается по формуле (Чистая прибыль/Капитал)
          */
-        double profit;
-        if (fData.getClearnProfit() == null) {
-            profit = 0.0;
-
+        //TODO  java.lang.ArithmeticException: / by zero
+        double profit = fData.getClearnProfit() == null ? 0.0 : Double.parseDouble(String.valueOf(fData.getClearnProfit()));
+        double capital = dataB.getTotalCapital() == null ? 0.0 : Double.parseDouble(String.valueOf(dataB.getTotalCapital()));
+        if (capital == 0) {
+            this.ROE = BigDecimal.valueOf(0.00);
         } else {
-            profit = Double.parseDouble(String.valueOf(fData.getClearnProfit()));
+            BigDecimal temp = BigDecimal.valueOf(profit).divide(BigDecimal.valueOf(capital), 2, RoundingMode.HALF_UP);
+            this.ROE = temp.setScale(2, RoundingMode.CEILING);
         }
-        double capital = dataB.getTotalCapital();
-        this.ROE = (int) (profit / capital);
     }
 
     private void setEV(MarketData marketData, DataAboutBalance dData) {
         /**
          * EV считается по формуле (Капитализация компании + Итого обязательства - Денежные средства)
          */
-        int capitalization = marketData.getCapitalization();
-        double totalLiabilities = dData.getTotalLiabilities();
-        double cash = dData.getCash();
-        this.EV = (int) ((double) capitalization + (totalLiabilities - cash));
+        BigDecimal capitalization = marketData.getCapitalization() == null ? BigDecimal.valueOf(0.0) : marketData.getCapitalization();
+        double totalLiabilities = dData.getTotalLiabilities() == null ? 0.0 : Double.parseDouble(String.valueOf(dData.getTotalLiabilities()));
+        double cash = dData.getCash() == null ? 0.0 : Double.parseDouble(String.valueOf(dData.getCash()));
+
+        BigDecimal temp = capitalization.add(BigDecimal.valueOf((totalLiabilities - cash)));
+        this.EV = temp.setScale(2, RoundingMode.CEILING);
     }
 
     private void setEBITDA(FinancialData financialData) {
@@ -167,15 +170,16 @@ public class TheMultiplier implements Data, Serializable {
 //        double financealExpenses = Double.parseDouble(String.valueOf(financialData.getFinancealExpenses()));
 //        double financealIncome = Double.parseDouble(String.valueOf(financialData.getFinancealIncome()));
 //        double depreciation = Double.parseDouble(String.valueOf(financialData.getDepreciation()));
-        this.EBITDA = (int) (proofitBeforTax + financealExpenses - financealIncome + depreciation);
+        BigDecimal temp = BigDecimal.valueOf(proofitBeforTax + financealExpenses - financealIncome + depreciation);
+        this.EBITDA = temp.setScale(2, RoundingMode.CEILING);
     }
 
     private void setEV_EBITDA() {
         try {
-
-            this.EV_EBITDA = this.EV / this.EBITDA;
+            BigDecimal temp  = this.EV.divide(this.EBITDA,2,  BigDecimal.ROUND_HALF_UP);
+            this.EV_EBITDA = temp.setScale(2, RoundingMode.CEILING);
         } catch (Exception e) {
-            this.EV_EBITDA = 0;
+            this.EV_EBITDA = BigDecimal.valueOf(0.00);
         }
 
     }
@@ -184,12 +188,15 @@ public class TheMultiplier implements Data, Serializable {
         /**
          * P/BV считается по формуле (Капитал/Капитализация)
          */
-        double totalCapital = dataAboutBalance.getTotalCapital();
-        int capitalization = marketData.getCapitalization();
-        if (capitalization == 0) {
-            this.P_BV = BigDecimal.valueOf(0);
+        double totalCapital = dataAboutBalance.getTotalCapital() == null ? 0.0 : Double.parseDouble(String.valueOf(dataAboutBalance.getTotalCapital()));
+        BigDecimal capitalization = marketData.getCapitalization() == null ? BigDecimal.valueOf(0.0) : marketData.getCapitalization();
+
+
+
+        if (capitalization.compareTo(BigDecimal.ZERO) == 0) {
+            this.P_BV = BigDecimal.valueOf(0.00);
         } else {
-            BigDecimal temp = BigDecimal.valueOf(totalCapital / capitalization);
+            BigDecimal temp = BigDecimal.valueOf(totalCapital).divide(capitalization, 2, BigDecimal.ROUND_HALF_UP);
             temp = temp.setScale(2, RoundingMode.CEILING);
             this.P_BV = temp;
         }
@@ -199,7 +206,7 @@ public class TheMultiplier implements Data, Serializable {
         /**
          * P/S считается по формуле (Капитализация/Выручку)
          */
-        int capitalization = marketData.getCapitalization();
+        BigDecimal capitalization = marketData.getCapitalization() == null ? BigDecimal.valueOf(0.0) : marketData.getCapitalization();
 //        double revenue = Double.parseDouble(String.valueOf(financialData.getRevenue()));
         double revenue;
 
@@ -210,7 +217,7 @@ public class TheMultiplier implements Data, Serializable {
             if (revenue == 0) {
                 this.P_S = BigDecimal.valueOf(0);
             } else {
-                BigDecimal temp = BigDecimal.valueOf(capitalization / revenue);
+                BigDecimal temp = capitalization.divide(BigDecimal.valueOf(revenue), 2,  BigDecimal.ROUND_HALF_UP);
                 temp = temp.setScale(2, RoundingMode.CEILING);
                 this.P_S = temp;
             }
@@ -224,10 +231,11 @@ public class TheMultiplier implements Data, Serializable {
         double revenue;
 
         if (financialData.getRevenue() == null) {
-            this.EV_S = 0;
+            this.EV_S = BigDecimal.valueOf(0.0);
         } else {
             revenue = Double.parseDouble(String.valueOf(financialData.getRevenue()));
-            this.EV_S = (int) (getEV() / revenue);
+            BigDecimal temp = getEV().divide(BigDecimal.valueOf(revenue), 2,  BigDecimal.ROUND_HALF_UP);
+            this.EV_S = temp.setScale(2, RoundingMode.CEILING);
 
         }
     }
@@ -236,9 +244,14 @@ public class TheMultiplier implements Data, Serializable {
         /**
          * DEBT/EBITDA считается по формуле (Обязательства итого - денежные средства)/EBITDA
          */
-        double cash = dataAboutBalance.getCash();
-        double totalLiabilities = dataAboutBalance.getTotalLiabilities();
-        this.DEBT_EBITDA = (int) ((totalLiabilities - cash) / getEBITDA());
+        double cash = dataAboutBalance.getCash() == null ? 0.0 : Double.parseDouble(String.valueOf(dataAboutBalance.getCash()));
+        double totalLiabilities = dataAboutBalance.getTotalLiabilities() == null ? 0.0 : Double.parseDouble(String.valueOf(dataAboutBalance.getTotalLiabilities()));
+        if (getEBITDA().compareTo(BigDecimal.ZERO) == 0) {
+            this.DEBT_EBITDA = BigDecimal.valueOf(0.00);
+        } else {
+            BigDecimal temp = BigDecimal.valueOf(totalLiabilities - cash).divide(getEBITDA(), 2, RoundingMode.HALF_UP);
+            this.DEBT_EBITDA = temp.setScale(2, RoundingMode.CEILING);
+        }
     }
 
 

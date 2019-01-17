@@ -1,6 +1,8 @@
 package model.companyInformation;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.*;
 import java.util.TreeMap;
 
@@ -10,10 +12,10 @@ public class MarketData implements Data, Serializable {
     private String name;
     private String tiker;
     private long numberAO;
-    private int priceAO;
-    private int numberAP;
-    private int priceAP;
-    private int capitalization;
+    private BigDecimal priceAO;
+    private BigDecimal numberAP;
+    private BigDecimal priceAP;
+    private BigDecimal capitalization;
     private TreeMap<String, MarketData> mapMarket;
 
     public MarketData() {
@@ -21,35 +23,35 @@ public class MarketData implements Data, Serializable {
 
     public MarketData(String numberAO,String priceAO, String numberAP, String priceAP ) {
         this. numberAO = Long.parseLong(numberAO);
-        this.priceAO = Integer.parseInt(priceAO);
-        this.numberAP = Integer.parseInt(numberAP);
-        this.priceAP = Integer.parseInt(priceAP);
+        this.priceAO = BigDecimal.valueOf(Double.parseDouble(priceAO));
+        this.numberAP = BigDecimal.valueOf(Double.parseDouble(numberAP));
+        this.priceAP = BigDecimal.valueOf(Double.parseDouble(priceAP));
 
     }
 
-    private void setMarketDataForMulty(String name, String tiker, long numberAO, int priceAO, int numberAP, int priceAP) {
+    private void setMarketDataForMulty(String name, String tiker, long numberAO, BigDecimal priceAO, BigDecimal numberAP, BigDecimal priceAP) {
         this.name = name;
         this.tiker = tiker;
         this.numberAO = numberAO;
-        this.priceAO = priceAO;
-        this.numberAP = numberAP;
-        this.priceAP = priceAP;
+        this.priceAO = priceAO.setScale(2 , RoundingMode.CEILING);
+        this.numberAP = numberAP.setScale(2 , RoundingMode.CEILING);
+        this.priceAP = priceAP.setScale(2 , RoundingMode.CEILING);
         setCapitalization(numberAO,priceAO, numberAP, priceAP);
         this.capitalization = capitalization;
     }
 
-    private void setMarketData(String name, String tiker, long numberAO, int priceAO, int numberAP, int priceAP) {
+    private void setMarketData(String name, String tiker, long numberAO, BigDecimal priceAO, BigDecimal numberAP, BigDecimal priceAP) {
         this.name = name;
         this.tiker = tiker;
         this.numberAO = numberAO;
-        this.priceAO = priceAO;
-        this.numberAP = numberAP;
-        this.priceAP = priceAP;
+        this.priceAO = priceAO.setScale(2 , RoundingMode.CEILING);
+        this.numberAP = numberAP.setScale(2 , RoundingMode.CEILING);
+        this.priceAP = priceAP.setScale(2 , RoundingMode.CEILING);
         setCapitalization(numberAO,priceAO, numberAP, priceAP);
         this.capitalization = capitalization;
     }
 
-    public void setMarketDataForMainPage(String name, String tiker, int capitalization) {
+    public void setMarketDataForMainPage(String name, String tiker, BigDecimal capitalization) {
         this.name = name;
         this.tiker = tiker;
         this.capitalization = capitalization;
@@ -67,28 +69,30 @@ public class MarketData implements Data, Serializable {
         return tiker;
     }
 
-    public void setCapitalization(long numberAO, int priceAO, int numberAP, int priceAP  ) {
+    public void setCapitalization(long numberAO, BigDecimal priceAO, BigDecimal numberAP, BigDecimal priceAP  ) {
 
-        this.capitalization = (int) ((numberAO*priceAO)+(numberAP*priceAP));
+        BigDecimal numberAOTemp = numberAP;
+//        this.capitalization = ((BigDecimal.valueOf(numberAO)*priceAO)+(numberAP*priceAP));
+        this.capitalization = numberAOTemp.multiply(priceAO).add(numberAP.multiply(priceAP)).setScale(2 , RoundingMode.CEILING);
     }
 
     public long getNumberAO() {
         return numberAO;
     }
 
-    public int getPriceAO() {
+    public BigDecimal getPriceAO() {
         return priceAO;
     }
 
-    public int getNumberAP() {
+    public BigDecimal getNumberAP() {
         return numberAP;
     }
 
-    public int getPriceAP() {
+    public BigDecimal getPriceAP() {
         return priceAP;
     }
 
-    public int getCapitalization() {
+    public BigDecimal getCapitalization() {
         return capitalization;
     }
 
@@ -97,8 +101,8 @@ public class MarketData implements Data, Serializable {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(rSet);
             while (resultSet.next()) {
-                setMarketData(resultSet.getString(6),resultSet.getString(7),resultSet.getLong(1), resultSet.getInt(2),
-                        resultSet.getInt(3), resultSet.getInt(4));
+                setMarketData(resultSet.getString(6),resultSet.getString(7),resultSet.getLong(1), resultSet.getBigDecimal(2),
+                        resultSet.getBigDecimal(3), resultSet.getBigDecimal(4));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -113,8 +117,8 @@ public class MarketData implements Data, Serializable {
             while (resultSet.next()) {
                 String name = resultSet.getString(8);
                 MarketData temp = new MarketData();
-                temp.setMarketDataForMulty(resultSet.getString(8), resultSet.getString(9), resultSet.getLong(10), resultSet.getInt(11),
-                        resultSet.getInt(12), resultSet.getInt(13));
+                temp.setMarketDataForMulty(resultSet.getString(8), resultSet.getString(9), resultSet.getLong(10), resultSet.getBigDecimal(11),
+                        resultSet.getBigDecimal(12), resultSet.getBigDecimal(13));
                 mapMarket.put(name, temp);
             }
         } catch (SQLException e) {
@@ -132,9 +136,9 @@ public class MarketData implements Data, Serializable {
             st.setString(2, name);
             st.setString(3, tiker);
             st.setLong(4, numberAO);
-            st.setDouble(5, priceAO);
-            st.setDouble(6, numberAP);
-            st.setDouble(7, priceAP);
+            st.setBigDecimal(5, priceAO);
+            st.setBigDecimal(6, numberAP);
+            st.setBigDecimal(7, priceAP);
             st.executeUpdate();
 
         } catch (SQLException e) {
@@ -150,7 +154,7 @@ public class MarketData implements Data, Serializable {
             while (resultSet.next()) {
                 String name = resultSet.getString(1);
                 MarketData data = new MarketData();
-                data.setMarketDataForMainPage(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3));
+                data.setMarketDataForMainPage(resultSet.getString(1), resultSet.getString(2), resultSet.getBigDecimal(3));
                 result.put(name, data);
             }
         } catch (SQLException e) {

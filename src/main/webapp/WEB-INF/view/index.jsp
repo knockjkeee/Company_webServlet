@@ -74,14 +74,14 @@
             <tr>
                 <td><a href="<c:url value="/company?param1=${map.key}"/>"><c:out value="${map.key}"/></a></td>
                 <td><c:out value="${map.value.tiker}"/></td>
-                <td><c:out value="${map.value.capitalization}"/></td>
+                <td><c:out value="${map.value.capitalization}"/> &#8381</td>
                 <td><c:out value="${map.value.p_E}"/></td>
                 <td><c:out value="${map.value.p_S}"/></td>
                 <td><c:out value="${map.value.p_BV}"/></td>
                 <td><c:out value="${map.value.EV_EBITDA}"/></td>
                 <td><c:out value="${map.value.EV_S}"/></td>
                 <td><c:out value="${map.value.DEBT_EBITDA}"/></td>
-                <td><c:out value="${map.value.ROE}"/></td>
+                <td><c:out value="${map.value.ROE}"/> %</td>
             </tr>
 
         </c:forEach>

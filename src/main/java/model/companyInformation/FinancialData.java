@@ -2,6 +2,7 @@ package model.companyInformation;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.*;
 import java.util.TreeMap;
 
@@ -24,24 +25,24 @@ public class FinancialData implements Data, Serializable {
     private void setFinancialDataForMulty(String name, BigDecimal  revenue, BigDecimal  operatingProfit, BigDecimal  proofitBeforTax,
                                           BigDecimal  clearnProfit, BigDecimal  financealIncome, BigDecimal  financealExpenses, BigDecimal  depreciation) {
         this.name = name;
-        this.revenue = revenue;
-        this.operatingProfit = operatingProfit;
-        this.proofitBeforTax = proofitBeforTax;
-        this.clearnProfit = clearnProfit;
-        this.financealIncome = financealIncome;
-        this.financealExpenses = financealExpenses;
-        this.depreciation = depreciation;
+        this.revenue = revenue.setScale(2 , RoundingMode.CEILING);
+        this.operatingProfit = operatingProfit.setScale(2 , RoundingMode.CEILING);
+        this.proofitBeforTax = proofitBeforTax.setScale(2 , RoundingMode.CEILING);
+        this.clearnProfit = clearnProfit.setScale(2 , RoundingMode.CEILING);
+        this.financealIncome = financealIncome.setScale(2 , RoundingMode.CEILING);
+        this.financealExpenses = financealExpenses.setScale(2 , RoundingMode.CEILING);
+        this.depreciation = depreciation.setScale(2 , RoundingMode.CEILING);
     }
 
     private void setFinancialData(BigDecimal  revenue, BigDecimal  operatingProfit, BigDecimal  proofitBeforTax, BigDecimal  clearnProfit,
                                   BigDecimal  financealIncome, BigDecimal  financealExpenses, BigDecimal  depreciation) {
-        this.revenue = revenue;
-        this.operatingProfit = operatingProfit;
-        this.proofitBeforTax = proofitBeforTax;
-        this.clearnProfit = clearnProfit;
-        this.financealIncome = financealIncome;
-        this.financealExpenses = financealExpenses;
-        this.depreciation = depreciation;
+        this.revenue = revenue.setScale(2 , RoundingMode.CEILING);
+        this.operatingProfit = operatingProfit.setScale(2 , RoundingMode.CEILING);
+        this.proofitBeforTax = proofitBeforTax.setScale(2 , RoundingMode.CEILING);
+        this.clearnProfit = clearnProfit.setScale(2 , RoundingMode.CEILING);
+        this.financealIncome = financealIncome.setScale(2 , RoundingMode.CEILING);
+        this.financealExpenses = financealExpenses.setScale(2 , RoundingMode.CEILING);
+        this.depreciation = depreciation.setScale(2 , RoundingMode.CEILING);
     }
 
     public FinancialData(String revenue, String operatingProfit, String proofitBeforTax, String clearnProfit, String financealIncome,

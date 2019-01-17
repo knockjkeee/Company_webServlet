@@ -64,202 +64,202 @@
     <c:forEach items="<%=mapData%>" var="map0" begin="0" end="0">
         <tr>
             <td>Денежные средства</td>
-            <td>${map0.value.cash}</td>
+            <td>${map0.value.cash} &#8381</td>
             <c:forEach items="<%=mapData%>" var="map1" begin="1" end="1">
-                <td>${map1.value.cash}</td>
+                <td>${map1.value.cash} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map2" begin="2" end="2">
-                <td>${map2.value.cash}</td>
+                <td>${map2.value.cash} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map3" begin="3" end="3">
-                <td>${map3.value.cash}</td>
+                <td>${map3.value.cash} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map4" begin="4" end="4">
-                <td>${map4.value.cash}</td>
+                <td>${map4.value.cash} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map5" begin="5" end="5">
-                <td>${map5.value.cash}</td>
+                <td>${map5.value.cash} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map6" begin="6" end="6">
-                <td>${map6.value.cash}</td>
+                <td>${map6.value.cash} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map7" begin="7" end="7">
-                <td>${map7.value.cash}</td>
+                <td>${map7.value.cash} &#8381</td>
             </c:forEach>
         </tr>
         <tr>
             <td>Оборотные активы</td>
-            <td>${map0.value.currentAssets}</td>
+            <td>${map0.value.currentAssets} &#8381</td>
             <c:forEach items="<%=mapData%>" var="map1" begin="1" end="1">
-                <td>${map1.value.currentAssets}</td>
+                <td>${map1.value.currentAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map2" begin="2" end="2">
-                <td>${map2.value.currentAssets}</td>
+                <td>${map2.value.currentAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map3" begin="3" end="3">
-                <td>${map3.value.currentAssets}</td>
+                <td>${map3.value.currentAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map4" begin="4" end="4">
-                <td>${map4.value.currentAssets}</td>
+                <td>${map4.value.currentAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map5" begin="5" end="5">
-                <td>${map5.value.currentAssets}</td>
+                <td>${map5.value.currentAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map6" begin="6" end="6">
-                <td>${map6.value.currentAssets}</td>
+                <td>${map6.value.currentAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map7" begin="7" end="7">
-                <td>${map7.value.currentAssets}</td>
+                <td>${map7.value.currentAssets} &#8381</td>
             </c:forEach>
         </tr>
         <tr>
             <td>Внеоборотные активы</td>
-            <td>${map0.value.nonCurrentAssets}</td>
+            <td>${map0.value.nonCurrentAssets} &#8381</td>
             <c:forEach items="<%=mapData%>" var="map1" begin="1" end="1">
-                <td>${map1.value.nonCurrentAssets}</td>
+                <td>${map1.value.nonCurrentAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map2" begin="2" end="2">
-                <td>${map2.value.nonCurrentAssets}</td>
+                <td>${map2.value.nonCurrentAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map3" begin="3" end="3">
-                <td>${map3.value.nonCurrentAssets}</td>
+                <td>${map3.value.nonCurrentAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map4" begin="4" end="4">
-                <td>${map4.value.nonCurrentAssets}</td>
+                <td>${map4.value.nonCurrentAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map5" begin="5" end="5">
-                <td>${map5.value.nonCurrentAssets}</td>
+                <td>${map5.value.nonCurrentAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map6" begin="6" end="6">
-                <td>${map6.value.nonCurrentAssets}</td>
+                <td>${map6.value.nonCurrentAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map7" begin="7" end="7">
-                <td>${map7.value.nonCurrentAssets}</td>
+                <td>${map7.value.nonCurrentAssets} &#8381</td>
             </c:forEach>
         </tr>
         <tr>
             <td>Итого активы</td>
-            <td>${map0.value.totalAssets}</td>
+            <td>${map0.value.totalAssets} &#8381</td>
             <c:forEach items="<%=mapData%>" var="map1" begin="1" end="1">
-                <td>${map1.value.totalAssets}</td>
+                <td>${map1.value.totalAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map2" begin="2" end="2">
-                <td>${map2.value.totalAssets}</td>
+                <td>${map2.value.totalAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map3" begin="3" end="3">
-                <td>${map3.value.totalAssets}</td>
+                <td>${map3.value.totalAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map4" begin="4" end="4">
-                <td>${map4.value.totalAssets}</td>
+                <td>${map4.value.totalAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map5" begin="5" end="5">
-                <td>${map5.value.totalAssets}</td>
+                <td>${map5.value.totalAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map6" begin="6" end="6">
-                <td>${map6.value.totalAssets}</td>
+                <td>${map6.value.totalAssets} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map7" begin="7" end="7">
-                <td>${map7.value.totalAssets}</td>
+                <td>${map7.value.totalAssets} &#8381</td>
             </c:forEach>
         </tr>
         <tr>
             <td>Краткосрочные обстоятельства</td>
-            <td>${map0.value.shortTermLiabilities}</td>
+            <td>${map0.value.shortTermLiabilities} &#8381</td>
             <c:forEach items="<%=mapData%>" var="map1" begin="1" end="1">
-                <td>${map1.value.shortTermLiabilities}</td>
+                <td>${map1.value.shortTermLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map2" begin="2" end="2">
-                <td>${map2.value.shortTermLiabilities}</td>
+                <td>${map2.value.shortTermLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map3" begin="3" end="3">
-                <td>${map3.value.shortTermLiabilities}</td>
+                <td>${map3.value.shortTermLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map4" begin="4" end="4">
-                <td>${map4.value.shortTermLiabilities}</td>
+                <td>${map4.value.shortTermLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map5" begin="5" end="5">
-                <td>${map5.value.shortTermLiabilities}</td>
+                <td>${map5.value.shortTermLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map6" begin="6" end="6">
-                <td>${map6.value.shortTermLiabilities}</td>
+                <td>${map6.value.shortTermLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map7" begin="7" end="7">
-                <td>${map7.value.shortTermLiabilities}</td>
+                <td>${map7.value.shortTermLiabilities} &#8381</td>
             </c:forEach>
         </tr>
         <tr>
             <td>Долгосрочные обстоятельства</td>
-            <td>${map0.value.longTermLiabilities}</td>
+            <td>${map0.value.longTermLiabilities} &#8381</td>
             <c:forEach items="<%=mapData%>" var="map1" begin="1" end="1">
-                <td>${map1.value.longTermLiabilities}</td>
+                <td>${map1.value.longTermLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map2" begin="2" end="2">
-                <td>${map2.value.longTermLiabilities}</td>
+                <td>${map2.value.longTermLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map3" begin="3" end="3">
-                <td>${map3.value.longTermLiabilities}</td>
+                <td>${map3.value.longTermLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map4" begin="4" end="4">
-                <td>${map4.value.longTermLiabilities}</td>
+                <td>${map4.value.longTermLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map5" begin="5" end="5">
-                <td>${map5.value.longTermLiabilities}</td>
+                <td>${map5.value.longTermLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map6" begin="6" end="6">
-                <td>${map6.value.longTermLiabilities}</td>
+                <td>${map6.value.longTermLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map7" begin="7" end="7">
-                <td>${map7.value.longTermLiabilities}</td>
+                <td>${map7.value.longTermLiabilities} &#8381</td>
             </c:forEach>
         </tr>
         <tr>
             <td>Итого обязательства</td>
-            <td>${map0.value.totalLiabilities}</td>
+            <td>${map0.value.totalLiabilities} &#8381</td>
             <c:forEach items="<%=mapData%>" var="map1" begin="1" end="1">
-                <td>${map1.value.totalLiabilities}</td>
+                <td>${map1.value.totalLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map2" begin="2" end="2">
-                <td>${map2.value.totalLiabilities}</td>
+                <td>${map2.value.totalLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map3" begin="3" end="3">
-                <td>${map3.value.totalLiabilities}</td>
+                <td>${map3.value.totalLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map4" begin="4" end="4">
-                <td>${map4.value.totalLiabilities}</td>
+                <td>${map4.value.totalLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map5" begin="5" end="5">
-                <td>${map5.value.totalLiabilities}</td>
+                <td>${map5.value.totalLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map6" begin="6" end="6">
-                <td>${map6.value.totalLiabilities}</td>
+                <td>${map6.value.totalLiabilities} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map7" begin="7" end="7">
-                <td>${map7.value.totalLiabilities}</td>
+                <td>${map7.value.totalLiabilities} &#8381</td>
             </c:forEach>
         </tr>
         <tr>
             <td>Итого каапитал</td>
-            <td>${map0.value.totalCapital}</td>
+            <td>${map0.value.totalCapital} &#8381</td>
             <c:forEach items="<%=mapData%>" var="map1" begin="1" end="1">
-                <td>${map1.value.totalCapital}</td>
+                <td>${map1.value.totalCapital} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map2" begin="2" end="2">
-                <td>${map2.value.totalCapital}</td>
+                <td>${map2.value.totalCapital} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map3" begin="3" end="3">
-                <td>${map3.value.totalCapital}</td>
+                <td>${map3.value.totalCapital} &#8381 </td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map4" begin="4" end="4">
-                <td>${map4.value.totalCapital}</td>
+                <td>${map4.value.totalCapital} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map5" begin="5" end="5">
-                <td>${map5.value.totalCapital}</td>
+                <td>${map5.value.totalCapital} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map6" begin="6" end="6">
-                <td>${map6.value.totalCapital}</td>
+                <td>${map6.value.totalCapital} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map7" begin="7" end="7">
-                <td>${map7.value.totalCapital}</td>
+                <td>${map7.value.totalCapital} &#8381</td>
             </c:forEach>
         </tr>
     </c:forEach>
@@ -279,156 +279,156 @@
     <c:forEach items="<%=mapFinance%>" var="map0" begin="0" end="0">
         <tr>
             <td>Выручка</td>
-            <td>${map0.value.revenue}</td>
+            <td>${map0.value.revenue} &#8381</td>
             <c:forEach items="<%=mapFinance%>" var="map1" begin="1" end="1">
-                <td>${map1.value.revenue}</td>
+                <td>${map1.value.revenue} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map2" begin="2" end="2">
-                <td>${map2.value.revenue}</td>
+                <td>${map2.value.revenue} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map3" begin="3" end="3">
-                <td>${map3.value.revenue}</td>
+                <td>${map3.value.revenue} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map4" begin="4" end="4">
-                <td>${map4.value.revenue}</td>
+                <td>${map4.value.revenue} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map5" begin="5" end="5">
-                <td>${map5.value.revenue}</td>
+                <td>${map5.value.revenue} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map6" begin="6" end="6">
-                <td>${map6.value.revenue}</td>
+                <td>${map6.value.revenue} &#8381</td>
             </c:forEach>
         </tr>
         <tr>
             <td>Операционная прибыль</td>
-            <td>${map0.value.operatingProfit}</td>
+            <td>${map0.value.operatingProfit} &#8381</td>
             <c:forEach items="<%=mapFinance%>" var="map1" begin="1" end="1">
-                <td>${map1.value.operatingProfit}</td>
+                <td>${map1.value.operatingProfit} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map2" begin="2" end="2">
-                <td>${map2.value.operatingProfit}</td>
+                <td>${map2.value.operatingProfit} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map3" begin="3" end="3">
-                <td>${map3.value.operatingProfit}</td>
+                <td>${map3.value.operatingProfit} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map4" begin="4" end="4">
-                <td>${map4.value.operatingProfit}</td>
+                <td>${map4.value.operatingProfit} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map5" begin="5" end="5">
-                <td>${map5.value.operatingProfit}</td>
+                <td>${map5.value.operatingProfit} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map6" begin="6" end="6">
-                <td>${map6.value.operatingProfit}</td>
+                <td>${map6.value.operatingProfit} &#8381</td>
             </c:forEach>
         </tr>
         <tr>
             <td>Прибыль до налогов</td>
-            <td>${map0.value.proofitBeforTax}</td>
+            <td>${map0.value.proofitBeforTax} &#8381</td>
             <c:forEach items="<%=mapFinance%>" var="map1" begin="1" end="1">
-                <td>${map1.value.proofitBeforTax}</td>
+                <td>${map1.value.proofitBeforTax} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map2" begin="2" end="2">
-                <td>${map2.value.proofitBeforTax}</td>
+                <td>${map2.value.proofitBeforTax} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map3" begin="3" end="3">
-                <td>${map3.value.proofitBeforTax}</td>
+                <td>${map3.value.proofitBeforTax} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map4" begin="4" end="4">
-                <td>${map4.value.proofitBeforTax}</td>
+                <td>${map4.value.proofitBeforTax} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map5" begin="5" end="5">
-                <td>${map5.value.proofitBeforTax}</td>
+                <td>${map5.value.proofitBeforTax} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map6" begin="6" end="6">
-                <td>${map6.value.proofitBeforTax}</td>
+                <td>${map6.value.proofitBeforTax} &#8381</td>
             </c:forEach>
         </tr>
         <tr>
             <td>Чистая прибыль</td>
-            <td>${map0.value.clearnProfit}</td>
+            <td>${map0.value.clearnProfit} &#8381</td>
             <c:forEach items="<%=mapFinance%>" var="map1" begin="1" end="1">
-                <td>${map1.value.clearnProfit}</td>
+                <td>${map1.value.clearnProfit} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map2" begin="2" end="2">
-                <td>${map2.value.clearnProfit}</td>
+                <td>${map2.value.clearnProfit} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map3" begin="3" end="3">
-                <td>${map3.value.clearnProfit}</td>
+                <td>${map3.value.clearnProfit} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map4" begin="4" end="4">
-                <td>${map4.value.clearnProfit}</td>
+                <td>${map4.value.clearnProfit} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map5" begin="5" end="5">
-                <td>${map5.value.clearnProfit}</td>
+                <td>${map5.value.clearnProfit} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map6" begin="6" end="6">
-                <td>${map6.value.clearnProfit}</td>
+                <td>${map6.value.clearnProfit} &#8381</td>
             </c:forEach>
         </tr>
         <tr>
             <td>Финансовые доходы</td>
-            <td>${map0.value.financealIncome}</td>
+            <td>${map0.value.financealIncome} &#8381</td>
             <c:forEach items="<%=mapFinance%>" var="map1" begin="1" end="1">
-                <td>${map1.value.financealIncome}</td>
+                <td>${map1.value.financealIncome} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map2" begin="2" end="2">
-                <td>${map2.value.financealIncome}</td>
+                <td>${map2.value.financealIncome} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map3" begin="3" end="3">
-                <td>${map3.value.financealIncome}</td>
+                <td>${map3.value.financealIncome} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map4" begin="4" end="4">
-                <td>${map4.value.financealIncome}</td>
+                <td>${map4.value.financealIncome} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map5" begin="5" end="5">
-                <td>${map5.value.financealIncome}</td>
+                <td>${map5.value.financealIncome} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map6" begin="6" end="6">
-                <td>${map6.value.financealIncome}</td>
+                <td>${map6.value.financealIncome} &#8381</td>
             </c:forEach>
         </tr>
         <tr>
             <td>Финансовые расходы</td>
-            <td>${map0.value.financealExpenses}</td>
+            <td>${map0.value.financealExpenses} &#8381</td>
             <c:forEach items="<%=mapFinance%>" var="map1" begin="1" end="1">
-                <td>${map1.value.financealExpenses}</td>
+                <td>${map1.value.financealExpenses} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map2" begin="2" end="2">
-                <td>${map2.value.financealExpenses}</td>
+                <td>${map2.value.financealExpenses} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map3" begin="3" end="3">
-                <td>${map3.value.financealExpenses}</td>
+                <td>${map3.value.financealExpenses} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map4" begin="4" end="4">
-                <td>${map4.value.financealExpenses}</td>
+                <td>${map4.value.financealExpenses} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map5" begin="5" end="5">
-                <td>${map5.value.financealExpenses}</td>
+                <td>${map5.value.financealExpenses} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map6" begin="6" end="6">
-                <td>${map6.value.financealExpenses}</td>
+                <td>${map6.value.financealExpenses} &#8381</td>
             </c:forEach>
         </tr>
         <tr>
             <td>Амортизация</td>
-            <td>${map0.value.depreciation}</td>
+            <td>${map0.value.depreciation} &#8381</td>
             <c:forEach items="<%=mapFinance%>" var="map1" begin="1" end="1">
-                <td>${map1.value.depreciation}</td>
+                <td>${map1.value.depreciation} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map2" begin="2" end="2">
-                <td>${map2.value.depreciation}</td>
+                <td>${map2.value.depreciation} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map3" begin="3" end="3">
-                <td>${map3.value.depreciation}</td>
+                <td>${map3.value.depreciation} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map4" begin="4" end="4">
-                <td>${map4.value.depreciation}</td>
+                <td>${map4.value.depreciation} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map5" begin="5" end="5">
-                <td>${map5.value.depreciation}</td>
+                <td>${map5.value.depreciation} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapFinance%>" var="map6" begin="6" end="6">
-                <td>${map6.value.depreciation}</td>
+                <td>${map6.value.depreciation} &#8381</td>
             </c:forEach>
         </tr>
     </c:forEach>
@@ -470,24 +470,24 @@
         </tr>
         <tr>
             <td>Цена АО</td>
-            <td>${map0.value.priceAO}</td>
+            <td>${map0.value.priceAO} &#8381</td>
             <c:forEach items="<%=mapMarket%>" var="map1" begin="1" end="1">
-                <td>${map1.value.priceAO}</td>
+                <td>${map1.value.priceAO} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapMarket%>" var="map2" begin="2" end="2">
-                <td>${map2.value.priceAO}</td>
+                <td>${map2.value.priceAO} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapMarket%>" var="map3" begin="3" end="3">
-                <td>${map3.value.priceAO}</td>
+                <td>${map3.value.priceAO} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapMarket%>" var="map4" begin="4" end="4">
-                <td>${map4.value.priceAO}</td>
+                <td>${map4.value.priceAO} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapMarket%>" var="map5" begin="5" end="5">
-                <td>${map5.value.priceAO}</td>
+                <td>${map5.value.priceAO} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapMarket%>" var="map6" begin="6" end="6">
-                <td>${map6.value.priceAO}</td>
+                <td>${map6.value.priceAO} &#8381</td>
             </c:forEach>
         </tr>
         <tr>
@@ -514,46 +514,46 @@
         </tr>
         <tr>
             <td>Цена АП</td>
-            <td>${map0.value.priceAP}</td>
+            <td>${map0.value.priceAP} &#8381</td>
             <c:forEach items="<%=mapMarket%>" var="map1" begin="1" end="1">
-                <td>${map1.value.priceAP}</td>
+                <td>${map1.value.priceAP} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapMarket%>" var="map2" begin="2" end="2">
-                <td>${map2.value.priceAP}</td>
+                <td>${map2.value.priceAP} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapMarket%>" var="map3" begin="3" end="3">
-                <td>${map3.value.priceAP}</td>
+                <td>${map3.value.priceAP} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapMarket%>" var="map4" begin="4" end="4">
-                <td>${map4.value.priceAP}</td>
+                <td>${map4.value.priceAP} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapMarket%>" var="map5" begin="5" end="5">
-                <td>${map5.value.priceAP}</td>
+                <td>${map5.value.priceAP} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapMarket%>" var="map6" begin="6" end="6">
-                <td>${map6.value.priceAP}</td>
+                <td>${map6.value.priceAP} &#8381</td>
             </c:forEach>
         </tr>
         <tr>
             <td>Капитализация</td>
-            <td>${map0.value.capitalization}</td>
+            <td>${map0.value.capitalization} &#8381</td>
             <c:forEach items="<%=mapMarket%>" var="map1" begin="1" end="1">
-                <td>${map1.value.capitalization}</td>
+                <td>${map1.value.capitalization} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapMarket%>" var="map2" begin="2" end="2">
-                <td>${map2.value.capitalization}</td>
+                <td>${map2.value.capitalization} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapMarket%>" var="map3" begin="3" end="3">
-                <td>${map3.value.capitalization}</td>
+                <td>${map3.value.capitalization} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapMarket%>" var="map4" begin="4" end="4">
-                <td>${map4.value.capitalization}</td>
+                <td>${map4.value.capitalization} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapMarket%>" var="map5" begin="5" end="5">
-                <td>${map5.value.capitalization}</td>
+                <td>${map5.value.capitalization} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapMarket%>" var="map6" begin="6" end="6">
-                <td>${map6.value.capitalization}</td>
+                <td>${map6.value.capitalization} &#8381</td>
             </c:forEach>
         </tr>
     </c:forEach>
@@ -595,24 +595,24 @@
         </tr>
         <tr>
             <td>ROE</td>
-            <td>${map0.value.ROE}</td>
+            <td>${map0.value.ROE} %</td>
             <c:forEach items="<%=multi%>" var="map1" begin="1" end="1">
-                <td>${map1.value.ROE}</td>
+                <td>${map1.value.ROE} %</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map2" begin="2" end="2">
-                <td>${map2.value.ROE}</td>
+                <td>${map2.value.ROE} %</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map3" begin="3" end="3">
-                <td>${map3.value.ROE}</td>
+                <td>${map3.value.ROE} %</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map4" begin="4" end="4">
-                <td>${map4.value.ROE}</td>
+                <td>${map4.value.ROE} % </td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map5" begin="5" end="5">
-                <td>${map5.value.ROE}</td>
+                <td>${map5.value.ROE} %</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map6" begin="6" end="6">
-                <td>${map6.value.ROE}</td>
+                <td>${map6.value.ROE} %</td>
             </c:forEach>
         </tr>
         <tr>

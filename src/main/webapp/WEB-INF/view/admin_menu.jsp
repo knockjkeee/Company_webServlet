@@ -93,10 +93,8 @@
                     <input type="Цена АО" required placeholder="Цена АО" name="priceAO"/>
                     <input type="Количество АР" required placeholder="Количество АР" name="numberAP"/>
                     <input type="Цена АР" required placeholder="Цена АР" name="priceAP"/>
-
                 </div>
             </div>
-
             <input type="submit" value="Upload">
 
         </form>

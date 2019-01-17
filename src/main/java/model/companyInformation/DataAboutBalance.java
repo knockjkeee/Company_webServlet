@@ -1,6 +1,8 @@
 package model.companyInformation;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.*;
 import java.util.TreeMap;
 
@@ -9,82 +11,86 @@ public class DataAboutBalance implements Data, Serializable{
     private static final long serialVersionUID = 164476569777790030L;
 
     private String name;
-    private double cash;
-    private double currentAssets;
-    private double nonCurrentAssets;
-    private double totalAssets;
-    private double shortTermLiabilities;
-    private double longTermLiabilities;
-    private double totalLiabilities;
-    private double totalCapital;
+    private BigDecimal cash;
+    private BigDecimal currentAssets;
+    private BigDecimal nonCurrentAssets;
+    private BigDecimal totalAssets;
+    private BigDecimal shortTermLiabilities;
+    private BigDecimal longTermLiabilities;
+    private BigDecimal totalLiabilities;
+    private BigDecimal totalCapital;
     private TreeMap<String, DataAboutBalance> mapData;
 
     public DataAboutBalance() {
     }
 
-    private void setDataAboutBalanceForMulty(String name, double cash, double currentAssets, double nonCurrentAssets, double totalAssets, double shortTermLiabilities, double longTermLiabilities, double totalLiabilities, double totalCapital) {
+    private void setDataAboutBalanceForMulty(String name, BigDecimal cash, BigDecimal currentAssets,
+                                             BigDecimal nonCurrentAssets, BigDecimal totalAssets, BigDecimal shortTermLiabilities,
+                                             BigDecimal longTermLiabilities, BigDecimal totalLiabilities, BigDecimal totalCapital) {
         this.name = name;
         this.cash = cash;
-        this.currentAssets = currentAssets;
-        this.nonCurrentAssets = nonCurrentAssets;
-        this.totalAssets = totalAssets;
-        this.shortTermLiabilities = shortTermLiabilities;
-        this.longTermLiabilities = longTermLiabilities;
+        this.currentAssets = currentAssets.setScale(2 , RoundingMode.CEILING);
+        this.nonCurrentAssets = nonCurrentAssets.setScale(2 , RoundingMode.CEILING);
+        this.totalAssets = totalAssets.setScale(2 , RoundingMode.CEILING);
+        this.shortTermLiabilities = shortTermLiabilities.setScale(2 , RoundingMode.CEILING);
+        this.longTermLiabilities = longTermLiabilities.setScale(2 , RoundingMode.CEILING);
         this.totalLiabilities = totalLiabilities;
-        this.totalCapital = totalCapital;
+        this.totalCapital = totalCapital.setScale(2 , RoundingMode.CEILING);
     }
 
-    private void setDataAboutBalance(double cash, double currentAssets, double nonCurrentAssets, double totalAssets, double shortTermLiabilities, double longTermLiabilities, double totalLiabilities, double totalCapital) {
-        this.cash = cash;
-        this.currentAssets = currentAssets;
-        this.nonCurrentAssets = nonCurrentAssets;
-        this.totalAssets = totalAssets;
-        this.shortTermLiabilities = shortTermLiabilities;
-        this.longTermLiabilities = longTermLiabilities;
-        this.totalLiabilities = totalLiabilities;
-        this.totalCapital = totalCapital;
+    private void setDataAboutBalance(BigDecimal cash, BigDecimal currentAssets, BigDecimal nonCurrentAssets,
+                                     BigDecimal totalAssets, BigDecimal shortTermLiabilities, BigDecimal longTermLiabilities,
+                                     BigDecimal totalLiabilities, BigDecimal totalCapital) {
+        this.cash = cash.setScale(2 , RoundingMode.CEILING);
+        this.currentAssets = currentAssets.setScale(2 , RoundingMode.CEILING);
+        this.nonCurrentAssets = nonCurrentAssets.setScale(2 , RoundingMode.CEILING);
+        this.totalAssets = totalAssets.setScale(2 , RoundingMode.CEILING);
+        this.shortTermLiabilities = shortTermLiabilities.setScale(2 , RoundingMode.CEILING);
+        this.longTermLiabilities = longTermLiabilities.setScale(2 , RoundingMode.CEILING);
+        this.totalLiabilities = totalLiabilities.setScale(2 , RoundingMode.CEILING);
+        this.totalCapital = totalCapital.setScale(2 , RoundingMode.CEILING);
     }
 
     public DataAboutBalance(String cash, String nonCurrentAssets,String currentAssets, String totalAssets, String shortTermLiabilities ,String longTermLiabilities,String totalLiabilities , String totalCapital ) {
-        this.cash = Double.parseDouble(cash);
-        this.nonCurrentAssets = Double.parseDouble(nonCurrentAssets);
-        this.currentAssets = Double.parseDouble(currentAssets);
-        this.totalAssets = Double.parseDouble(totalAssets);
-        this.shortTermLiabilities = Double.parseDouble(shortTermLiabilities);
-        this.longTermLiabilities = Double.parseDouble(longTermLiabilities);
-        this.totalLiabilities = Double.parseDouble(totalLiabilities);
-        this.totalCapital = Double.parseDouble(totalCapital);
+        this.cash = BigDecimal.valueOf(Double.parseDouble(cash));
+        this.nonCurrentAssets = BigDecimal.valueOf(Double.parseDouble(nonCurrentAssets));
+        this.currentAssets = BigDecimal.valueOf(Double.parseDouble(currentAssets));
+        this.totalAssets = BigDecimal.valueOf(Double.parseDouble(totalAssets));
+        this.shortTermLiabilities = BigDecimal.valueOf(Double.parseDouble(shortTermLiabilities));
+        this.longTermLiabilities = BigDecimal.valueOf(Double.parseDouble(longTermLiabilities));
+        this.totalLiabilities = BigDecimal.valueOf(Double.parseDouble(totalLiabilities));
+        this.totalCapital = BigDecimal.valueOf(Double.parseDouble(totalCapital));
     }
 
-    public double getCash() {
+    public BigDecimal getCash() {
         return cash;
     }
 
-    public double getCurrentAssets() {
+    public BigDecimal getCurrentAssets() {
         return currentAssets;
     }
 
-    public double getNonCurrentAssets() {
+    public BigDecimal getNonCurrentAssets() {
         return nonCurrentAssets;
     }
 
-    public double getTotalAssets() {
+    public BigDecimal getTotalAssets() {
         return totalAssets;
     }
 
-    public double getShortTermLiabilities() {
+    public BigDecimal getShortTermLiabilities() {
         return shortTermLiabilities;
     }
 
-    public double getLongTermLiabilities() {
+    public BigDecimal getLongTermLiabilities() {
         return longTermLiabilities;
     }
 
-    public double getTotalLiabilities() {
+    public BigDecimal getTotalLiabilities() {
         return totalLiabilities;
     }
 
-    public double getTotalCapital() {
+    public BigDecimal getTotalCapital() {
         return totalCapital;
     }
 
@@ -97,8 +103,8 @@ public class DataAboutBalance implements Data, Serializable{
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(rSet);
             while (resultSet.next()) {
-                setDataAboutBalance(resultSet.getDouble(1), resultSet.getDouble(2), resultSet.getDouble(3), resultSet.getDouble(4),
-                        resultSet.getDouble(5), resultSet.getDouble(6), resultSet.getDouble(7), resultSet.getDouble(8));
+                setDataAboutBalance(resultSet.getBigDecimal(1), resultSet.getBigDecimal(2), resultSet.getBigDecimal(3), resultSet.getBigDecimal(4),
+                        resultSet.getBigDecimal(5), resultSet.getBigDecimal(6), resultSet.getBigDecimal(7), resultSet.getBigDecimal(8));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -113,8 +119,8 @@ public class DataAboutBalance implements Data, Serializable{
             while (resultSet.next()) {
                 String name = resultSet.getString(8);
                 DataAboutBalance temp  = new DataAboutBalance();
-                temp.setDataAboutBalanceForMulty(resultSet.getString(8),resultSet.getDouble(10), resultSet.getDouble(11), resultSet.getDouble(12), resultSet.getDouble(13),
-                        resultSet.getDouble(14), resultSet.getDouble(15), resultSet.getDouble(16), resultSet.getDouble(17) );
+                temp.setDataAboutBalanceForMulty(resultSet.getString(8),resultSet.getBigDecimal(10), resultSet.getBigDecimal(11), resultSet.getBigDecimal(12), resultSet.getBigDecimal(13),
+                        resultSet.getBigDecimal(14), resultSet.getBigDecimal(15), resultSet.getBigDecimal(16), resultSet.getBigDecimal(17) );
                 mapData.put(name, temp);
             }
         } catch (SQLException e) {
@@ -131,14 +137,14 @@ public class DataAboutBalance implements Data, Serializable{
             st.setInt(1, id_main);
             st.setString(2, name);
             st.setString(3, tiker);
-            st.setDouble(4, cash);
-            st.setDouble(5,currentAssets);
-            st.setDouble(6, nonCurrentAssets);
-            st.setDouble(7, totalAssets);
-            st.setDouble(8, shortTermLiabilities);
-            st.setDouble(9, longTermLiabilities);
-            st.setDouble(10, totalLiabilities);
-            st.setDouble(11, totalCapital);
+            st.setBigDecimal(4, cash);
+            st.setBigDecimal(5,currentAssets);
+            st.setBigDecimal(6, nonCurrentAssets);
+            st.setBigDecimal(7, totalAssets);
+            st.setBigDecimal(8, shortTermLiabilities);
+            st.setBigDecimal(9, longTermLiabilities);
+            st.setBigDecimal(10, totalLiabilities);
+            st.setBigDecimal(11, totalCapital);
             st.executeUpdate();
 
         } catch (SQLException e) {
