@@ -65,14 +65,14 @@ public class OptionalServlet extends HttpServlet {
         for (Map.Entry<String, TheMultiplier> entry : data.entrySet()) {
             sb.append("<td> <a href=\"/company?param1=" + entry.getKey() + "\">" + entry.getKey() + "</a></td><br>")
                     .append("<td>" + entry.getValue().getTiker() + "</td><br>")
-                    .append("<td>" + entry.getValue().getCapitalization() + "</td><br>")
+                    .append("<td>" + entry.getValue().getCapitalization() + " &#8381</td><br>")
                     .append("<td>" + entry.getValue().getP_E() + "</td><br>")
                     .append("<td>" + entry.getValue().getP_S() + "</td><br>")
                     .append("<td>" + entry.getValue().getP_BV() + "</td><br>")
                     .append("<td>" + entry.getValue().getEV_EBITDA() + "</td><br>")
                     .append("<td>" + entry.getValue().getEV_S() + "</td><br>")
-                    .append("<td>" + entry.getValue().getDEBT_EBITDA() + "</td><br>")
-                    .append("<td>" + entry.getValue().getROE()+ "</td><br></tr>");
+                    .append("<td>" + entry.getValue().getDEBT_EBITDA() + " &#8381</td><br>")
+                    .append("<td>" + entry.getValue().getROE()+ " %</td><br></tr>");
         }
         return sb;
     }
@@ -139,14 +139,14 @@ public class OptionalServlet extends HttpServlet {
 //            if (entry.getKey().equals(String.valueOf(Years.Seven.index()))) {
             sb.append("<td> <a href=\"/company?param1=" + entry.getValue().getName() + "\">" + entry.getValue().getName() + "</a></td><br>")
                     .append("<td>" + entry.getValue().getTiker() + "</td><br>")
-                    .append("<td>" + entry.getValue().getCapitalization() + "</td><br>")
+                    .append("<td>" + entry.getValue().getCapitalization() + " &#8381</td><br>")
                     .append("<td>" + entry.getValue().getP_E() + "</td><br>")
                     .append("<td>" + entry.getValue().getP_S() + "</td><br>")
                     .append("<td>" + entry.getValue().getP_BV() + "</td><br>")
                     .append("<td>" + entry.getValue().getEV_EBITDA() + "</td><br>")
                     .append("<td>" + entry.getValue().getEV_S() + "</td><br>")
-                    .append("<td>" + entry.getValue().getDEBT_EBITDA() + "</td><br>")
-                    .append("<td>" + entry.getValue().getROE()+ "</td><br></tr>");
+                    .append("<td>" + entry.getValue().getDEBT_EBITDA() + " &#8381</td><br>")
+                    .append("<td>" + entry.getValue().getROE()+ " %</td><br></tr>");
         }
 //        }
         return sb;

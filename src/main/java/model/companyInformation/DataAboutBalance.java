@@ -22,6 +22,19 @@ public class DataAboutBalance implements Data, Serializable{
     private TreeMap<String, DataAboutBalance> mapData;
 
     public DataAboutBalance() {
+        setEmptyDataBigDecimal();
+    }
+
+
+    public void setEmptyDataBigDecimal() {
+        this.cash = new BigDecimal(0.00);
+        this.currentAssets = new BigDecimal(0.00);
+        this.nonCurrentAssets = new BigDecimal(0.00);
+        this.totalAssets = new BigDecimal(0.00);
+        this.shortTermLiabilities = new BigDecimal(0.00);
+        this.longTermLiabilities = new BigDecimal(0.00);
+        this.totalLiabilities = new BigDecimal(0.00);
+        this.totalCapital = new BigDecimal(0.00);
     }
 
     private void setDataAboutBalanceForMulty(String name, BigDecimal cash, BigDecimal currentAssets,

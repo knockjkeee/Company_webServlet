@@ -47,18 +47,9 @@ public class TheMultiplier implements Data, Serializable {
         this.DEBT_EBITDA = DEBT_EBITDA;
     }
 
-    @Override
-    public void loadData(Connection connection, String Rset) {
-
-    }
 
     @Override
-    public void loadDataForMulty(Connection connection, String Rset) {
-
-    }
-
-    @Override
-    public void pushData(Connection connection, int id_main, String name, String tiker) {
+    public void setEmptyDataBigDecimal() {
 
     }
 
@@ -114,13 +105,17 @@ public class TheMultiplier implements Data, Serializable {
         /**
          * P/E cчитается по формуле (Капитализация/Чистая прибыль)
          * */
-        BigDecimal capitalization = marketData.getCapitalization() == null ? BigDecimal.valueOf(0.0) : marketData.getCapitalization() ;
+        BigDecimal capitalization = marketData.getCapitalization() == null ? BigDecimal.valueOf(0.000) : marketData.getCapitalization() ;
         if (fData.getClearnProfit() == null) {
-            this.P_E = BigDecimal.valueOf(0.00);
+            this.P_E = BigDecimal.valueOf(0.000);
         } else {
             double profit = Double.parseDouble(String.valueOf(fData.getClearnProfit()));
-            BigDecimal temp = capitalization.divide(BigDecimal.valueOf(profit),2, BigDecimal.ROUND_HALF_UP);
-            this.P_E = temp.setScale(2, BigDecimal.ROUND_CEILING);
+            if (profit == 0) {
+                this.P_E = BigDecimal.valueOf(0.000);
+            } else {
+                BigDecimal temp = capitalization.divide(BigDecimal.valueOf(profit),9, BigDecimal.ROUND_UP);
+                this.P_E = temp.setScale(9, BigDecimal.ROUND_CEILING);
+            }
         }
     }
 
@@ -129,13 +124,13 @@ public class TheMultiplier implements Data, Serializable {
          * ROE считается по формуле (Чистая прибыль/Капитал)
          */
         //TODO  java.lang.ArithmeticException: / by zero
-        double profit = fData.getClearnProfit() == null ? 0.0 : Double.parseDouble(String.valueOf(fData.getClearnProfit()));
-        double capital = dataB.getTotalCapital() == null ? 0.0 : Double.parseDouble(String.valueOf(dataB.getTotalCapital()));
-        if (capital == 0) {
+        BigDecimal profit = fData.getClearnProfit() == null ? BigDecimal.valueOf(0.000) : fData.getClearnProfit();
+        BigDecimal capital = dataB.getTotalCapital() == null ? BigDecimal.valueOf(0.000) : dataB.getTotalCapital();
+        if (capital.compareTo(BigDecimal.ZERO) == 0) {
             this.ROE = BigDecimal.valueOf(0.00);
         } else {
-            BigDecimal temp = BigDecimal.valueOf(profit).divide(BigDecimal.valueOf(capital), 2, RoundingMode.HALF_UP);
-            this.ROE = temp.setScale(2, RoundingMode.CEILING);
+            BigDecimal temp = profit.multiply(new BigDecimal(100));
+            this.ROE = temp.divide(capital, 2, RoundingMode.HALF_UP).setScale(2, RoundingMode.CEILING);
         }
     }
 
@@ -143,12 +138,11 @@ public class TheMultiplier implements Data, Serializable {
         /**
          * EV считается по формуле (Капитализация компании + Итого обязательства - Денежные средства)
          */
-        BigDecimal capitalization = marketData.getCapitalization() == null ? BigDecimal.valueOf(0.0) : marketData.getCapitalization();
-        double totalLiabilities = dData.getTotalLiabilities() == null ? 0.0 : Double.parseDouble(String.valueOf(dData.getTotalLiabilities()));
-        double cash = dData.getCash() == null ? 0.0 : Double.parseDouble(String.valueOf(dData.getCash()));
+        BigDecimal capitalization = marketData.getCapitalization() == null ? BigDecimal.valueOf(0.000) : marketData.getCapitalization();
+        BigDecimal totalLiabilities = dData.getTotalLiabilities() == null ? BigDecimal.valueOf(0.000) : dData.getTotalLiabilities();
 
-        BigDecimal temp = capitalization.add(BigDecimal.valueOf((totalLiabilities - cash)));
-        this.EV = temp.setScale(2, RoundingMode.CEILING);
+        BigDecimal temp = capitalization.add(totalLiabilities);
+        this.EV = temp.setScale(4, RoundingMode.CEILING);
     }
 
     private void setEBITDA(FinancialData financialData) {
@@ -161,23 +155,23 @@ public class TheMultiplier implements Data, Serializable {
 //        double financealIncome;
 //        double depreciation;
 
-        double proofitBeforTax = financialData.getProofitBeforTax() == null ? 0.0 : Double.parseDouble(String.valueOf(financialData.getProofitBeforTax()));
-        double financealExpenses = financialData.getFinancealExpenses() == null ? 0.0 : Double.parseDouble(String.valueOf(financialData.getFinancealExpenses()));
-        double financealIncome = financialData.getFinancealIncome() == null ? 0.0 : Double.parseDouble(String.valueOf(financialData.getDepreciation()));
-        double depreciation = financialData.getDepreciation() == null ? 0.0 : Double.parseDouble(String.valueOf(financialData.getDepreciation()));
+        BigDecimal proofitBeforTax = financialData.getProofitBeforTax() == null ? BigDecimal.valueOf(0.000) : financialData.getProofitBeforTax();
+        BigDecimal financealExpenses = financialData.getFinancealExpenses() == null ? BigDecimal.valueOf(0.000) : financialData.getFinancealExpenses();
+        BigDecimal financealIncome = financialData.getFinancealIncome() == null ? BigDecimal.valueOf(0.000) : financialData.getFinancealIncome();
+        BigDecimal depreciation = financialData.getDepreciation() == null ? BigDecimal.valueOf(0.000) : financialData.getDepreciation();
 
 //        double proofitBeforTax = Double.parseDouble(String.valueOf(financialData.getProofitBeforTax()));
 //        double financealExpenses = Double.parseDouble(String.valueOf(financialData.getFinancealExpenses()));
 //        double financealIncome = Double.parseDouble(String.valueOf(financialData.getFinancealIncome()));
 //        double depreciation = Double.parseDouble(String.valueOf(financialData.getDepreciation()));
-        BigDecimal temp = BigDecimal.valueOf(proofitBeforTax + financealExpenses - financealIncome + depreciation);
+        BigDecimal temp = proofitBeforTax.add(financealExpenses).subtract(financealIncome).add(depreciation);
         this.EBITDA = temp.setScale(2, RoundingMode.CEILING);
     }
 
     private void setEV_EBITDA() {
         try {
-            BigDecimal temp  = this.EV.divide(this.EBITDA,2,  BigDecimal.ROUND_HALF_UP);
-            this.EV_EBITDA = temp.setScale(2, RoundingMode.CEILING);
+            BigDecimal temp  = this.EV.divide(this.EBITDA,9,  BigDecimal.ROUND_HALF_UP);
+            this.EV_EBITDA = temp.setScale(9, RoundingMode.CEILING);
         } catch (Exception e) {
             this.EV_EBITDA = BigDecimal.valueOf(0.00);
         }
@@ -188,16 +182,14 @@ public class TheMultiplier implements Data, Serializable {
         /**
          * P/BV считается по формуле (Капитал/Капитализация)
          */
-        double totalCapital = dataAboutBalance.getTotalCapital() == null ? 0.0 : Double.parseDouble(String.valueOf(dataAboutBalance.getTotalCapital()));
+        BigDecimal totalCapital = dataAboutBalance.getTotalCapital() == null ? BigDecimal.valueOf(0.0) : dataAboutBalance.getTotalCapital();
         BigDecimal capitalization = marketData.getCapitalization() == null ? BigDecimal.valueOf(0.0) : marketData.getCapitalization();
-
-
 
         if (capitalization.compareTo(BigDecimal.ZERO) == 0) {
             this.P_BV = BigDecimal.valueOf(0.00);
         } else {
-            BigDecimal temp = BigDecimal.valueOf(totalCapital).divide(capitalization, 2, BigDecimal.ROUND_HALF_UP);
-            temp = temp.setScale(2, RoundingMode.CEILING);
+            BigDecimal temp = capitalization.divide(totalCapital, 9, BigDecimal.ROUND_HALF_UP);
+            temp = temp.setScale(9, RoundingMode.CEILING);
             this.P_BV = temp;
         }
     }
@@ -211,14 +203,14 @@ public class TheMultiplier implements Data, Serializable {
         double revenue;
 
         if (financialData.getRevenue() == null) {
-            this.P_S = BigDecimal.valueOf(0);
+            this.P_S = BigDecimal.valueOf(0.000);
         } else {
             revenue = Double.parseDouble(String.valueOf(financialData.getRevenue()));
             if (revenue == 0) {
-                this.P_S = BigDecimal.valueOf(0);
+                this.P_S = BigDecimal.valueOf(0.00);
             } else {
-                BigDecimal temp = capitalization.divide(BigDecimal.valueOf(revenue), 2,  BigDecimal.ROUND_HALF_UP);
-                temp = temp.setScale(2, RoundingMode.CEILING);
+                BigDecimal temp = capitalization.divide(BigDecimal.valueOf(revenue), 9,  BigDecimal.ROUND_HALF_UP);
+                temp = temp.setScale(9, RoundingMode.CEILING);
                 this.P_S = temp;
             }
         }
@@ -234,9 +226,12 @@ public class TheMultiplier implements Data, Serializable {
             this.EV_S = BigDecimal.valueOf(0.0);
         } else {
             revenue = Double.parseDouble(String.valueOf(financialData.getRevenue()));
-            BigDecimal temp = getEV().divide(BigDecimal.valueOf(revenue), 2,  BigDecimal.ROUND_HALF_UP);
-            this.EV_S = temp.setScale(2, RoundingMode.CEILING);
-
+            if (revenue == 0) {
+                this.EV_S = BigDecimal.valueOf(0.0);
+            } else {
+                BigDecimal temp = getEV().divide(BigDecimal.valueOf(revenue), 9,  BigDecimal.ROUND_HALF_UP);
+                this.EV_S = temp.setScale(9, RoundingMode.CEILING);
+            }
         }
     }
 
@@ -254,7 +249,20 @@ public class TheMultiplier implements Data, Serializable {
         }
     }
 
+    @Override
+    public void loadData(Connection connection, String Rset) {
 
+    }
+
+    @Override
+    public void loadDataForMulty(Connection connection, String Rset) {
+
+    }
+
+    @Override
+    public void pushData(Connection connection, int id_main, String name, String tiker) {
+
+    }
     @Override
     public String toString() {
         return "TheMultiplier{" +

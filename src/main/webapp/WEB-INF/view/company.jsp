@@ -60,32 +60,45 @@
         <th><p>2016</p></th>
         <th><p>2017</p></th>
         <th><p>2018</p></th>
+        <th><p>EDIT</p></th>
     </tr>
     <c:forEach items="<%=mapData%>" var="map0" begin="0" end="0">
         <tr>
             <td>Денежные средства</td>
-            <td>${map0.value.cash} &#8381</td>
-            <c:forEach items="<%=mapData%>" var="map1" begin="1" end="1">
-                <td>${map1.value.cash} &#8381</td>
-            </c:forEach>
-            <c:forEach items="<%=mapData%>" var="map2" begin="2" end="2">
-                <td>${map2.value.cash} &#8381</td>
-            </c:forEach>
-            <c:forEach items="<%=mapData%>" var="map3" begin="3" end="3">
-                <td>${map3.value.cash} &#8381</td>
-            </c:forEach>
-            <c:forEach items="<%=mapData%>" var="map4" begin="4" end="4">
-                <td>${map4.value.cash} &#8381</td>
-            </c:forEach>
-            <c:forEach items="<%=mapData%>" var="map5" begin="5" end="5">
-                <td>${map5.value.cash} &#8381</td>
-            </c:forEach>
-            <c:forEach items="<%=mapData%>" var="map6" begin="6" end="6">
-                <td>${map6.value.cash} &#8381</td>
-            </c:forEach>
-            <c:forEach items="<%=mapData%>" var="map7" begin="7" end="7">
-                <td>${map7.value.cash} &#8381</td>
-            </c:forEach>
+            <form method="get" action="">
+                <input type="number" hidden name="2012" value="${map0.value.cash}"/>
+                <td>${map0.value.cash} &#8381</td>
+                <c:forEach items="<%=mapData%>" var="map1" begin="1" end="1">
+                    <input type="number" hidden name="2013" value="${map1.value.cash}"/>
+                    <td>${map1.value.cash} &#8381</td>
+                </c:forEach>
+                <c:forEach items="<%=mapData%>" var="map2" begin="2" end="2">
+                    <input type="number" hidden name="2014" value="${map2.value.cash}"/>
+                    <td>${map2.value.cash} &#8381</td>
+                </c:forEach>
+                <c:forEach items="<%=mapData%>" var="map3" begin="3" end="3">
+                    <input type="number" hidden name="2015" value="${map3.value.cash}"/>
+                    <td>${map3.value.cash} &#8381</td>
+                </c:forEach>
+                <c:forEach items="<%=mapData%>" var="map4" begin="4" end="4">
+                    <input type="number" hidden name="2016" value="${map4.value.cash}"/>
+                    <td>${map4.value.cash} &#8381</td>
+                </c:forEach>
+                <c:forEach items="<%=mapData%>" var="map5" begin="5" end="5">
+                    <input type="number" hidden name="2017" value="${map5.value.cash}"/>
+                    <td>${map5.value.cash} &#8381</td>
+                </c:forEach>
+                <c:forEach items="<%=mapData%>" var="map6" begin="6" end="6">
+                    <input type="number" hidden name="2018" value="${map6.value.cash}"/>
+                    <td>${map6.value.cash} &#8381</td>
+                </c:forEach>
+                <%--<c:forEach items="<%=mapData%>" var="map7" begin="7" end="7">--%>
+                    <%--<input type="number" hidden name="2018" value="${map7.value.cash}"/>--%>
+                    <%--<td>${map7.value.cash}&#8381</td>--%>
+                <%--</c:forEach>--%>
+                <td><input type="submit" value="Редактировать"/></td>
+            </form>
+
         </tr>
         <tr>
             <td>Оборотные активы</td>
@@ -108,9 +121,9 @@
             <c:forEach items="<%=mapData%>" var="map6" begin="6" end="6">
                 <td>${map6.value.currentAssets} &#8381</td>
             </c:forEach>
-            <c:forEach items="<%=mapData%>" var="map7" begin="7" end="7">
-                <td>${map7.value.currentAssets} &#8381</td>
-            </c:forEach>
+            <%--<c:forEach items="<%=mapData%>" var="map7" begin="7" end="7">--%>
+                <%--<td>${map7.value.currentAssets} &#8381</td>--%>
+            <%--</c:forEach>--%>
         </tr>
         <tr>
             <td>Внеоборотные активы</td>
@@ -247,7 +260,7 @@
                 <td>${map2.value.totalCapital} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map3" begin="3" end="3">
-                <td>${map3.value.totalCapital} &#8381 </td>
+                <td>${map3.value.totalCapital} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=mapData%>" var="map4" begin="4" end="4">
                 <td>${map4.value.totalCapital} &#8381</td>
@@ -606,7 +619,7 @@
                 <td>${map3.value.ROE} %</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map4" begin="4" end="4">
-                <td>${map4.value.ROE} % </td>
+                <td>${map4.value.ROE} %</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map5" begin="5" end="5">
                 <td>${map5.value.ROE} %</td>
@@ -617,46 +630,46 @@
         </tr>
         <tr>
             <td>EV</td>
-            <td>${map0.value.EV}</td>
+            <td>${map0.value.EV} &#8381</td>
             <c:forEach items="<%=multi%>" var="map1" begin="1" end="1">
-                <td>${map1.value.EV}</td>
+                <td>${map1.value.EV} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map2" begin="2" end="2">
-                <td>${map2.value.EV}</td>
+                <td>${map2.value.EV} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map3" begin="3" end="3">
-                <td>${map3.value.EV}</td>
+                <td>${map3.value.EV} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map4" begin="4" end="4">
-                <td>${map4.value.EV}</td>
+                <td>${map4.value.EV} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map5" begin="5" end="5">
-                <td>${map5.value.EV}</td>
+                <td>${map5.value.EV} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map6" begin="6" end="6">
-                <td>${map6.value.EV}</td>
+                <td>${map6.value.EV} &#8381</td>
             </c:forEach>
         </tr>
         <tr>
             <td>EBITDA</td>
-            <td>${map0.value.EBITDA}</td>
+            <td>${map0.value.EBITDA} &#8381</td>
             <c:forEach items="<%=multi%>" var="map1" begin="1" end="1">
-                <td>${map1.value.EBITDA}</td>
+                <td>${map1.value.EBITDA} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map2" begin="2" end="2">
-                <td>${map2.value.EBITDA}</td>
+                <td>${map2.value.EBITDA} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map3" begin="3" end="3">
-                <td>${map3.value.EBITDA}</td>
+                <td>${map3.value.EBITDA} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map4" begin="4" end="4">
-                <td>${map4.value.EBITDA}</td>
+                <td>${map4.value.EBITDA} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map5" begin="5" end="5">
-                <td>${map5.value.EBITDA}</td>
+                <td>${map5.value.EBITDA} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map6" begin="6" end="6">
-                <td>${map6.value.EBITDA}</td>
+                <td>${map6.value.EBITDA} &#8381</td>
             </c:forEach>
         </tr>
         <tr>
@@ -749,24 +762,24 @@
         </tr>
         <tr>
             <td>DEBT_EBITDA</td>
-            <td>${map0.value.DEBT_EBITDA}</td>
+            <td>${map0.value.DEBT_EBITDA} &#8381</td>
             <c:forEach items="<%=multi%>" var="map1" begin="1" end="1">
-                <td>${map1.value.DEBT_EBITDA}</td>
+                <td>${map1.value.DEBT_EBITDA} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map2" begin="2" end="2">
-                <td>${map2.value.DEBT_EBITDA}</td>
+                <td>${map2.value.DEBT_EBITDA} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map3" begin="3" end="3">
-                <td>${map3.value.DEBT_EBITDA}</td>
+                <td>${map3.value.DEBT_EBITDA} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map4" begin="4" end="4">
-                <td>${map4.value.DEBT_EBITDA}</td>
+                <td>${map4.value.DEBT_EBITDA} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map5" begin="5" end="5">
-                <td>${map5.value.DEBT_EBITDA}</td>
+                <td>${map5.value.DEBT_EBITDA} &#8381</td>
             </c:forEach>
             <c:forEach items="<%=multi%>" var="map6" begin="6" end="6">
-                <td>${map6.value.DEBT_EBITDA}</td>
+                <td>${map6.value.DEBT_EBITDA} &#8381</td>
             </c:forEach>
         </tr>
     </c:forEach>

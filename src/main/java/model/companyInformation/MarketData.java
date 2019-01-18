@@ -19,9 +19,18 @@ public class MarketData implements Data, Serializable {
     private TreeMap<String, MarketData> mapMarket;
 
     public MarketData() {
+        setEmptyDataBigDecimal();
     }
 
-    public MarketData(String numberAO,String priceAO, String numberAP, String priceAP ) {
+
+    public void setEmptyDataBigDecimal() {
+        this.priceAO = new BigDecimal(0.00);
+        this.numberAP = new BigDecimal(0.00);
+        this.priceAP = new BigDecimal(0.00);
+        this.capitalization = new BigDecimal(0.00);
+    }
+
+    public MarketData(String numberAO, String priceAO, String numberAP, String priceAP ) {
         this. numberAO = Long.parseLong(numberAO);
         this.priceAO = BigDecimal.valueOf(Double.parseDouble(priceAO));
         this.numberAP = BigDecimal.valueOf(Double.parseDouble(numberAP));
@@ -44,10 +53,10 @@ public class MarketData implements Data, Serializable {
         this.name = name;
         this.tiker = tiker;
         this.numberAO = numberAO;
-        this.priceAO = priceAO.setScale(2 , RoundingMode.CEILING);
-        this.numberAP = numberAP.setScale(2 , RoundingMode.CEILING);
-        this.priceAP = priceAP.setScale(2 , RoundingMode.CEILING);
-        setCapitalization(numberAO,priceAO, numberAP, priceAP);
+        this.priceAO = priceAO.setScale(6 , RoundingMode.DOWN);
+        this.numberAP = numberAP.setScale(6 , RoundingMode.DOWN);
+        this.priceAP = priceAP.setScale(6 , RoundingMode.DOWN);
+        setCapitalization(this.numberAO,this.priceAO, this.numberAP, this.priceAP);
         this.capitalization = capitalization;
     }
 
@@ -71,9 +80,9 @@ public class MarketData implements Data, Serializable {
 
     public void setCapitalization(long numberAO, BigDecimal priceAO, BigDecimal numberAP, BigDecimal priceAP  ) {
 
-        BigDecimal numberAOTemp = numberAP;
+        BigDecimal numberAOTemp = BigDecimal.valueOf(numberAO);
 //        this.capitalization = ((BigDecimal.valueOf(numberAO)*priceAO)+(numberAP*priceAP));
-        this.capitalization = numberAOTemp.multiply(priceAO).add(numberAP.multiply(priceAP)).setScale(2 , RoundingMode.CEILING);
+        this.capitalization = numberAOTemp.multiply(priceAO).add(numberAP.multiply(priceAP)).setScale(4 , RoundingMode.DOWN);
     }
 
     public long getNumberAO() {

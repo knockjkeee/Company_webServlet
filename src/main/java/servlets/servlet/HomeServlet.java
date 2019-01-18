@@ -45,6 +45,8 @@ public class HomeServlet extends HttpServlet {
 
         SqlQuery.indexMathMultiplier(connection, dataAboutBalance, financialData, marketData, multiMap);
 
+//        req.getSession().setAttribute("loginError","Incorrect password");
+        
         req.getSession().setAttribute("multiMap", multiMap);
         req.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(req, resp);
 

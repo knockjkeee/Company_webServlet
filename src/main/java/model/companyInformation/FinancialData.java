@@ -20,6 +20,17 @@ public class FinancialData implements Data, Serializable {
     private TreeMap<String, FinancialData> mapFinance;
 
     public FinancialData() {
+        setEmptyDataBigDecimal();
+    }
+
+    public void setEmptyDataBigDecimal() {
+        this.revenue = new BigDecimal(0.00);
+        this.operatingProfit = new BigDecimal(0.00);
+        this.proofitBeforTax = new BigDecimal(0.00);
+        this.clearnProfit = new BigDecimal(0.00);
+        this.financealIncome = new BigDecimal(0.00);
+        this.financealExpenses = new BigDecimal(0.00);
+        this.depreciation = new BigDecimal(0.00);
     }
 
     private void setFinancialDataForMulty(String name, BigDecimal  revenue, BigDecimal  operatingProfit, BigDecimal  proofitBeforTax,
