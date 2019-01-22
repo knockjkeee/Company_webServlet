@@ -41,27 +41,29 @@ public class DataAboutBalance implements Data, Serializable{
                                              BigDecimal nonCurrentAssets, BigDecimal totalAssets, BigDecimal shortTermLiabilities,
                                              BigDecimal longTermLiabilities, BigDecimal totalLiabilities, BigDecimal totalCapital) {
         this.name = name;
-        this.cash = cash;
-        this.currentAssets = currentAssets.setScale(2 , RoundingMode.CEILING);
-        this.nonCurrentAssets = nonCurrentAssets.setScale(2 , RoundingMode.CEILING);
-        this.totalAssets = totalAssets.setScale(2 , RoundingMode.CEILING);
-        this.shortTermLiabilities = shortTermLiabilities.setScale(2 , RoundingMode.CEILING);
-        this.longTermLiabilities = longTermLiabilities.setScale(2 , RoundingMode.CEILING);
-        this.totalLiabilities = totalLiabilities;
-        this.totalCapital = totalCapital.setScale(2 , RoundingMode.CEILING);
+        this.cash = cash  == null ? BigDecimal.valueOf(0.00) : cash.setScale(2, RoundingMode.CEILING);
+        this.currentAssets = currentAssets == null ? BigDecimal.valueOf(0.000) : currentAssets.setScale(2, RoundingMode.CEILING);
+        this.nonCurrentAssets = nonCurrentAssets == null ? BigDecimal.valueOf(0.00) : nonCurrentAssets.setScale(2 , RoundingMode.CEILING);
+        this.totalAssets = totalAssets == null ? BigDecimal.valueOf(0.00) : totalAssets.setScale(2 , RoundingMode.CEILING);
+        this.shortTermLiabilities = shortTermLiabilities == null ? BigDecimal.valueOf(0.00) : shortTermLiabilities.setScale(2 , RoundingMode.CEILING);
+        this.longTermLiabilities = longTermLiabilities == null ? BigDecimal.valueOf(0.00) :longTermLiabilities.setScale(2 , RoundingMode.CEILING);
+        this.totalLiabilities = totalLiabilities == null ? BigDecimal.valueOf(0.00) : totalLiabilities.setScale(2 , RoundingMode.CEILING);
+        this.totalCapital = totalCapital == null? BigDecimal.valueOf(0.00) :totalCapital.setScale(2 , RoundingMode.CEILING);
     }
 
     private void setDataAboutBalance(BigDecimal cash, BigDecimal currentAssets, BigDecimal nonCurrentAssets,
                                      BigDecimal totalAssets, BigDecimal shortTermLiabilities, BigDecimal longTermLiabilities,
                                      BigDecimal totalLiabilities, BigDecimal totalCapital) {
-        this.cash = cash.setScale(2 , RoundingMode.CEILING);
-        this.currentAssets = currentAssets.setScale(2 , RoundingMode.CEILING);
-        this.nonCurrentAssets = nonCurrentAssets.setScale(2 , RoundingMode.CEILING);
-        this.totalAssets = totalAssets.setScale(2 , RoundingMode.CEILING);
-        this.shortTermLiabilities = shortTermLiabilities.setScale(2 , RoundingMode.CEILING);
-        this.longTermLiabilities = longTermLiabilities.setScale(2 , RoundingMode.CEILING);
-        this.totalLiabilities = totalLiabilities.setScale(2 , RoundingMode.CEILING);
-        this.totalCapital = totalCapital.setScale(2 , RoundingMode.CEILING);
+
+        this.cash = cash  == null ? BigDecimal.valueOf(0.00) : cash.setScale(2, RoundingMode.CEILING);
+        this.currentAssets = currentAssets == null ? BigDecimal.valueOf(0.000) : currentAssets.setScale(2, RoundingMode.CEILING);
+        this.nonCurrentAssets = nonCurrentAssets == null ? BigDecimal.valueOf(0.00) : nonCurrentAssets.setScale(2 , RoundingMode.CEILING);
+        this.totalAssets = totalAssets == null ? BigDecimal.valueOf(0.00) : totalAssets.setScale(2 , RoundingMode.CEILING);
+        this.shortTermLiabilities = shortTermLiabilities == null ? BigDecimal.valueOf(0.00) : shortTermLiabilities.setScale(2 , RoundingMode.CEILING);
+        this.longTermLiabilities = longTermLiabilities == null ? BigDecimal.valueOf(0.00) :longTermLiabilities.setScale(2 , RoundingMode.CEILING);
+        this.totalLiabilities = totalLiabilities == null ? BigDecimal.valueOf(0.00) : totalLiabilities.setScale(2 , RoundingMode.CEILING);
+        this.totalCapital = totalCapital == null? BigDecimal.valueOf(0.00) :totalCapital.setScale(2 , RoundingMode.CEILING);
+
     }
 
     public DataAboutBalance(String cash, String nonCurrentAssets,String currentAssets, String totalAssets, String shortTermLiabilities ,String longTermLiabilities,String totalLiabilities , String totalCapital ) {
@@ -142,9 +144,10 @@ public class DataAboutBalance implements Data, Serializable{
     }
 
     @Override
-    public void pushData(Connection connection, int id_main, String name, String tiker) {
+    public void pushData(Connection connection, int id_main, String name, String tiker, String nameTable) {
         try {
-            String query = "INSERT INTO dataaboutbalance2018(id_main, name, tiker, cash, currentAssets, nonCurrentAssets, totalAssets, shortTermLiabilities, longTermLiabilities, totalLiabilities, totalCapital) " +
+//            String query = "INSERT INTO dataaboutbalance2018(id_main, name, tiker, cash, currentAssets, nonCurrentAssets, totalAssets, shortTermLiabilities, longTermLiabilities, totalLiabilities, totalCapital) " +
+            String query = "INSERT INTO "+ nameTable +"(id_main, name, tiker, cash, currentAssets, nonCurrentAssets, totalAssets, shortTermLiabilities, longTermLiabilities, totalLiabilities, totalCapital) " +
                     "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement st = connection.prepareStatement(query);
             st.setInt(1, id_main);

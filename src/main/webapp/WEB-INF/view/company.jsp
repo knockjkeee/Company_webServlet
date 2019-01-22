@@ -12,15 +12,16 @@
   Time: 20:50
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title><c:out value="${name}"/></title>
 </head>
 <img>
 
 <%
     String nameCompany = (String) session.getAttribute("name");
+
     TreeMap<Integer, DataAboutBalance> mapData = (TreeMap<Integer, DataAboutBalance>) session.getAttribute("mapDataAboutBalance");
     TreeMap<Integer, FinancialData> mapFinance = (TreeMap<Integer, FinancialData>) session.getAttribute("mapFinancialData");
     TreeMap<Integer, MarketData> mapMarket = (TreeMap<Integer, MarketData>) session.getAttribute("mapMarketData");
@@ -65,8 +66,11 @@
     <c:forEach items="<%=mapData%>" var="map0" begin="0" end="0">
         <tr>
             <td>Денежные средства</td>
-            <form method="get" action="">
-                <input type="number" hidden name="2012" value="${map0.value.cash}"/>
+            <form method="get" action="${pageContext.request.contextPath}/Edit">
+                <input type="text" hidden name="nameTable" value="dataaboutbalance"/>
+                <input type="text" hidden name="colum" value="Денежные средства">
+                <input type="text" hidden name="row" value="cash"/>
+                <input type="text" hidden name="2012" value="${map0.value.cash}"/>
                 <td>${map0.value.cash} &#8381</td>
                 <c:forEach items="<%=mapData%>" var="map1" begin="1" end="1">
                     <input type="number" hidden name="2013" value="${map1.value.cash}"/>
@@ -798,5 +802,16 @@
         <th><p>2018</p></th>
     </tr>
 </table>
+
+
+<c:if test="${not empty dataUpdate}">
+    <script>
+        window.addEventListener("load", function () {
+            alert("${dataUpdate}");
+        });
+    </script>
+</c:if>
+
+
 </body>
 </html>

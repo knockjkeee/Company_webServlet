@@ -219,9 +219,9 @@ public class CompanyServlet extends HttpServlet {
 //                System.out.println("Create!!!!");
 //            }
 //        }
-        System.out.println(file.getName());
+//        System.out.println(file.getName());
 //        System.out.println(fileWrite.getName());
-        System.out.println(file.length());
+//        System.out.println(file.length());
 //        System.out.println(fileName.length());
 
 //        String query = "INSERT INTO companyInformation  (id, name, description, image) VALUES (?,?,?,?)";

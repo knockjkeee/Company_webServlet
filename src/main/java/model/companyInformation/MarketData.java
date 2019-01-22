@@ -30,8 +30,8 @@ public class MarketData implements Data, Serializable {
         this.capitalization = new BigDecimal(0.00);
     }
 
-    public MarketData(String numberAO, String priceAO, String numberAP, String priceAP ) {
-        this. numberAO = Long.parseLong(numberAO);
+    public MarketData(String numberAO, String priceAO, String numberAP, String priceAP) {
+        this.numberAO = Long.parseLong(numberAO);
         this.priceAO = BigDecimal.valueOf(Double.parseDouble(priceAO));
         this.numberAP = BigDecimal.valueOf(Double.parseDouble(numberAP));
         this.priceAP = BigDecimal.valueOf(Double.parseDouble(priceAP));
@@ -42,10 +42,10 @@ public class MarketData implements Data, Serializable {
         this.name = name;
         this.tiker = tiker;
         this.numberAO = numberAO;
-        this.priceAO = priceAO.setScale(2 , RoundingMode.CEILING);
-        this.numberAP = numberAP.setScale(2 , RoundingMode.CEILING);
-        this.priceAP = priceAP.setScale(2 , RoundingMode.CEILING);
-        setCapitalization(numberAO,priceAO, numberAP, priceAP);
+        this.priceAO = priceAO == null ? BigDecimal.valueOf(0.00) : priceAO.setScale(6, RoundingMode.DOWN);
+        this.numberAP = numberAP == null ? BigDecimal.valueOf(0.00) : numberAP.setScale(6, RoundingMode.DOWN);
+        this.priceAP = priceAP == null ? BigDecimal.valueOf(0.00) : priceAP.setScale(6, RoundingMode.DOWN);
+        setCapitalization(numberAO, priceAO, numberAP, priceAP);
         this.capitalization = capitalization;
     }
 
@@ -53,10 +53,10 @@ public class MarketData implements Data, Serializable {
         this.name = name;
         this.tiker = tiker;
         this.numberAO = numberAO;
-        this.priceAO = priceAO.setScale(6 , RoundingMode.DOWN);
-        this.numberAP = numberAP.setScale(6 , RoundingMode.DOWN);
-        this.priceAP = priceAP.setScale(6 , RoundingMode.DOWN);
-        setCapitalization(this.numberAO,this.priceAO, this.numberAP, this.priceAP);
+        this.priceAO = priceAO == null ? BigDecimal.valueOf(0.00) : priceAO.setScale(6, RoundingMode.DOWN);
+        this.numberAP = numberAP == null ? BigDecimal.valueOf(0.00) : numberAP.setScale(6, RoundingMode.DOWN);
+        this.priceAP = priceAP == null ? BigDecimal.valueOf(0.00) : priceAP.setScale(6, RoundingMode.DOWN);
+        setCapitalization(this.numberAO, this.priceAO, this.numberAP, this.priceAP);
         this.capitalization = capitalization;
     }
 
@@ -78,11 +78,11 @@ public class MarketData implements Data, Serializable {
         return tiker;
     }
 
-    public void setCapitalization(long numberAO, BigDecimal priceAO, BigDecimal numberAP, BigDecimal priceAP  ) {
+    public void setCapitalization(long numberAO, BigDecimal priceAO, BigDecimal numberAP, BigDecimal priceAP) {
 
         BigDecimal numberAOTemp = BigDecimal.valueOf(numberAO);
 //        this.capitalization = ((BigDecimal.valueOf(numberAO)*priceAO)+(numberAP*priceAP));
-        this.capitalization = numberAOTemp.multiply(priceAO).add(numberAP.multiply(priceAP)).setScale(4 , RoundingMode.DOWN);
+        this.capitalization = numberAOTemp.multiply(priceAO).add(numberAP.multiply(priceAP)).setScale(4, RoundingMode.DOWN);
     }
 
     public long getNumberAO() {
@@ -110,7 +110,7 @@ public class MarketData implements Data, Serializable {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(rSet);
             while (resultSet.next()) {
-                setMarketData(resultSet.getString(6),resultSet.getString(7),resultSet.getLong(1), resultSet.getBigDecimal(2),
+                setMarketData(resultSet.getString(6), resultSet.getString(7), resultSet.getLong(1), resultSet.getBigDecimal(2),
                         resultSet.getBigDecimal(3), resultSet.getBigDecimal(4));
             }
         } catch (SQLException e) {
@@ -136,9 +136,10 @@ public class MarketData implements Data, Serializable {
     }
 
     @Override
-    public void pushData(Connection connection, int id_main, String name, String tiker) {
+    public void pushData(Connection connection, int id_main, String name, String tiker, String nameTable) {
         try {
-            String query = "INSERT INTO marketdata2018(id_main, name, tiker, numberAO, priceAO, numberAP, priceAP) " +
+//            String query = "INSERT INTO marketdata2018(id_main, name, tiker, numberAO, priceAO, numberAP, priceAP) " +
+            String query = "INSERT INTO " + nameTable + "(id_main, name, tiker, numberAO, priceAO, numberAP, priceAP) " +
                     "VALUES (?,?,?,?,?,?,?)";
             PreparedStatement st = connection.prepareStatement(query);
             st.setInt(1, id_main);

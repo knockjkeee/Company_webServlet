@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Home page</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
@@ -32,7 +32,7 @@
     SELECT * FROM company_dynamic;
 </s:query>
 
-<h2>Создание новой компании (Будет логотип)</h2><br/>
+<%--<h2>Создание новой компании (Будет логотип)</h2><br/>--%>
 <h2><a href="<c:url value="/login"/>">Login</a>
     <%--<br/>--%>
     <%--<br/>--%>
@@ -43,10 +43,10 @@
         <option hidden>Выберите отрасль</option>
         <option value="gaz" id="gaz">Газ</option>
         <option value="oil" id="oil">Нефть</option>
-        <option value="electric" id="3">Электроэнергия</option>
-        <option value="it" id="4">Информационные технологии</option>
-        <option value="prom" id="5">Промышленность</option>
-        <option value="invest" id="6">Инсвестиции</option>
+        <option value="electric" id="electric">Электроэнергия</option>
+        <option value="it" id="it">Информационные технологии</option>
+        <option value="prom" id="prom">Промышленность</option>
+        <option value="invest" id="invest">Инсвестиции</option>
     </select>
     <br>
     <br>

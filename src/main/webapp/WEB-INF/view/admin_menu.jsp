@@ -34,7 +34,7 @@
             <span class="tab">2018</span>
         </div>
 
-        <form method="post" action="${pageContext.request.contextPath}/Upload" enctype="multipart/form-data">
+        <form method="get" action="${pageContext.request.contextPath}/Upload" enctype="multipart/form-data">
 
             <div class="tab_content">
                 <div class="tab_item">
@@ -47,10 +47,10 @@
                         <option hidden>Выберите отрасль</option>
                         <option value="gaz" id="gaz">Газ</option>
                         <option value="oil" id="oil">Нефть</option>
-                        <option value="electric" id="3">Электроэнергия</option>
-                        <option value="it" id="4">Информационные технологии</option>
-                        <option value="prom" id="5">Промышленность</option>
-                        <option value="invest" id="6">Инсвестиции</option>
+                        <option value="electric" id="electric">Электроэнергия</option>
+                        <option value="it" id="it">Информационные технологии</option>
+                        <option value="prom" id="prom">Промышленность</option>
+                        <option value="invest" id="invest">Инсвестиции</option>
                     </select>
                     <input type="file" required placeholder="image" name="image" id="image"/><br>
                     <br>
@@ -395,10 +395,10 @@
 
 
 
-<c:if test="${not empty data}">
+<c:if test="${not empty dataPush}">
     <script>
         window.addEventListener("load", function () {
-            alert("${data}");
+            alert("${dataPush}");
         });
     </script>
 </c:if>

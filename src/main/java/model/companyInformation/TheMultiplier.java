@@ -260,9 +260,10 @@ public class TheMultiplier implements Data, Serializable {
     }
 
     @Override
-    public void pushData(Connection connection, int id_main, String name, String tiker) {
+    public void pushData(Connection connection, int id_main, String name, String tiker, String nameTable) {
 
     }
+
     @Override
     public String toString() {
         return "TheMultiplier{" +

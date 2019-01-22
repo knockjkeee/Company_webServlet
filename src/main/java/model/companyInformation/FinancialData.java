@@ -36,24 +36,24 @@ public class FinancialData implements Data, Serializable {
     private void setFinancialDataForMulty(String name, BigDecimal  revenue, BigDecimal  operatingProfit, BigDecimal  proofitBeforTax,
                                           BigDecimal  clearnProfit, BigDecimal  financealIncome, BigDecimal  financealExpenses, BigDecimal  depreciation) {
         this.name = name;
-        this.revenue = revenue.setScale(2 , RoundingMode.CEILING);
-        this.operatingProfit = operatingProfit.setScale(2 , RoundingMode.CEILING);
-        this.proofitBeforTax = proofitBeforTax.setScale(2 , RoundingMode.CEILING);
-        this.clearnProfit = clearnProfit.setScale(2 , RoundingMode.CEILING);
-        this.financealIncome = financealIncome.setScale(2 , RoundingMode.CEILING);
-        this.financealExpenses = financealExpenses.setScale(2 , RoundingMode.CEILING);
-        this.depreciation = depreciation.setScale(2 , RoundingMode.CEILING);
+        this.revenue = revenue == null ? BigDecimal.valueOf(0.00) : revenue.setScale(2 , RoundingMode.CEILING);
+        this.operatingProfit = operatingProfit == null ? BigDecimal.valueOf(0.00) : operatingProfit.setScale(2 , RoundingMode.CEILING);
+        this.proofitBeforTax = proofitBeforTax == null ? BigDecimal.valueOf(0.00) : proofitBeforTax.setScale(2 , RoundingMode.CEILING);
+        this.clearnProfit = clearnProfit == null ? BigDecimal.valueOf(0.00) : clearnProfit.setScale(2 , RoundingMode.CEILING);
+        this.financealIncome = financealIncome == null ? BigDecimal.valueOf(0.00) : financealIncome.setScale(2 , RoundingMode.CEILING);
+        this.financealExpenses = financealExpenses == null ? BigDecimal.valueOf(0.00) : financealExpenses.setScale(2 , RoundingMode.CEILING);
+        this.depreciation = depreciation == null ? BigDecimal.valueOf(0.00) : depreciation.setScale(2 , RoundingMode.CEILING);
     }
 
     private void setFinancialData(BigDecimal  revenue, BigDecimal  operatingProfit, BigDecimal  proofitBeforTax, BigDecimal  clearnProfit,
                                   BigDecimal  financealIncome, BigDecimal  financealExpenses, BigDecimal  depreciation) {
-        this.revenue = revenue.setScale(2 , RoundingMode.CEILING);
-        this.operatingProfit = operatingProfit.setScale(2 , RoundingMode.CEILING);
-        this.proofitBeforTax = proofitBeforTax.setScale(2 , RoundingMode.CEILING);
-        this.clearnProfit = clearnProfit.setScale(2 , RoundingMode.CEILING);
-        this.financealIncome = financealIncome.setScale(2 , RoundingMode.CEILING);
-        this.financealExpenses = financealExpenses.setScale(2 , RoundingMode.CEILING);
-        this.depreciation = depreciation.setScale(2 , RoundingMode.CEILING);
+        this.revenue = revenue == null ? BigDecimal.valueOf(0.00) : revenue.setScale(2 , RoundingMode.CEILING);
+        this.operatingProfit = operatingProfit == null ? BigDecimal.valueOf(0.00) : operatingProfit.setScale(2 , RoundingMode.CEILING);
+        this.proofitBeforTax = proofitBeforTax == null ? BigDecimal.valueOf(0.00) : proofitBeforTax.setScale(2 , RoundingMode.CEILING);
+        this.clearnProfit = clearnProfit == null ? BigDecimal.valueOf(0.00) : clearnProfit.setScale(2 , RoundingMode.CEILING);
+        this.financealIncome = financealIncome == null ? BigDecimal.valueOf(0.00) : financealIncome.setScale(2 , RoundingMode.CEILING);
+        this.financealExpenses = financealExpenses == null ? BigDecimal.valueOf(0.00) : financealExpenses.setScale(2 , RoundingMode.CEILING);
+        this.depreciation = depreciation == null ? BigDecimal.valueOf(0.00) : depreciation.setScale(2 , RoundingMode.CEILING);
     }
 
     public FinancialData(String revenue, String operatingProfit, String proofitBeforTax, String clearnProfit, String financealIncome,
@@ -132,9 +132,10 @@ public class FinancialData implements Data, Serializable {
     }
 
     @Override
-    public void pushData(Connection connection, int id_main, String name, String tiker) {
+    public void pushData(Connection connection, int id_main, String name, String tiker, String nameTable) {
         try {
-            String query = "INSERT INTO financialdata2018(id_main, name, tiker, revenue, operatingProfit, proofitBeforTax, clearnProfit, financealIncome, financealExpenses, depreciation) " +
+//            String query = "INSERT INTO financialdata2018(id_main, name, tiker, revenue, operatingProfit, proofitBeforTax, clearnProfit, financealIncome, financealExpenses, depreciation) " +
+            String query = "INSERT INTO " + nameTable + "(id_main, name, tiker, revenue, operatingProfit, proofitBeforTax, clearnProfit, financealIncome, financealExpenses, depreciation) " +
                     "VALUES (?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement st = connection.prepareStatement(query);
             st.setInt(1, id_main);
