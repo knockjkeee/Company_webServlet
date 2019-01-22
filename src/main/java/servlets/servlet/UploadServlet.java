@@ -109,6 +109,7 @@ public class UploadServlet extends HttpServlet {
 
         pushDataDB(req, connection, name, tiker, description, image, selection);
         req.getRequestDispatcher("/WEB-INF/view/admin_menu.jsp").forward(req, resp);
+        req.getSession().removeAttribute("dataPush");
     }
 
     private void pushDataDB(HttpServletRequest req, Connection connection, String name, String tiker, String description, InputStream image, String selection) {
@@ -128,6 +129,7 @@ public class UploadServlet extends HttpServlet {
         }
 
         pushIndustrialData(connection, selection, countID);
+
         req.getSession().setAttribute("dataPush", "Данные сохранены");
     }
 

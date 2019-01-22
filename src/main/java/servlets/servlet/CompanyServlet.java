@@ -53,7 +53,9 @@ public class CompanyServlet extends HttpServlet {
 //            System.out.println(entry.getValue());
 //        }
 //        addBLOBtoDB();
+//        req.getSession().removeAttribute("dataUpdate");
         req.getRequestDispatcher("/WEB-INF/view/company.jsp").forward(req, resp);
+        req.getSession().removeAttribute("dataUpdate");
     }
 
     private void setAttributeToJsp(HttpServletRequest req, TreeMap<Integer, Data> mapDataAboutBalance, TreeMap<Integer, Data> mapFinancialData, TreeMap<Integer, Data> mapMarketData, TreeMap<String, TheMultiplier> multi) {

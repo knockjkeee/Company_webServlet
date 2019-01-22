@@ -1,7 +1,10 @@
 package servlets.servlet;
 
 import dao.DBConnectionManager;
-import model.companyInformation.*;
+import model.companyInformation.DataAboutBalance;
+import model.companyInformation.FinancialData;
+import model.companyInformation.MarketData;
+import model.companyInformation.TheMultiplier;
 import until.CheckDataDBble;
 import until.LoadDataDB;
 import until.SqlQuery;
@@ -36,6 +39,10 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        HttpSession session = req.getSession(false);
+//        if (session != null) {
+//            session.invalidate();
+//        }
         Connection connection = (Connection) getServletContext().getAttribute("DBConnection");
         CheckDataDBble checkDataDB = new LoadDataDB();
         DataAboutBalance dataAboutBalance = checkDataDB.getDataAboutBalance();
