@@ -119,11 +119,11 @@ public class FinancialData implements Data, Serializable {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(rSet);
             while (resultSet.next()) {
-                String name = resultSet.getString(8);
+                String name = resultSet.getString(9);
                 FinancialData temp = new FinancialData();
-                temp.setFinancialDataForMulty(resultSet.getString(8),resultSet.getBigDecimal(10), resultSet.getBigDecimal(11),
-                        resultSet.getBigDecimal(12), resultSet.getBigDecimal(13),
-                        resultSet.getBigDecimal(14), resultSet.getBigDecimal(15), resultSet.getBigDecimal(16) );
+                temp.setFinancialDataForMulty(resultSet.getString(9),resultSet.getBigDecimal(11), resultSet.getBigDecimal(12),
+                        resultSet.getBigDecimal(13), resultSet.getBigDecimal(14),
+                        resultSet.getBigDecimal(15), resultSet.getBigDecimal(16), resultSet.getBigDecimal(17) );
                 mapFinance.put(name, temp);
             }
         } catch (SQLException e) {

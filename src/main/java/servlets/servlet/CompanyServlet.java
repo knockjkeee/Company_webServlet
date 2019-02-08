@@ -26,7 +26,18 @@ public class CompanyServlet extends HttpServlet {
         String name = req.getParameter("param1");
         req.getSession().setAttribute("name", name);
         Connection connection = (Connection) getServletContext().getAttribute("DBConnection");
-        System.out.println(name);
+//        System.out.println(name);
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT company.info FROM company WHERE name = '" + name + "'");
+            while (resultSet.next()) {
+                String info = resultSet.getString(1);
+                req.getSession().setAttribute("info", info);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 
         try {
@@ -34,7 +45,6 @@ public class CompanyServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
 
         TreeMap<Integer, Data> mapDataAboutBalance = new TreeMap<>();
         TreeMap<Integer, Data> mapFinancialData = new TreeMap<>();
@@ -49,11 +59,6 @@ public class CompanyServlet extends HttpServlet {
         loadDataTableCompanyPage(name, connection, mapDataAboutBalance, mapFinancialData, mapMarketData, multi, dataAboutBalance, financialData, marketData);
         setAttributeToJsp(req, mapDataAboutBalance, mapFinancialData, mapMarketData, multi);
 
-//        for (Map.Entry<Integer, Data> entry : multi.entrySet()) {
-//            System.out.println(entry.getValue());
-//        }
-//        addBLOBtoDB();
-//        req.getSession().removeAttribute("dataUpdate");
         req.getRequestDispatcher("/WEB-INF/view/company.jsp").forward(req, resp);
         req.getSession().removeAttribute("dataUpdate");
     }
@@ -64,11 +69,7 @@ public class CompanyServlet extends HttpServlet {
         req.getSession().setAttribute("mapMarketData", mapMarketData);
         req.getSession().setAttribute("multi", multi);
 
-//        System.out.println(mapDataAboutBalance);
-//        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-//        System.out.println(mapFinancialData);
-//        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-//        System.out.println(mapMarketData);
+
 
     }
 
@@ -84,8 +85,6 @@ public class CompanyServlet extends HttpServlet {
     }
 
     private void checkBlobDB (String nameCompany,HttpServletRequest req) throws SQLException, IOException {
-//        BufferedImage image;
-//        File file = new File("logo.png");
         String result;
         Connection connection = (Connection) getServletContext().getAttribute("DBConnection");
         Statement statement = connection.createStatement();
@@ -96,27 +95,8 @@ public class CompanyServlet extends HttpServlet {
             String encode = Base64.getEncoder().encodeToString(images);
             req.getSession().setAttribute("imgBAse", encode);
             req.getSession().setAttribute("description", description);
-//            Blob blob = resultSet.getBlob(1);
-//            InputStream in = blob.getBinaryStream();
-//            image = ImageIO.read(in);
-//            ImageIO.write(image, "png", file);
-//            //
-//            image = (File) resultSet.getBlob(1);
         }
 
-//        BufferedReader rd = null;
-//        BufferedWriter wr = null;
-//
-//        rd = new BufferedReader(new FileReader(file));
-//        wr = new BufferedWriter(new FileWriter(result));
-//        String count;
-//        while ((count = rd.readLine()) != null) {
-//            wr.write(count);
-//            System.out.println("+++++++++++++++++++++++++++++++++++++DONE+++++++++++++++++++++++++++++++++++++++++");
-//        }
-//
-//        wr.flush();
-//        System.out.println(result.length());
     }
 
 //    public void convertImage(Blob[] blob) {
@@ -180,58 +160,5 @@ public class CompanyServlet extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-//        String fileName = "toto.png";
-//        File fileWrite = new File(fileName);
-//
-////        String pathUpload = "\\WEB-INF\\logo_company\\";
-//        FileInputStream in = null;
-//        FileOutputStream out = null;
-//
-//        try {
-//            int count;
-//            in = new FileInputStream(file);
-//            out = new FileOutputStream(fileWrite);
-//            while ((count = in.read()) != -1) {
-//                out.write((char)count);
-//            }
-//
-//
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            System.out.println("Success");
-//            try {
-//                in.close();
-//                out.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        if (fileWrite.exists()) {
-//            try {
-//                fileWrite.createNewFile();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            } finally {
-//                System.out.println("Create!!!!");
-//            }
-//        }
-//        System.out.println(file.getName());
-//        System.out.println(fileWrite.getName());
-//        System.out.println(file.length());
-//        System.out.println(fileName.length());
-
-//        String query = "INSERT INTO companyInformation  (id, name, description, image) VALUES (?,?,?,?)";
-//
-//        try {
-//            PreparedStatement preparedStatement = connection.prepareStatement(query);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
     }
 }

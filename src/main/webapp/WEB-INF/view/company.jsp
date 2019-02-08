@@ -33,7 +33,21 @@
 <h3>Картинка</h3>
 <img src="data:image/jpeg;base64,<%=teg%>">
 <h3>Описание</h3>
+<br>
 <c:out value="<%=description%>"/>
+
+
+<br>
+<div>
+    <form method="get" action="${pageContext.request.contextPath}/EditInfo">
+        <label>ВНЕСЕННЫЕ ДАННЫЕ ЗА ПОСЛЕДНИЙ ГОД СООТВЕТСТВУЮТ = ${info}</label>
+        <input type="number" hidden name="name" value="${name}"/>
+        <input type="number" hidden name="info" value="${info}"/>
+        <input type="submit" value="Редактировать"/>
+    </form>
+</div>
+
+<br>
 <h3>Финансовая отчетность по МСФО</h3>
 <table border="1">
     <tr>

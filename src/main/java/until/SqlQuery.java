@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -123,6 +124,31 @@ public class SqlQuery {
         marketData.loadDataForMulty(connection, getDataForMathMultiplierQuery(nameMarket));
         TreeMap<String, MarketData> mapMarket = marketData.getMapMarket();
 
+        addMapData(multy, mapData, mapFinance, mapMarket);
+        return multy;
+    }
+
+
+    public static TreeMap<String, ? extends Data> indexMathMultiplierMain(Connection connection, DataAboutBalance data, FinancialData finance,
+                                                                          MarketData marketData, TreeMap<String, TheMultiplier> multy, String year, ArrayList<String> names) {
+        String nameDataTable = data.getClass().getSimpleName().toLowerCase() + year;
+        data.loadDataForMulty(connection, getDataForMathMultiplierQuery(nameDataTable));
+        TreeMap<String, DataAboutBalance> mapData = data.getMapData();
+
+        String nameFinance = finance.getClass().getSimpleName().toLowerCase() + year;
+        finance.loadDataForMulty(connection, getDataForMathMultiplierQuery(nameFinance));
+        TreeMap<String, FinancialData> mapFinance = finance.getMapFinance();
+
+        String nameMarket = marketData.getClass().getSimpleName().toLowerCase() + year;
+        marketData.loadDataForMulty(connection, getDataForMathMultiplierQuery(nameMarket));
+        TreeMap<String, MarketData> mapMarket = marketData.getMapMarket();
+
+        addMapDataNames(multy, mapData, mapFinance, mapMarket, names);
+        return multy;
+    }
+
+    private static void addMapData(TreeMap<String, TheMultiplier> multy, TreeMap<String, DataAboutBalance> mapData, TreeMap<String, FinancialData> mapFinance, TreeMap<String, MarketData> mapMarket) {
+
         for (Map.Entry<String, DataAboutBalance> entryD : mapData.entrySet()) {
             String nameD = entryD.getKey();
             for (Map.Entry<String, FinancialData> entryF : mapFinance.entrySet()) {
@@ -135,7 +161,27 @@ public class SqlQuery {
                 }
             }
         }
-        return multy;
+    }
+
+    private static void addMapDataNames(TreeMap<String, TheMultiplier> multy, TreeMap<String, DataAboutBalance> mapData, TreeMap<String,
+            FinancialData> mapFinance, TreeMap<String, MarketData> mapMarket, ArrayList<String> names) {
+
+        for (Map.Entry<String, DataAboutBalance> entryD : mapData.entrySet()) {
+            String nameD = entryD.getKey();
+            for (Map.Entry<String, FinancialData> entryF : mapFinance.entrySet()) {
+                if (entryF.getKey().equals(nameD)) {
+                    for (Map.Entry<String, MarketData> entryM : mapMarket.entrySet()) {
+                        if (entryM.getKey().equals(nameD)) {
+                            for (String name : names) {
+                                if (name.equals(nameD)) {
+                                    multy.put(nameD, new MathMultiplier(entryD.getValue(), entryF.getValue(), entryM.getValue()).setMultiplier());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public static TreeMap<String, ? extends Data> indexDataMarketForMainPage(Connection connection, MarketData marketData, TreeMap<String, Data> dataTreeMap) {

@@ -264,10 +264,29 @@ public class TheMultiplier implements Data, Serializable {
 
     }
 
+//    @Override
+//    public String toString() {
+//        return "TheMultiplier{" +
+//                "P_E=" + P_E +
+//                ", ROE=" + ROE +
+//                ", EV=" + EV +
+//                ", EBITDA=" + EBITDA +
+//                ", EV_EBITDA=" + EV_EBITDA +
+//                ", P_BV=" + P_BV +
+//                ", P_S=" + P_S +
+//                ", EV_S=" + EV_S +
+//                ", DEBT_EBITDA=" + DEBT_EBITDA +
+//                '}';
+//    }
+
+
     @Override
     public String toString() {
         return "TheMultiplier{" +
-                "P_E=" + P_E +
+                "name='" + name + '\'' +
+                ", tiker='" + tiker + '\'' +
+                ", capitalization=" + capitalization +
+                ", P_E=" + P_E +
                 ", ROE=" + ROE +
                 ", EV=" + EV +
                 ", EBITDA=" + EBITDA +

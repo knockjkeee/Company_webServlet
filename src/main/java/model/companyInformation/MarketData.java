@@ -124,10 +124,10 @@ public class MarketData implements Data, Serializable {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(rSet);
             while (resultSet.next()) {
-                String name = resultSet.getString(8);
+                String name = resultSet.getString(9);
                 MarketData temp = new MarketData();
-                temp.setMarketDataForMulty(resultSet.getString(8), resultSet.getString(9), resultSet.getLong(10), resultSet.getBigDecimal(11),
-                        resultSet.getBigDecimal(12), resultSet.getBigDecimal(13));
+                temp.setMarketDataForMulty(resultSet.getString(9), resultSet.getString(10), resultSet.getLong(11), resultSet.getBigDecimal(12),
+                        resultSet.getBigDecimal(13), resultSet.getBigDecimal(14));
                 mapMarket.put(name, temp);
             }
         } catch (SQLException e) {
@@ -174,14 +174,29 @@ public class MarketData implements Data, Serializable {
     }
 
 
+//    @Override
+//    public String toString() {
+//        return "MarketData{" +
+//                "numberAO=" + numberAO +
+//                ", priceAO=" + priceAO +
+//                ", numberAP=" + numberAP +
+//                ", priceAP=" + priceAP +
+//                ", capitalization=" + capitalization +
+//                '}';
+//    }
+
+
     @Override
     public String toString() {
         return "MarketData{" +
-                "numberAO=" + numberAO +
+                "name='" + name + '\'' +
+                ", tiker='" + tiker + '\'' +
+                ", numberAO=" + numberAO +
                 ", priceAO=" + priceAO +
                 ", numberAP=" + numberAP +
                 ", priceAP=" + priceAP +
                 ", capitalization=" + capitalization +
+                ", mapMarket=" + mapMarket +
                 '}';
     }
 }

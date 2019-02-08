@@ -55,6 +55,7 @@
                     <input type="file" required placeholder="image" name="image" id="image"/><br>
                     <br>
                     <textarea placeholder="description" name="description" rows="5" cols="30"></textarea>
+                    <textarea placeholder="Период внесения данных за последний год" name="info" rows="5" cols="30"></textarea>
                 </div>
                 <div class="tab_item">
                     <label>Данные о балансе</label>

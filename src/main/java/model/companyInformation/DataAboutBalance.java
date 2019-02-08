@@ -132,10 +132,10 @@ public class DataAboutBalance implements Data, Serializable{
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(rSet);
             while (resultSet.next()) {
-                String name = resultSet.getString(8);
+                String name = resultSet.getString(9);
                 DataAboutBalance temp  = new DataAboutBalance();
-                temp.setDataAboutBalanceForMulty(resultSet.getString(8),resultSet.getBigDecimal(10), resultSet.getBigDecimal(11), resultSet.getBigDecimal(12), resultSet.getBigDecimal(13),
-                        resultSet.getBigDecimal(14), resultSet.getBigDecimal(15), resultSet.getBigDecimal(16), resultSet.getBigDecimal(17) );
+                temp.setDataAboutBalanceForMulty(resultSet.getString(9),resultSet.getBigDecimal(11), resultSet.getBigDecimal(12), resultSet.getBigDecimal(13), resultSet.getBigDecimal(14),
+                        resultSet.getBigDecimal(15), resultSet.getBigDecimal(16), resultSet.getBigDecimal(17), resultSet.getBigDecimal(18) );
                 mapData.put(name, temp);
             }
         } catch (SQLException e) {
@@ -167,8 +167,6 @@ public class DataAboutBalance implements Data, Serializable{
             e.printStackTrace();
         }
     }
-
-
 
 
     @Override

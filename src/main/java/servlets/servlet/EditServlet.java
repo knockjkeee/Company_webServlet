@@ -23,8 +23,6 @@ public class EditServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
         value = req.getParameterNames();
         attr = req.getParameterNames();
         data = new TreeMap<>();
@@ -34,7 +32,7 @@ public class EditServlet extends HttpServlet {
         String name;
         name = (String) req.getSession().getAttribute("name");
         loadDataToUpdate(req);
-        System.out.println(data);
+//        System.out.println(data);
         req.getSession().setAttribute("data", data);
         req.getSession().setAttribute("name", name);
 
@@ -58,17 +56,11 @@ public class EditServlet extends HttpServlet {
         System.out.println(data);
 
         req.getSession().setAttribute("dataUpdate", "Данные обновлены");
-
-
         resp.sendRedirect(req.getContextPath() + "/company?param1=" + URLEncoder.encode(name, "UTF-8"));
-
-
-
     }
 
 
     private void loadDataToUpdate(HttpServletRequest req) {
-
         while (attr.hasMoreElements()) {
             tempAttr.add(attr.nextElement());
         }

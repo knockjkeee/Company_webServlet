@@ -37,24 +37,48 @@
     <%--<br/>--%>
     <%--<br/>--%>
 
-<br>
-<br>
+    <br>
+    <h3>Год для мультипликатора</h3>
+    <div>
+        <select name="selection" id="year">
+            <option hidden id="null2" >Выберите год</option>
+            <option value="2012" id="2012">2012</option>
+            <option value="2013" id="2013">2013</option>
+            <option value="2014" id="2014">2014</option>р
+            <option value="2015" id="2015">2015</option>
+            <option value="2016" id="2016">2016</option>
+            <option value="2017" id="2017">2017</option>
+            <option value="2018" id="2018">2018</option>
+        </select>
+    </div>
+    <br>
+    <h3>Отрасль</h3>
     <select name="selection" id="list">
-        <option hidden>Выберите отрасль</option>
+        <option hidden id="null">Выберите отрасль</option>
         <option value="gaz" id="gaz">Газ</option>
         <option value="oil" id="oil">Нефть</option>
         <option value="electric" id="electric">Электроэнергия</option>
         <option value="it" id="it">Информационные технологии</option>
         <option value="prom" id="prom">Промышленность</option>
         <option value="invest" id="invest">Инсвестиции</option>
+        <option value="construction" id="construction">Строительство</option>
+        <option value="auto" id="auto">Транспорт</option>
+        <option value="retail" id="retail">Ритейл</option>
+        <option value="telecom" id="telecom">Телекоммуникации</option>
+        <option value="finance" id="finance">Финансовый секто</option>
+        <option value="electronetwork" id="electronetwork">Электросети</option>
+        <option value="metall" id="metall">Металлургия</option>
+        <option value="coal" id="coal">Уголь</option>
+        <option value="other" id="other">Прочие</option>
     </select>
     <br>
-    <br>
-
+    <h3>Поиск компании</h3>
     <form>
         <input type="text" required placeholder="поиск" id="search"/>
     </form>
-    <button id="btn">Поиск</button>
+    <button id="btn">Поиск/Сброс фильтров</button>
+
+
 
     <br>
     <br>
@@ -103,7 +127,7 @@
 
 
     <script>
-        <%@include file="test1.js"%>
+        <%@include file="main.js"%>
     </script>
 
     <style>

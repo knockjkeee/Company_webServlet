@@ -53,6 +53,7 @@ public class UploadServlet extends HttpServlet {
         String tiker = null;
         String description = null;
         InputStream image = null;
+        String info = null;
         //Industrial
         String selection = null;
         //Data
@@ -98,6 +99,9 @@ public class UploadServlet extends HttpServlet {
                         if (item.getFieldName().equals("selection")) {
                             selection = item.getString();
                         }
+                        if (item.getFieldName().equals("info")) {
+                            info = item.getString();
+                        }
 
                         checkAttr(item);
                     }
@@ -107,13 +111,13 @@ public class UploadServlet extends HttpServlet {
             }
         }
 
-        pushDataDB(req, connection, name, tiker, description, image, selection);
+        pushDataDB(req, connection, name, tiker, description, image, selection, info);
         req.getRequestDispatcher("/WEB-INF/view/admin_menu.jsp").forward(req, resp);
         req.getSession().removeAttribute("dataPush");
     }
 
-    private void pushDataDB(HttpServletRequest req, Connection connection, String name, String tiker, String description, InputStream image, String selection) {
-        pushMainData(connection, image, name, tiker, description);
+    private void pushDataDB(HttpServletRequest req, Connection connection, String name, String tiker, String description, InputStream image, String selection, String info) {
+        pushMainData(connection, image, name, tiker, description, info);
         int countID = checkID(connection);
 
         for (Map.Entry<String, Data> entry : mapInstanceData.entrySet()) {
@@ -186,15 +190,16 @@ public class UploadServlet extends HttpServlet {
         }
     }
 
-    private void pushMainData(Connection connection, InputStream img, String name, String tiker, String ds) {
+    private void pushMainData(Connection connection, InputStream img, String name, String tiker, String ds,  String info) {
 
         try {
-            String query = "INSERT  INTO  company (name, tiker, description, image) VALUES (?,?,?,?)";
+            String query = "INSERT  INTO  company (name, tiker, description, image) VALUES (?,?,?,?,?)";
             PreparedStatement st = connection.prepareStatement(query);
             st.setString(1, name);
             st.setString(2, tiker);
             st.setString(3, ds);
             st.setBinaryStream(4, img);
+            st.setString(5, info);
             st.executeUpdate();
 
         } catch (SQLException e) {

@@ -37,6 +37,11 @@ public class SearchServlet extends HttpServlet {
             StringBuilder result = new StringBuilder();
             result.append(searchNullQuery(createDataNullSearch(connection), sb));
 
+
+
+
+
+
             resp.setContentType("text/html; charset=UTF-8");
             PrintWriter out = resp.getWriter();
             out.write(result.toString());

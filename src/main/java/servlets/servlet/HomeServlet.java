@@ -43,6 +43,7 @@ public class HomeServlet extends HttpServlet {
 //        if (session != null) {
 //            session.invalidate();
 //        }
+
         Connection connection = (Connection) getServletContext().getAttribute("DBConnection");
         CheckDataDBble checkDataDB = new LoadDataDB();
         DataAboutBalance dataAboutBalance = checkDataDB.getDataAboutBalance();
@@ -56,6 +57,10 @@ public class HomeServlet extends HttpServlet {
         
         req.getSession().setAttribute("multiMap", multiMap);
         req.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(req, resp);
+
+
+
+//        System.out.println(multiMap);
 
     }
 

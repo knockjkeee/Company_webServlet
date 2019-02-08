@@ -1,6 +1,5 @@
 package servlets.servlet.filterSearch;
 
-import model.Years;
 import model.companyInformation.*;
 import until.CheckDataDBble;
 import until.ConvertFilterHtml;
@@ -32,7 +31,10 @@ public class OptionalServlet extends HttpServlet {
         StringBuilder sb = convertHtml.stringBuilder();
         Connection connection = (Connection) getServletContext().getAttribute("DBConnection");
         String nameSearch = req.getParameter("optional");
+        String year = req.getParameter("year");
+
         System.out.println(nameSearch);
+        System.out.println(year);
 
         String rSet = SqlQuery.getOptional(nameSearch);
 
@@ -44,7 +46,13 @@ public class OptionalServlet extends HttpServlet {
         ArrayList<String> stringOptional = new ArrayList<>();
         stringOptional.addAll(companyOptional(connection, rsetOptional));
 
-        result.append(searchNotNullQuery(createDataNotNullSearch(stringOptional, connection),sb ));
+        if (year.equals("Выберите год")) {
+            result.append(searchNotNullQuery(createDataNotNullSearch(stringOptional, connection, "2018"), sb));
+        } else {
+            result.append(searchNotNullQuery(createDataNotNullSearch(stringOptional, connection, year), sb));
+        }
+
+//        result.append(searchNotNullQuery(createDataNotNullSearch(stringOptional, connection),sb ));
 
 //        SQLStatementIndustry sqlStatementIndustry = SQLStatementIndustry.getInstance();
 //        try {
@@ -101,7 +109,7 @@ public class OptionalServlet extends HttpServlet {
         return result;
     }
 
-    public TreeMap<String, TheMultiplier> createDataNotNullSearch(ArrayList<String> nameSearch, Connection connection) {
+    public TreeMap<String, TheMultiplier> createDataNotNullSearch(ArrayList<String> nameSearch, Connection connection, String year) {
 //        Connection connection = (Connection) getServletContext().getAttribute("DBConnection");
         TreeMap<Integer, Data> mapDataAboutBalance = new TreeMap<>();
         TreeMap<Integer, Data> mapFinancialData = new TreeMap<>();
@@ -110,11 +118,11 @@ public class OptionalServlet extends HttpServlet {
 
         TreeMap<String, TheMultiplier> result = new TreeMap<>();
 
-
         CheckDataDBble checkDataDB = new LoadDataDB();
         DataAboutBalance dataAboutBalance = checkDataDB.getDataAboutBalance();
         FinancialData financialData = checkDataDB.getFinancialData();
         MarketData marketData = checkDataDB.getMarketData();
+
         int count = 0;
 
         for (String name : nameSearch) {
@@ -122,13 +130,18 @@ public class OptionalServlet extends HttpServlet {
             SqlQuery.checkTableInDBDataTableForCompany(financialData, connection, mapFinancialData, name);
             SqlQuery.checkTableInDBDataTableForCompany(marketData, connection, mapMarketData, name);
             SqlQuery.checkMathMultiplierForCompany(mapDataAboutBalance, mapFinancialData, mapMarketData, multi);
+
+            System.out.println(multi);
+
             for (Map.Entry<String, TheMultiplier> entry : multi.entrySet()) {
-                if (entry.getKey().equals(String.valueOf(Years.Seven.index()))) {
-                    result.put(entry.getKey() + count, entry.getValue());
-                    count++;
+//                if (entry.getKey().equals(String.valueOf(Years.Seven.index()))) { //тут надо менять аргумент
+                if (entry.getKey().equals(year)) { //тут надо менять аргумент
+                    if (entry.getValue().getName() != null) {
+                        result.put(entry.getKey() + count, entry.getValue());
+                        count++;
+                    }
                 }
             }
-
         }
 
         return result;
@@ -158,6 +171,5 @@ public class OptionalServlet extends HttpServlet {
         SqlQuery.checkTableInDBDataTableForCompany(marketData, connection, mapMarketData, name);
         SqlQuery.checkMathMultiplierForCompany(mapDataAboutBalance, mapFinancialData, mapMarketData, multi);
     }
-
 
 }
