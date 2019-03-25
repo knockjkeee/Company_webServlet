@@ -113,8 +113,8 @@ public class TheMultiplier implements Data, Serializable {
             if (profit == 0) {
                 this.P_E = BigDecimal.valueOf(0.000);
             } else {
-                BigDecimal temp = capitalization.divide(BigDecimal.valueOf(profit),9, BigDecimal.ROUND_UP);
-                this.P_E = temp.setScale(9, BigDecimal.ROUND_CEILING);
+                BigDecimal temp = capitalization.divide(BigDecimal.valueOf(profit),2, BigDecimal.ROUND_UP);
+                this.P_E = temp.setScale(2, BigDecimal.ROUND_CEILING);
             }
         }
     }
@@ -142,7 +142,7 @@ public class TheMultiplier implements Data, Serializable {
         BigDecimal totalLiabilities = dData.getTotalLiabilities() == null ? BigDecimal.valueOf(0.000) : dData.getTotalLiabilities();
 
         BigDecimal temp = capitalization.add(totalLiabilities);
-        this.EV = temp.setScale(4, RoundingMode.CEILING);
+        this.EV = temp.setScale(2, RoundingMode.CEILING);
     }
 
     private void setEBITDA(FinancialData financialData) {
@@ -170,8 +170,8 @@ public class TheMultiplier implements Data, Serializable {
 
     private void setEV_EBITDA() {
         try {
-            BigDecimal temp  = this.EV.divide(this.EBITDA,9,  BigDecimal.ROUND_HALF_UP);
-            this.EV_EBITDA = temp.setScale(9, RoundingMode.CEILING);
+            BigDecimal temp  = this.EV.divide(this.EBITDA,2,  BigDecimal.ROUND_HALF_UP);
+            this.EV_EBITDA = temp.setScale(2, RoundingMode.CEILING);
         } catch (Exception e) {
             this.EV_EBITDA = BigDecimal.valueOf(0.00);
         }
@@ -188,8 +188,8 @@ public class TheMultiplier implements Data, Serializable {
         if (capitalization.compareTo(BigDecimal.ZERO) == 0) {
             this.P_BV = BigDecimal.valueOf(0.00);
         } else {
-            BigDecimal temp = capitalization.divide(totalCapital, 9, BigDecimal.ROUND_HALF_UP);
-            temp = temp.setScale(9, RoundingMode.CEILING);
+            BigDecimal temp = capitalization.divide(totalCapital, 2, BigDecimal.ROUND_HALF_UP);
+            temp = temp.setScale(2, RoundingMode.CEILING);
             this.P_BV = temp;
         }
     }
@@ -209,8 +209,8 @@ public class TheMultiplier implements Data, Serializable {
             if (revenue == 0) {
                 this.P_S = BigDecimal.valueOf(0.00);
             } else {
-                BigDecimal temp = capitalization.divide(BigDecimal.valueOf(revenue), 9,  BigDecimal.ROUND_HALF_UP);
-                temp = temp.setScale(9, RoundingMode.CEILING);
+                BigDecimal temp = capitalization.divide(BigDecimal.valueOf(revenue), 2,  BigDecimal.ROUND_HALF_UP);
+                temp = temp.setScale(2, RoundingMode.CEILING);
                 this.P_S = temp;
             }
         }
@@ -229,8 +229,8 @@ public class TheMultiplier implements Data, Serializable {
             if (revenue == 0) {
                 this.EV_S = BigDecimal.valueOf(0.0);
             } else {
-                BigDecimal temp = getEV().divide(BigDecimal.valueOf(revenue), 9,  BigDecimal.ROUND_HALF_UP);
-                this.EV_S = temp.setScale(9, RoundingMode.CEILING);
+                BigDecimal temp = getEV().divide(BigDecimal.valueOf(revenue), 2,  BigDecimal.ROUND_HALF_UP);
+                this.EV_S = temp.setScale(2, RoundingMode.CEILING);
             }
         }
     }

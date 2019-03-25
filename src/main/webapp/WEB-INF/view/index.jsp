@@ -65,7 +65,7 @@
         <option value="auto" id="auto">Транспорт</option>
         <option value="retail" id="retail">Ритейл</option>
         <option value="telecom" id="telecom">Телекоммуникации</option>
-        <option value="finance" id="finance">Финансовый секто</option>
+        <option value="finance" id="finance">Финансовый сектор</option>
         <option value="electronetwork" id="electronetwork">Электросети</option>
         <option value="metall" id="metall">Металлургия</option>
         <option value="coal" id="coal">Уголь</option>

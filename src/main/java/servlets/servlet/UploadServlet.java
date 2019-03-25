@@ -91,18 +91,17 @@ public class UploadServlet extends HttpServlet {
                             name = item.getString("UTF-8");
                         }
                         if (item.getFieldName().equals("tiker")) {
-                            tiker = item.getString();
+                            tiker = item.getString("UTF-8");
                         }
                         if (item.getFieldName().equals("description")) {
                             description = item.getString("UTF-8");
                         }
                         if (item.getFieldName().equals("selection")) {
-                            selection = item.getString();
+                            selection = item.getString("UTF-8");
                         }
                         if (item.getFieldName().equals("info")) {
-                            info = item.getString();
+                            info = item.getString("UTF-8");
                         }
-
                         checkAttr(item);
                     }
                 }
@@ -193,7 +192,7 @@ public class UploadServlet extends HttpServlet {
     private void pushMainData(Connection connection, InputStream img, String name, String tiker, String ds,  String info) {
 
         try {
-            String query = "INSERT  INTO  company (name, tiker, description, image) VALUES (?,?,?,?,?)";
+            String query = "INSERT  INTO  company (name, tiker, description, image, info) VALUES (?,?,?,?,?)";
             PreparedStatement st = connection.prepareStatement(query);
             st.setString(1, name);
             st.setString(2, tiker);

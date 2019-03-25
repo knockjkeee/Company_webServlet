@@ -58,7 +58,10 @@ public class MarketData implements Data, Serializable {
         this.priceAP = priceAP == null ? BigDecimal.valueOf(0.00) : priceAP.setScale(6, RoundingMode.DOWN);
         setCapitalization(this.numberAO, this.priceAO, this.numberAP, this.priceAP);
         this.capitalization = capitalization;
+
     }
+
+
 
     public void setMarketDataForMainPage(String name, String tiker, BigDecimal capitalization) {
         this.name = name;
@@ -82,7 +85,7 @@ public class MarketData implements Data, Serializable {
 
         BigDecimal numberAOTemp = BigDecimal.valueOf(numberAO);
 //        this.capitalization = ((BigDecimal.valueOf(numberAO)*priceAO)+(numberAP*priceAP));
-        this.capitalization = numberAOTemp.multiply(priceAO).add(numberAP.multiply(priceAP)).setScale(4, RoundingMode.DOWN);
+        this.capitalization = numberAOTemp.multiply(priceAO).add(numberAP.multiply(priceAP)).setScale(2, RoundingMode.DOWN);
     }
 
     public long getNumberAO() {
